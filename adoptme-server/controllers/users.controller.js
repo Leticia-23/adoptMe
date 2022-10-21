@@ -1,23 +1,38 @@
 const mongoose = require("mongoose");
 
-
-const deleteOwnUser = async (req, res) => {
-    return res.status(201).json("Account create correctly")
-}
-
-const editProfile = async (req, res) => {
-    return res.status(201).json("Account create correctly")
-}
-
-
-const deleteUser = async (req, res) => {
-    return res.status(201).json("Account create correctly")
-}
-
+// Public
 
 const getUserInfo = async (req, res) => {
-    return res.status(201).json("Account create correctly")
-}
+  return res.status(201).json("Get user info correctly");
+};
 
+// Private
 
-module.exports = {}
+const updateProfile = async (req, res) => {
+  return res.status(201).json("Update profile correctly");
+};
+
+const deleteOwnUser = async (req, res) => {
+  return res.status(201).json("Delete own user correctly");
+};
+
+const banUser = async (req, res) => {
+  return res.status(201).json("Ban user correctly");
+};
+
+const getUsers = async (req, res) => {
+  return res.status(201).json("Get all users correctly");
+};
+
+const getOwnInfo = async (req, res) => {
+  return res.status(201).json("Get own information correctly");
+};
+
+module.exports = {
+  getUserInfo,
+  updateProfile,
+  deleteOwnUser,
+  banUser,
+  getUsers,
+  getOwnInfo,
+};
