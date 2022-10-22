@@ -10,6 +10,10 @@ const router = express.Router();
 // URL: http://localhost:8080/api/auth/signup
 router.post("/signup", AuthController.signup);
 
+// Create association
+// URL: http://localhost:8080/api/auth/signup/association
+router.post("/signup/association", AuthController.signup_association);
+
 // Login user
 // URL: http://localhost:8080/api/auth/login
 router.post("/login", AuthController.login);

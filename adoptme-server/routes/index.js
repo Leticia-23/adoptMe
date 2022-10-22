@@ -9,4 +9,6 @@ router.use("/auth", auth);
 
 router.use("/users", users);
 
+router.use("/animals", users);
+
 module.exports = router;

@@ -32,4 +32,8 @@ router.get("/", UserController.getUsers);
 // URL: http://localhost:8080/api/users/me
 router.get("/me", UserController.getOwnInfo);
 
+// Get associations info
+// URL: http://localhost:8080/api/users/association/{id}
+router.get("/association/:id", UserController.getOwnInfo);
+
 module.exports = router;

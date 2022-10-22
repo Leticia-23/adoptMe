@@ -28,6 +28,10 @@ const getOwnInfo = async (req, res) => {
   return res.status(201).json("Get own information correctly");
 };
 
+const getAssociationInfo = async (req, res) => {
+  return res.status(201).json("Get association private information correctly");
+};
+
 module.exports = {
   getUserInfo,
   updateProfile,
@@ -35,4 +39,5 @@ module.exports = {
   banUser,
   getUsers,
   getOwnInfo,
+  getAssociationInfo,
 };
