@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // Public
 
-const getUserInfo = async (req, res) => {
+const getUser = async (req, res) => {
   return res.status(200).json("Get user info correctly");
 };
 
@@ -33,7 +33,7 @@ const getAssociationInfo = async (req, res) => {
 };
 
 module.exports = {
-  getUserInfo,
+  getUser,
   updateProfile,
   deleteOwnUser,
   banUser,

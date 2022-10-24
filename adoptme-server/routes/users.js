@@ -8,12 +8,13 @@ const router = express.Router();
 
 // Get user info
 // URL: http://localhost:8080/api/users/{id}
-router.get("/:id", UserController.getUserInfo);
+router.get("/:id", UserController.getUser);
 
 // Private
 
 // Update profile
 // URL: http://localhost:8080/api/users/profile
+//TODO: use patch for only some fields
 router.put("/profile", UserController.updateProfile);
 
 // Delete own user
