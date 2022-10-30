@@ -14,8 +14,7 @@ router.get("/:id", UserController.getUser);
 
 // Update profile
 // URL: http://localhost:8080/api/users/profile
-//TODO: use patch for only some fields
-router.put("/profile", UserController.updateProfile);
+router.patch("/profile", UserController.updateProfile);
 
 // Delete own user
 // URL: http://localhost:8080/api/users

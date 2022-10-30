@@ -30,9 +30,7 @@ router.get("/:id", AuthController.getPublicAnimal);
 
 // Update animal info
 // URL: http://localhost:8080/api/animals/{id}
-// TODO: use patch if not al data updated
-// TODO: make adoptions table
-router.put("/:id", AuthController.updateAnimal);
+router.patch("/:id", AuthController.updateAnimal);
 
 // Delete animal
 // URL: http://localhost:8080/api/animals{id}
