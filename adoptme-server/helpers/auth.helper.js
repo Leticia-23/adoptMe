@@ -13,7 +13,7 @@ const signup_helper = async (username, email, password) => {
   return await User.create(user);
 };
 
-const signup_association_helper = async (name, email, password) => {
+const signup_institution_helper = async (name, email, password) => {
   const institution = new Institution({
     name: name,
     email: email,
@@ -38,8 +38,38 @@ const createAdmin_heper = async (username, email, password) => {
   return await User.create(user);
 };
 
+const findUserByEmail = async (email) => {
+  try {
+    const res = await User.findOne({ email: email, enabled: true });
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: err,
+    };
+  }
+};
+
+const findInstitutionByEmail = async (email) => {
+  try {
+    const res = await Institution.findOne({ email: email, enabled: true });
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: err,
+    };
+  }
+};
+
 module.exports = {
   signup_helper,
   createAdmin_heper,
-  signup_association_helper,
+  signup_institution_helper,
+  findUserByEmail,
+  findInstitutionByEmail,
 };

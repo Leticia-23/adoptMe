@@ -12,9 +12,9 @@ router.post("/signup", AuthController.signup);
 
 // Create association
 // URL: http://localhost:8080/api/auth/signup/institution
-router.post("/signup/institution", AuthController.signup_association);
+router.post("/signup/institution", AuthController.signup_institution);
 
-// Login user
+// Login user or institution
 // URL: http://localhost:8080/api/auth/login
 router.post("/login", AuthController.login);
 

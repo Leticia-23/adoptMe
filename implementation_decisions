@@ -24,3 +24,6 @@ INSTITUTIONS
 - institution@gmail.com
   institution
   pwdinstitution
+
+#########################################
+TOKEN_SECRET=8daf294bcf30fa9463f4c3596e8f00a52f8c66e97dea58fde96a29d66a0e0899
