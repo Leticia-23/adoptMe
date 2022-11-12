@@ -41,4 +41,4 @@ const Institution = new Schema(
   { timestamps: true } // Adds createdAt and updatedAt properties
 );
 
-module.exports = model("User", UserSchema);
+module.exports = model("Insitution", Institution);

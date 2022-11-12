@@ -1,0 +1,26 @@
+- Para el frontend de crear una institución se le asigna una contraseña y luego se le da la opción de cambiarlar
+
+  - De esta forma el sigup es igual
+
+- Para crear un usuario admin se tiene un endpoint para por ejemplo desde terminal o desde postman hacerlo
+
+#########################################
+ADMINS
+
+- admin@gmail.com
+  admin
+  pwdadmin
+
+#########################################
+USERS
+
+- leti@gmail.com
+  leti
+  pwdleti
+
+#########################################
+INSTITUTIONS
+
+- institution@gmail.com
+  institution
+  pwdinstitution
