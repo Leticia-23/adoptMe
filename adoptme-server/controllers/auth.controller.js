@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const authHelper = require("../helpers/auth.helper");
+const userHelper = require("../helpers/users.helper");
+const institutionHelper = require("../helpers/institutions.helper");
 
 // Public
 
@@ -78,7 +80,7 @@ const login = async (req, res) => {
 
   // Check if user or institution exists
   try {
-    const { data, err } = await authHelper.findUserByEmail(email);
+    const { data, err } = await userHelper.findUserByEmail(email);
     user = data;
 
     if (err != null) {
@@ -86,7 +88,9 @@ const login = async (req, res) => {
     }
     if (!user) {
       // Search if is an institution
-      const { data, err } = await authHelper.findInstitutionByEmail(email);
+      const { data, err } = await institutionHelper.findInstitutionByEmail(
+        email
+      );
       institution = data;
 
       if (err != null) {

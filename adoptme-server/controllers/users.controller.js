@@ -1,9 +1,34 @@
-const mongoose = require("mongoose");
+const userHelper = require("../helpers/users.helper");
 
 // Public
 
 const getUser = async (req, res) => {
-  return res.status(200).json("Get user info correctly");
+  const { id } = req.params;
+  let user = null;
+
+  try {
+    const { data, err } = await userHelper.findUserById(id);
+    user = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!user) {
+      return res.status(404).json({ error: "It isn't possible find the user" });
+    }
+
+    return res.status(200).json({
+      id: user._id,
+      username: user.username,
+      biography: user.biography,
+      avatar: user.avatar,
+      role: user.role,
+      createdAt: user.createdAt,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "catch getUser" });
+  }
 };
 
 // Private

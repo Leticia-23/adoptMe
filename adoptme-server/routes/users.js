@@ -1,6 +1,7 @@
 const express = require("express");
 
 const UserController = require("../controllers/users.controller");
+const { verifyToken } = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.get("/:id", UserController.getUser);
 
 // Update profile
 // URL: http://localhost:8080/api/users/profile
-router.patch("/profile", UserController.updateProfile);
+router.patch("/profile", verifyToken, UserController.updateProfile);
 
 // Delete own user
 // URL: http://localhost:8080/api/users
@@ -22,18 +23,18 @@ router.delete("/", UserController.deleteOwnUser);
 
 // Ban other users
 // URL: http://localhost:8080/api/users/{id}
-router.delete("/:id", UserController.banUser);
+router.delete("/:id", verifyToken, UserController.banUser);
 
 // Get all users
 // URL: http://localhost:8080/api/users
-router.get("/", UserController.getUsers);
+router.get("/", verifyToken, UserController.getUsers);
 
 // Get own info
 // URL: http://localhost:8080/api/users/me
-router.get("/me", UserController.getOwnInfo);
+router.get("/me", verifyToken, UserController.getOwnInfo);
 
 // Get associations info
 // URL: http://localhost:8080/api/users/association/{id}
-router.get("/association/:id", UserController.getOwnInfo);
+router.get("/association/:id", verifyToken, UserController.getOwnInfo);
 
 module.exports = router;

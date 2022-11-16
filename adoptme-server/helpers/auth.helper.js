@@ -1,4 +1,3 @@
-const institutions = require("../models/institutions");
 const User = require("../models/users");
 const Institution = require("../models/institutions");
 
@@ -38,38 +37,8 @@ const createAdmin_heper = async (username, email, password) => {
   return await User.create(user);
 };
 
-const findUserByEmail = async (email) => {
-  try {
-    const res = await User.findOne({ email: email, enabled: true });
-    return {
-      data: res,
-      err: null,
-    };
-  } catch (error) {
-    return {
-      err: err,
-    };
-  }
-};
-
-const findInstitutionByEmail = async (email) => {
-  try {
-    const res = await Institution.findOne({ email: email, enabled: true });
-    return {
-      data: res,
-      err: null,
-    };
-  } catch (error) {
-    return {
-      err: err,
-    };
-  }
-};
-
 module.exports = {
   signup_helper,
   createAdmin_heper,
   signup_institution_helper,
-  findUserByEmail,
-  findInstitutionByEmail,
 };

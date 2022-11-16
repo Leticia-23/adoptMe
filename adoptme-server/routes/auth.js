@@ -2,6 +2,8 @@ const express = require("express");
 
 const AuthController = require("../controllers/auth.controller");
 
+const { verifyToken } = require("../middlewares/auth.middleware");
+
 const router = express.Router();
 
 // Public
@@ -18,14 +20,16 @@ router.post("/signup/institution", AuthController.signup_institution);
 // URL: http://localhost:8080/api/auth/login
 router.post("/login", AuthController.login);
 
+// Only endpoint, not for frontend
+
+// Create admin
+// URL: http://localhost:8080/api/auth/admin
+router.post("/admin", AuthController.createAdmin);
+
 // Private
 
 // Logout user
 // URL: http://localhost:8080/api/auth/logout
-router.post("/logout", AuthController.logout);
-
-// Create admin - only endpoint, not for frontend
-// URL: http://localhost:8080/api/auth/admin
-router.post("/admin", AuthController.createAdmin);
+router.post("/logout", verifyToken, AuthController.logout);
 
 module.exports = router;
