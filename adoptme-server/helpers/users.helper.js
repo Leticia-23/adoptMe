@@ -15,7 +15,6 @@ const findUserByEmail = async (email) => {
 };
 
 const findUserById = async (id) => {
-  console.log("estoy aqui");
   try {
     const res = await User.findOne({ _id: id, enabled: true });
     return {

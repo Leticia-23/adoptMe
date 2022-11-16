@@ -27,7 +27,7 @@ const getUser = async (req, res) => {
       createdAt: user.createdAt,
     });
   } catch (error) {
-    return res.status(500).json({ error: "catch getUser" });
+    return res.status(500).json({ error: error });
   }
 };
 
