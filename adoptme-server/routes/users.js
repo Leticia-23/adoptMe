@@ -1,7 +1,7 @@
 const express = require("express");
 
 const UserController = require("../controllers/users.controller");
-const { verifyToken } = require("../middlewares/auth.middleware");
+const { verifyToken, isAdmin } = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
@@ -19,11 +19,11 @@ router.patch("/profile", verifyToken, UserController.updateProfile);
 
 // Delete own user
 // URL: http://localhost:8080/api/users
-router.delete("/", UserController.deleteOwnUser);
+router.delete("/", verifyToken, UserController.deleteOwnUser);
 
 // Ban other users
 // URL: http://localhost:8080/api/users/{id}
-router.delete("/:id", verifyToken, UserController.banUser);
+router.delete("/:id", verifyToken, isAdmin, UserController.banUser);
 
 // Get all users
 // URL: http://localhost:8080/api/users
