@@ -15,7 +15,9 @@ const getUser = async (req, res) => {
     }
 
     if (!user) {
-      return res.status(404).json({ error: "It isn't possible find the user" });
+      return res
+        .status(404)
+        .json({ error: "It's not possible find the user or the user" });
     }
 
     return res.status(200).json({
@@ -50,7 +52,7 @@ const deleteOwnUser = async (req, res) => {
     }
 
     if (!user) {
-      return res.status(404).json({ error: "It isn't possible find the user" });
+      return res.status(404).json({ error: "It's not possible find the user" });
     }
     return res.status(204).json("Delete own user correctly");
   } catch (error) {
@@ -59,23 +61,21 @@ const deleteOwnUser = async (req, res) => {
 };
 
 const banUser = async (req, res) => {
-  // return res.status(204).json("Ban user correctly");
   const { id } = req.params;
-  // TODO: Think if this endpoint is for ban institutions too
-  // and not to ban other admin user
   try {
     const { data, err } = await userHelper.deleteUserById(id);
     user = data;
-    console.log("user ban:", user);
 
     if (err != null) {
       return res.status(400).json({ error: err });
     }
 
     if (!user) {
-      return res.status(404).json({ error: "It isn't possible find the user" });
+      return res.status(404).json({
+        error: "It's not possible find the user or the user is administrator",
+      });
     }
-    return res.status(204).json("Ban user correctly");
+    return res.status(204).json();
   } catch (error) {
     return res.status(500).send(error);
   }

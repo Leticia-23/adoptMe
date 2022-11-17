@@ -28,7 +28,10 @@ INSTITUTIONS
 #########################################
 TOKEN_SECRET=8daf294bcf30fa9463f4c3596e8f00a52f8c66e97dea58fde96a29d66a0e0899
 
-
-
 ######
+
 TENGO QUE PENSAR QUÉ HAGO CON EL BAN USER SI HAY QUE HACERLO JUNTO CON BAN INSTITUTION Y EVITAR BAN A OTRO ADMIN
+-> Hago 2 endpoints distintos ya que en el frontend serán siempre botones en pantallas distintas así que se le podrá pasar bien el id de user o institution.
+
+-> Por el momento no hay manera de eliminar un usuario administrador, si fuese posible hay que hacer endpoint, controller y helper.
+Se puede hacer sino como el de crear y que sea solo un endpoint pero no se utilice en el frontend.

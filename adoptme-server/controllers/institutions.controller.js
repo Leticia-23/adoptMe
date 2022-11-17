@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const institutionHelper = require("../helpers/institutions.helper");
 
 // Public
 
@@ -22,6 +23,28 @@ const getInstitutionInfo = async (req, res) => {
     .json("Get own and private institution information correctly");
 };
 
+const banInstitution = async (req, res) => {
+  // TODO: change info user for institution
+
+  const { id } = req.params;
+  try {
+    // const { data, err } = await institutionHelper.deleteUserById(id);
+    // user = data;
+    // console.log("user ban:", user);
+
+    // if (err != null) {
+    //   return res.status(400).json({ error: err });
+    // }
+
+    // if (!user) {
+    //   return res.status(404).json({ error: "It isn't possible find the user" });
+    // }
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
 const getAnimals = async (req, res) => {
   return res.status(200).json("Get animals of institution correctly");
 };
@@ -41,6 +64,7 @@ module.exports = {
   getInstitutions,
   updateInstitution,
   getInstitutionInfo,
+  banInstitution,
   getAnimals,
   getAnimal,
   getUser,

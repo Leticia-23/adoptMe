@@ -29,9 +29,12 @@ const findUserById = async (id) => {
 };
 
 const deleteUserById = async (id) => {
-  console.log("deleteUserById helper");
   try {
-    const res = await User.findByIdAndUpdate(id, { enabled: false });
+    // With condition that user is not administrator
+    const res = await User.findOneAndUpdate(
+      { _id: id, role: "user" },
+      { enabled: false }
+    );
     return {
       data: res,
       err: null,

@@ -1,7 +1,7 @@
 const express = require("express");
 
 const InstitutionController = require("../controllers/institutions.controller");
-const { verifyToken } = require("../middlewares/auth.middleware");
+const { verifyToken, isAdmin } = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
@@ -25,6 +25,15 @@ router.patch("/profile", verifyToken, InstitutionController.updateInstitution);
 // Get own institution info
 // URL: http://localhost:8080/api/institutions/me
 router.get("/me", verifyToken, InstitutionController.getInstitutionInfo);
+
+// Ban institution
+// URL: http://localhost:8080/api/institutions/{id}
+router.delete(
+  "/:id",
+  verifyToken,
+  isAdmin,
+  InstitutionController.banInstitution
+);
 
 // Get animals of institution
 // URL: http://localhost:8080/api/institutions/{id}/animals
