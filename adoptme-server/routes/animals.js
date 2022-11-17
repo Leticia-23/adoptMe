@@ -27,7 +27,7 @@ router.post("/", verifyToken, AuthController.registerAnimal);
 
 // Get private info for an animal
 // URL: http://localhost:8080/api/animals/{id}
-router.get("/:id", verifyToken, AuthController.getPublicAnimal);
+router.get("/:id", verifyToken, AuthController.getPrivateAnimal);
 
 // Update animal info
 // URL: http://localhost:8080/api/animals/{id}

@@ -30,11 +30,11 @@ router.delete("/:id", verifyToken, isAdmin, UserController.banUser);
 router.get("/", verifyToken, UserController.getUsers);
 
 // Get own info
-// URL: http://localhost:8080/api/users/me
-router.get("/me", verifyToken, UserController.getOwnInfo);
+// URL: http://localhost:8080/api/users/info/me
+router.get("/info/me", verifyToken, UserController.getOwnInfo);
 
 // Get associations info
 // URL: http://localhost:8080/api/users/association/{id}
-router.get("/association/:id", verifyToken, UserController.getOwnInfo);
+router.get("/association/:id", verifyToken, UserController.getAssociationInfo);
 
 module.exports = router;
