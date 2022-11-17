@@ -32,7 +32,7 @@ const deleteUserById = async (id) => {
   try {
     // With condition that user is not administrator
     const res = await User.findOneAndUpdate(
-      { _id: id, role: "user" },
+      { _id: id, role: "user", enabled: true },
       { enabled: false }
     );
     return {

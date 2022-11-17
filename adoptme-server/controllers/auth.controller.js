@@ -42,7 +42,7 @@ const signup = async (req, res) => {
 const signup_institution = async (req, res) => {
   const { name, email, password, repeatPassword } = req.body;
 
-  console.log("signup_association", name, email, password, repeatPassword);
+  console.log("signup_institution", name, email, password, repeatPassword);
 
   // Check all parameters are not empty
   if (!name || !email || !password || !repeatPassword) {
@@ -61,7 +61,7 @@ const signup_institution = async (req, res) => {
 
   // Check user doesn't exist before and create user
   try {
-    await authHelper.signup_association_helper(name, email, hashed_password);
+    await authHelper.signup_institution_helper(name, email, hashed_password);
     return res.status(201).json("Institution created correctly");
   } catch (error) {
     return res.status(409).send({ error: "Institution already exist" });

@@ -14,4 +14,22 @@ const findInstitutionByEmail = async (email) => {
   }
 };
 
-module.exports = { findInstitutionByEmail };
+const deleteInsitutionById = async (id) => {
+  try {
+    // With condition that user is not administrator
+    const res = await Institution.findOneAndUpdate(
+      { _id: id, enabled: true },
+      { enabled: false }
+    );
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
+module.exports = { findInstitutionByEmail, deleteInsitutionById };

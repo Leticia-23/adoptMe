@@ -24,21 +24,22 @@ const getInstitutionInfo = async (req, res) => {
 };
 
 const banInstitution = async (req, res) => {
-  // TODO: change info user for institution
-
+  // TODO: fix
   const { id } = req.params;
+  let institution = null;
   try {
-    // const { data, err } = await institutionHelper.deleteUserById(id);
-    // user = data;
-    // console.log("user ban:", user);
+    const { data, err } = await institutionHelper.deleteInsitutionById(id);
+    institution = data;
 
-    // if (err != null) {
-    //   return res.status(400).json({ error: err });
-    // }
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
 
-    // if (!user) {
-    //   return res.status(404).json({ error: "It isn't possible find the user" });
-    // }
+    if (!institution) {
+      return res
+        .status(404)
+        .json({ error: "It's not possible find the institution" });
+    }
     return res.status(204).json();
   } catch (error) {
     return res.status(500).send(error);
