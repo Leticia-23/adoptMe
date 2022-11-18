@@ -16,7 +16,6 @@ const findInstitutionByEmail = async (email) => {
 
 const deleteInsitutionById = async (id) => {
   try {
-    // With condition that user is not administrator
     const res = await Institution.findOneAndUpdate(
       { _id: id, enabled: true },
       { enabled: false }

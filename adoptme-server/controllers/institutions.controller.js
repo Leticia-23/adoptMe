@@ -24,7 +24,6 @@ const getInstitutionInfo = async (req, res) => {
 };
 
 const banInstitution = async (req, res) => {
-  // TODO: fix
   const { id } = req.params;
   let institution = null;
   try {

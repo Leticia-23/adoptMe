@@ -1,4 +1,5 @@
 const userHelper = require("../helpers/users.helper");
+const users = require("../models/users");
 
 // Public
 
@@ -82,7 +83,26 @@ const banUser = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-  return res.status(200).json("Get all users correctly");
+  // TODO: finish and check
+  let users = null;
+  try {
+    const { data, err } = await userHelper.getUsersHelper;
+    users = data;
+    console.log(users);
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!users) {
+      return res.status(404).json({
+        error: "It's not possible find the users",
+      });
+    }
+    return res.status(200).json("Get all users correctly");
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 
 const getOwnInfo = async (req, res) => {
