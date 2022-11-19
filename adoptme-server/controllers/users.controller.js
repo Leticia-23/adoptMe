@@ -153,9 +153,7 @@ const getOwnInfo = async (req, res) => {
     }
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ error: "It's not possible find the user or the user" });
+      return res.status(404).json({ error: "It's not possible find the user" });
     }
 
     return res.status(200).json({

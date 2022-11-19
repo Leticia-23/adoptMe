@@ -19,12 +19,11 @@ router.get("/", InstitutionController.getInstitutions);
 
 // Update institution profile
 // URL: http://localhost:8080/api/institutions/profile
-//TODO: use patch for only some fields
 router.patch("/profile", verifyToken, InstitutionController.updateInstitution);
 
 // Get own institution info
-// URL: http://localhost:8080/api/institutions/me
-router.get("/me", verifyToken, InstitutionController.getInstitutionInfo);
+// URL: http://localhost:8080/api/institutions/info/me
+router.get("/info/me", verifyToken, InstitutionController.getInstitutionInfo);
 
 // Ban institution
 // URL: http://localhost:8080/api/institutions/{id}
