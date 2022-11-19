@@ -12,7 +12,6 @@ const router = express.Router();
 router.get("/:id", UserController.getUser);
 
 // Private
-
 // Update profile
 // URL: http://localhost:8080/api/users/profile
 router.patch("/profile", verifyToken, UserController.updateProfile);
@@ -27,14 +26,10 @@ router.delete("/:id", verifyToken, isAdmin, UserController.banUser);
 
 // Get all users
 // URL: http://localhost:8080/api/users
-router.get("/", verifyToken, UserController.getUsers);
+router.get("/", verifyToken, isAdmin, UserController.getUsers);
 
 // Get own info
 // URL: http://localhost:8080/api/users/info/me
 router.get("/info/me", verifyToken, UserController.getOwnInfo);
-
-// Get associations info
-// URL: http://localhost:8080/api/users/association/{id}
-router.get("/association/:id", verifyToken, UserController.getAssociationInfo);
 
 module.exports = router;

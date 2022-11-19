@@ -1,5 +1,5 @@
 const userHelper = require("../helpers/users.helper");
-const users = require("../models/users");
+const bcrypt = require("bcrypt");
 
 // Public
 
@@ -16,9 +16,7 @@ const getUser = async (req, res) => {
     }
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ error: "It's not possible find the user or the user" });
+      return res.status(404).json({ error: "It's not possible find the user" });
     }
 
     return res.status(200).json({
@@ -37,7 +35,45 @@ const getUser = async (req, res) => {
 // Private
 
 const updateProfile = async (req, res) => {
-  return res.status(200).json("Update profile correctly");
+  let updates = req.body;
+  const id = updates.id;
+  delete updates.id;
+  let user = null;
+
+  // Check if username is a field to update
+  if (updates.new_username) {
+    updates.username = updates.new_username;
+    delete updates.new_username;
+  } else {
+    delete updates.username;
+  }
+
+  // Check if password is a field to update
+  if (updates.password) {
+    // Generate a Salt
+    const salt = await bcrypt.genSalt(10);
+    // Hash password
+    const hashed_password = await bcrypt.hash(updates.password, salt);
+
+    updates.password = hashed_password;
+  }
+
+  try {
+    const { data, err } = await userHelper.updateUserById(id, updates);
+    user = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!user) {
+      return res.status(404).json({ error: "It's not possible find the user" });
+    }
+
+    return res.status(200).json("Profile correclty updated");
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
 };
 
 const deleteOwnUser = async (req, res) => {
@@ -63,6 +99,7 @@ const deleteOwnUser = async (req, res) => {
 
 const banUser = async (req, res) => {
   const { id } = req.params;
+  let user = null;
   try {
     const { data, err } = await userHelper.deleteUserById(id);
     user = data;
@@ -83,12 +120,10 @@ const banUser = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-  // TODO: finish and check
   let users = null;
   try {
-    const { data, err } = await userHelper.getUsersHelper;
+    const { data, err } = await userHelper.getUsersHelper();
     users = data;
-    console.log(users);
 
     if (err != null) {
       return res.status(400).json({ error: err });
@@ -96,21 +131,45 @@ const getUsers = async (req, res) => {
 
     if (!users) {
       return res.status(404).json({
-        error: "It's not possible find the users",
+        error: "Users not find",
       });
     }
-    return res.status(200).json("Get all users correctly");
+    return res.status(200).json({ users: users });
   } catch (error) {
     return res.status(500).send(error);
   }
 };
 
 const getOwnInfo = async (req, res) => {
-  return res.status(200).json("Get own information correctly");
-};
+  const { id } = req.body;
+  let user = null;
 
-const getAssociationInfo = async (req, res) => {
-  return res.status(200).json("Get association private information correctly");
+  try {
+    const { data, err } = await userHelper.findUserById(id);
+    user = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: "It's not possible find the user or the user" });
+    }
+
+    return res.status(200).json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      biography: user.biography,
+      avatar: user.avatar,
+      role: user.role,
+      createdAt: user.createdAt,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
 };
 
 module.exports = {
@@ -120,5 +179,4 @@ module.exports = {
   banUser,
   getUsers,
   getOwnInfo,
-  getAssociationInfo,
 };

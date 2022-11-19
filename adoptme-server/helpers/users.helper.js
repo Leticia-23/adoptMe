@@ -46,15 +46,26 @@ const deleteUserById = async (id) => {
   }
 };
 
-const getUsersHelper = async (id) => {
+const getUsersHelper = async () => {
   try {
-    // TODO: finish and check
-    // executes, name LIKE john and only selecting the "name" and "friends" fields
-    // await MyModel.find({ name: /john/i }, "name friends").exec();
     const res = await User.find(
       { role: "user", enabled: true },
       "username email biography avatar"
     ).exec();
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
+const updateUserById = async (id, updates) => {
+  try {
+    const res = await User.findByIdAndUpdate(id, updates);
     return {
       data: res,
       err: null,
@@ -71,4 +82,5 @@ module.exports = {
   findUserById,
   deleteUserById,
   getUsersHelper,
+  updateUserById,
 };
