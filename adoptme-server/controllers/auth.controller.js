@@ -13,8 +13,6 @@ const institutionHelper = require("../helpers/institutions.helper");
 const signup = async (req, res) => {
   const { username, email, password, repeatPassword } = req.body;
 
-  console.log("signup", username, email, password, repeatPassword);
-
   // Check all parameters are not empty
   if (!username || !email || !password || !repeatPassword) {
     return res.status(400).json({ error: "Fill all the fields" });
@@ -41,8 +39,6 @@ const signup = async (req, res) => {
 
 const signup_institution = async (req, res) => {
   const { name, email, password, repeatPassword } = req.body;
-
-  console.log("signup_institution", name, email, password, repeatPassword);
 
   // Check all parameters are not empty
   if (!name || !email || !password || !repeatPassword) {
@@ -181,8 +177,6 @@ const logout = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   const { username, email, password, repeatPassword } = req.body;
-
-  console.log("createAdmin", username, email, password, repeatPassword);
 
   // Check all parameters are not empty
   if (!username || !email || !password || !repeatPassword) {

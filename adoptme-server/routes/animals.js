@@ -1,7 +1,10 @@
 const express = require("express");
 
 const AuthController = require("../controllers/animals.controller");
-const { verifyToken } = require("../middlewares/auth.middleware");
+const {
+  verifyTokenInstitution,
+  isInstitution,
+} = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
@@ -23,18 +26,33 @@ router.get("/public/:id", AuthController.getPublicAnimal);
 
 // Register animal
 // URL: http://localhost:8080/api/animals
-router.post("/", verifyToken, AuthController.registerAnimal);
+router.post(
+  "/",
+  verifyTokenInstitution,
+  isInstitution,
+  AuthController.registerAnimal
+);
 
 // Get private info for an animal
 // URL: http://localhost:8080/api/animals/{id}
-router.get("/:id", verifyToken, AuthController.getPrivateAnimal);
+router.get("/:id", verifyTokenInstitution, AuthController.getPrivateAnimal);
 
 // Update animal info
 // URL: http://localhost:8080/api/animals/{id}
-router.patch("/:id", verifyToken, AuthController.updateAnimal);
+router.patch(
+  "/:id",
+  verifyTokenInstitution,
+  isInstitution,
+  AuthController.updateAnimal
+);
 
 // Delete animal
 // URL: http://localhost:8080/api/animals{id}
-router.delete("/:id", verifyToken, AuthController.deleteAnimal);
+router.delete(
+  "/:id",
+  verifyTokenInstitution,
+  isInstitution,
+  AuthController.deleteAnimal
+);
 
 module.exports = router;
