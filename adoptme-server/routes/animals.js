@@ -47,7 +47,7 @@ router.patch(
 );
 
 // Delete animal
-// URL: http://localhost:8080/api/animals{id}
+// URL: http://localhost:8080/api/animals/{id}
 router.delete(
   "/:id",
   verifyTokenInstitution,

@@ -35,3 +35,7 @@ TENGO QUE PENSAR QUÉ HAGO CON EL BAN USER SI HAY QUE HACERLO JUNTO CON BAN INST
 
 -> Por el momento no hay manera de eliminar un usuario administrador, si fuese posible hay que hacer endpoint, controller y helper.
 Se puede hacer sino como el de crear y que sea solo un endpoint pero no se utilice en el frontend.
+
+######
+
+-> Para las institutions he hecho otra comprobación de token por el problem del nombre del campo, lo que puedo hacer sino es cambiar a name para todos en vez de tener 2

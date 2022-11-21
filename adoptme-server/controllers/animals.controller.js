@@ -30,7 +30,7 @@ const getPublicAnimal = async (req, res) => {
     }
 
     return res.status(200).json({
-      name: animal.name,
+      animal_name: animal.animal_name,
       specie: animal.specie,
       breed: animal.breed,
       sex: animal.sex,
@@ -47,29 +47,25 @@ const getPublicAnimal = async (req, res) => {
 // Private
 
 const registerAnimal = async (req, res) => {
-  // const { name, specie, breed, sex, photo, description, institution } =
-  //   req.body;
-
   let animal = req.body;
-
-  console.log("body: ", animal);
+  // delete name of institution from body
   delete animal.name;
-  console.log("body without institution name: ", animal);
-
-  //add to the body de institution id if not already added with verify token
+  // put institution's id like institution instead id
+  animal.institution = animal.id;
+  delete animal.id;
 
   // Check all parameters are not empty
-  // if (
-  //   !animal_name ||
-  //   !specie ||
-  //   !breed ||
-  //   !sex ||
-  //   !photo ||
-  //   !description ||
-  //   !institution
-  // ) {
-  //   return res.status(400).json({ error: "Fill all the fields" });
-  // }
+  if (
+    !animal.animal_name ||
+    !animal.specie ||
+    !animal.breed ||
+    !animal.sex ||
+    !animal.photo ||
+    !animal.description ||
+    !animal.institution
+  ) {
+    return res.status(400).json({ error: "Fill all the fields" });
+  }
 
   // Check user doesn't exist before and create user
   try {
@@ -99,7 +95,7 @@ const getPrivateAnimal = async (req, res) => {
     }
 
     return res.status(200).json({
-      name: animal.name,
+      animal_name: animal.animal_name,
       specie: animal.specie,
       breed: animal.breed,
       sex: animal.sex,
@@ -114,6 +110,7 @@ const getPrivateAnimal = async (req, res) => {
       adoptionDate: animal.adoptionDate,
       institution: animal.institution,
       user: animal.user,
+      createdAt: animal.createdAt,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -121,11 +118,62 @@ const getPrivateAnimal = async (req, res) => {
 };
 
 const updateAnimal = async (req, res) => {
-  return res.status(200).json("Update animal info correctly");
+  // return res.status(200).json("Update animal info correctly");
+  let updates = req.body;
+  const animalId = updates.animalId;
+  delete updates.animalId;
+  // delete institution's info from body
+  delete updates.id;
+  delete updates.name;
+
+  let animal = null;
+
+  // Check if animal_name is a field to update
+  if (updates.new_name) {
+    updates.animal_name = updates.new_name;
+    delete updates.new_name;
+  }
+
+  try {
+    const { data, err } = await userHelper.updateUserById(id, updates);
+    user = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!animal) {
+      return res
+        .status(404)
+        .json({ error: "It's not possible find the animal" });
+    }
+
+    return res.status(200).json("Animal correclty updated");
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
 };
 
 const deleteAnimal = async (req, res) => {
-  return res.status(204).json();
+  const { id } = req.params;
+  let animal = null;
+  try {
+    const { data, err } = await animalHelper.deleteAnimalById(id);
+    animal = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!animal) {
+      return res.status(404).json({
+        error: "It's not possible find the animal",
+      });
+    }
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 
 module.exports = {

@@ -79,7 +79,8 @@ const isAdmin = async (req, res, next) => {
 
 // Middleware to validate institution
 const isInstitution = async (req, res, next) => {
-  const { id } = req.body.id;
+  console.log("req.body.id: ", req.body.id);
+  const id = req.body.id;
   console.log(id);
 
   let institution = null;

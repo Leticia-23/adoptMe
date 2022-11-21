@@ -4,26 +4,61 @@ const Institution = require("./institutions");
 
 const Animal = new Schema(
   {
-    animal_name: String,
-    specie: String,
-    breed: String,
+    animal_name: {
+      type: String,
+      required: true,
+    },
+    specie: {
+      type: String,
+      required: true,
+    },
+    breed: {
+      type: String,
+      required: true,
+    },
     sex: {
       type: String,
       enum: ["Male", "Female"],
     },
-    bornDate: Date,
-    size: String,
-    color: String,
-    photo: String,
-    danger: Boolean,
-    sterile: Boolean,
-    description: String,
+    bornDate: {
+      type: Date,
+      default: "",
+    },
+    size: {
+      type: String,
+      default: "",
+    },
+    color: {
+      type: String,
+      default: "",
+    },
+    photo: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    danger: {
+      type: Boolean,
+      default: false,
+    },
+    sterile: {
+      type: Boolean,
+      default: false,
+    },
+    description: {
+      type: String,
+      required: true,
+      default: "",
+    },
     adopted: {
       type: Boolean,
       required: true,
       default: false,
     },
-    adoptionDate: Date,
+    adoptionDate: {
+      type: Date,
+      default: "",
+    },
     institution: {
       type: Schema.Types.ObjectId,
       ref: Institution,
@@ -32,6 +67,7 @@ const Animal = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: User,
+      default: null,
     },
     enabled: {
       type: Boolean,

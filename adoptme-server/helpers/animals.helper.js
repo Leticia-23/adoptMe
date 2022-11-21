@@ -29,4 +29,41 @@ const registerAnimalHelper = async (animal) => {
   return await Animal.create(new_animal);
 };
 
-module.exports = { findAnimalById, registerAnimalHelper };
+const updateAnimalById = async (id, updates) => {
+  try {
+    const res = await Animal.findByIdAndUpdate(id, updates);
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
+const deleteAnimalById = async (id) => {
+  try {
+    // With condition that user is not administrator
+    const res = await Animal.findOneAndUpdate(
+      { _id: id, enabled: true },
+      { enabled: false }
+    );
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
+module.exports = {
+  findAnimalById,
+  registerAnimalHelper,
+  updateAnimalById,
+  deleteAnimalById,
+};
