@@ -42,3 +42,9 @@ Se puede hacer sino como el de crear y que sea solo un endpoint pero no se utili
 
 -> IMPORTANTE: En el frontend para udpate tanto user profile, institution o animal, meter los campos necesarios y antes de enviarlo, comprobar que si está vacío, no hay que enviarlo en el body.
 -> en los que en la bbdd sea una opción como Female, Male, poner automáticamente para elegir cuál de los 2 es con algún desplegable.
+
+######
+
+LISTAS DE INFORMACIÓN DE ANIMALES ADOPTADOS O NO
+-> Decidir qué devuelvo en el endpoint de información.
+Si voy a necesitar toda la info según lo que quiera recibir en esa página del frontend, o va a ser necesario con un par o tres de cosas y luego realmente con tener el id, si se clica ir entonces al perfil del animal y será ahí dónde se pida la info.
