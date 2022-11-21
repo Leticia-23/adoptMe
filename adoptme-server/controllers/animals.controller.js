@@ -30,6 +30,7 @@ const getPublicAnimal = async (req, res) => {
     }
 
     return res.status(200).json({
+      id: animal._id,
       animal_name: animal.animal_name,
       specie: animal.specie,
       breed: animal.breed,
@@ -95,6 +96,7 @@ const getPrivateAnimal = async (req, res) => {
     }
 
     return res.status(200).json({
+      id: animal._id,
       animal_name: animal.animal_name,
       specie: animal.specie,
       breed: animal.breed,
@@ -120,7 +122,7 @@ const getPrivateAnimal = async (req, res) => {
 const updateAnimal = async (req, res) => {
   // return res.status(200).json("Update animal info correctly");
   let updates = req.body;
-  const animalId = updates.animalId;
+  const animalId = req.params.id;
   delete updates.animalId;
   // delete institution's info from body
   delete updates.id;
@@ -129,14 +131,17 @@ const updateAnimal = async (req, res) => {
   let animal = null;
 
   // Check if animal_name is a field to update
-  if (updates.new_name) {
-    updates.animal_name = updates.new_name;
-    delete updates.new_name;
+  if (updates.new_animal_name) {
+    updates.animal_name = updates.new_animal_name;
+    delete updates.new_animal_name;
   }
 
   try {
-    const { data, err } = await userHelper.updateUserById(id, updates);
-    user = data;
+    const { data, err } = await animalHelper.updateAnimalById(
+      animalId,
+      updates
+    );
+    animal = data;
 
     if (err != null) {
       return res.status(400).json({ error: err });
