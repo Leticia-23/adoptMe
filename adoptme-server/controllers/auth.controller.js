@@ -11,10 +11,10 @@ const institutionHelper = require("../helpers/institutions.helper");
 // Public
 
 const signup = async (req, res) => {
-  const { username, email, password, repeatPassword } = req.body;
+  const { name, email, password, repeatPassword } = req.body;
 
   // Check all parameters are not empty
-  if (!username || !email || !password || !repeatPassword) {
+  if (!name || !email || !password || !repeatPassword) {
     return res.status(400).json({ error: "Fill all the fields" });
   }
 
@@ -30,7 +30,7 @@ const signup = async (req, res) => {
 
   // Check user doesn't exist before and create user
   try {
-    await authHelper.signup_helper(username, email, hashed_password);
+    await authHelper.signup_helper(name, email, hashed_password);
     return res.status(201).json("Account created correctly");
   } catch (error) {
     return res.status(409).send({ error: "User already exist" });
@@ -116,7 +116,7 @@ const login = async (req, res) => {
     // User account
     const accesToken = jwt.sign(
       {
-        username: user.username,
+        name: user.name,
         id: user._id,
       },
       process.env.TOKEN_SECRET
@@ -125,7 +125,7 @@ const login = async (req, res) => {
     // Response
     return res.status(200).json({
       id: user._id,
-      username: user.username,
+      name: user.name,
       email: user.email,
       biography: user.biography,
       avatar: user.avatar,
@@ -156,7 +156,7 @@ const login = async (req, res) => {
     // Response
     return res.status(200).json({
       id: institution._id,
-      name: institution.username,
+      name: institution.name,
       email: institution.email,
       web_URL: institution.web_URL,
       phoneNumber: institution.phoneNumber,
@@ -176,10 +176,10 @@ const logout = async (req, res) => {
 };
 
 const createAdmin = async (req, res) => {
-  const { username, email, password, repeatPassword } = req.body;
+  const { name, email, password, repeatPassword } = req.body;
 
   // Check all parameters are not empty
-  if (!username || !email || !password || !repeatPassword) {
+  if (!name || !email || !password || !repeatPassword) {
     return res.status(400).json({ error: "Fill all the fields" });
   }
 
@@ -195,7 +195,7 @@ const createAdmin = async (req, res) => {
 
   // Check user doesn't exist before and create user
   try {
-    await authHelper.createAdmin_heper(username, email, hashed_password);
+    await authHelper.createAdmin_heper(name, email, hashed_password);
     return res.status(201).json("Admin account created correctly");
   } catch (error) {
     return res.status(409).send({ error: "Admin already exist" });

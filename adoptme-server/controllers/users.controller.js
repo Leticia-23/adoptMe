@@ -21,7 +21,7 @@ const getUser = async (req, res) => {
 
     return res.status(200).json({
       id: user._id,
-      username: user.username,
+      name: user.name,
       biography: user.biography,
       avatar: user.avatar,
       role: user.role,
@@ -40,12 +40,12 @@ const updateProfile = async (req, res) => {
   delete updates.id;
   let user = null;
 
-  // Check if username is a field to update
-  if (updates.new_username) {
-    updates.username = updates.new_username;
-    delete updates.new_username;
+  // Check if name is a field to update
+  if (updates.new_name) {
+    updates.name = updates.new_name;
+    delete updates.new_name;
   } else {
-    delete updates.username;
+    delete updates.name;
   }
 
   // Check if password is a field to update
@@ -158,7 +158,7 @@ const getOwnInfo = async (req, res) => {
 
     return res.status(200).json({
       id: user._id,
-      username: user.username,
+      name: user.name,
       email: user.email,
       biography: user.biography,
       avatar: user.avatar,

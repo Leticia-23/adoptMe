@@ -50,7 +50,7 @@ const getUsersHelper = async () => {
   try {
     const res = await User.find(
       { role: "user", enabled: true },
-      "username email biography avatar"
+      "name email biography avatar"
     ).exec();
     return {
       data: res,

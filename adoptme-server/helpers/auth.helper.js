@@ -1,9 +1,9 @@
 const User = require("../models/users");
 const Institution = require("../models/institutions");
 
-const signup_helper = async (username, email, password) => {
+const signup_helper = async (name, email, password) => {
   const user = new User({
-    username: username,
+    name: name,
     email: email,
     password: password,
   });
@@ -23,11 +23,11 @@ const signup_institution_helper = async (name, email, password) => {
   return await Institution.create(institution);
 };
 
-const createAdmin_heper = async (username, email, password) => {
+const createAdmin_heper = async (name, email, password) => {
   const date = new Date().getTime();
 
   const user = new User({
-    username: username,
+    name: name,
     email: email,
     password: password,
     role: "admin",
