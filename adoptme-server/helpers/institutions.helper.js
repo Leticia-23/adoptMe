@@ -1,4 +1,5 @@
 const Institution = require("../models/institutions");
+const Animal = require("../models/animals");
 
 const findInstitutionByEmail = async (email) => {
   try {
@@ -76,10 +77,26 @@ const updateInstitutionById = async (id, updates) => {
   }
 };
 
+// TODO: check
+const findInstituionAnimals = async (institution) => {
+  try {
+    const res = await Animal.find({ institution: institution }).exec();
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
 module.exports = {
   findInstitutionByEmail,
   deleteInsitutionById,
   findInstitutionById,
   getInstitutionsHelper,
   updateInstitutionById,
+  findInstituionAnimals,
 };

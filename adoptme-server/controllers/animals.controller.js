@@ -68,7 +68,6 @@ const registerAnimal = async (req, res) => {
     return res.status(400).json({ error: "Fill all the fields" });
   }
 
-  // Check user doesn't exist before and create user
   try {
     await animalHelper.registerAnimalHelper(animal);
     return res.status(201).json("Animal registered correctly");
