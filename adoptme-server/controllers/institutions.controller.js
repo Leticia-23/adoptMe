@@ -202,7 +202,6 @@ const getUser = async (req, res) => {
         error: "User who adopted this animal not found.",
       });
     }
-    console.log(user);
     return res.status(200).json({ user: user.user });
   } catch (error) {
     return res.status(500).send(error);
