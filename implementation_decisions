@@ -48,3 +48,17 @@ Se puede hacer sino como el de crear y que sea solo un endpoint pero no se utili
 LISTAS DE INFORMACIÓN DE ANIMALES ADOPTADOS O NO
 -> Decidir qué devuelvo en el endpoint de información.
 Si voy a necesitar toda la info según lo que quiera recibir en esa página del frontend, o va a ser necesario con un par o tres de cosas y luego realmente con tener el id, si se clica ir entonces al perfil del animal y será ahí dónde se pida la info.
+
+######
+
+- He eliminado el endpoint "Get concrete animal of institution" porque creo que no tiene sentido.
+
+// Get concrete animal of institution
+// URL: http://localhost:8080/api/institutions/{id}/animals/{id}
+// router.get("/:id/animals/:id", verifyToken, InstitutionController.getAnimal);
+
+// const getAnimal = async (req, res) => {
+// return res.status(200).json("Get concrete animal of institution correctly");
+// };
+
+- El endpoint "Get user who adopted concrete animal of institution" lo he implementado, pero creo que tampoco tiene sentido ya que esa información la puedes obtener con el id del animal y ya y teniendo en el front la lista de los animales, o si estás en la página de un animal concreto ya te viene con la información de dicho animal el user.

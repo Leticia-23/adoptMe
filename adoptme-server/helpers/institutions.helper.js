@@ -77,10 +77,30 @@ const updateInstitutionById = async (id, updates) => {
   }
 };
 
-// TODO: check
-const findInstituionAnimals = async (institution) => {
+const findInstituionAnimals = async (id) => {
   try {
-    const res = await Animal.find({ institution: institution }).exec();
+    const res = await Animal.find({ institution: id }).exec();
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
+const findUser = async (idInstitution, idAnimal) => {
+  try {
+    const res = await Animal.findOne(
+      {
+        _id: idAnimal,
+        institution: idInstitution,
+        enabled: true,
+      },
+      "user"
+    ).exec();
     return {
       data: res,
       err: null,
@@ -99,4 +119,5 @@ module.exports = {
   getInstitutionsHelper,
   updateInstitutionById,
   findInstituionAnimals,
+  findUser,
 };

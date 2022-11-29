@@ -160,38 +160,53 @@ const banInstitution = async (req, res) => {
   }
 };
 
-// TODO check
 const getAnimals = async (req, res) => {
   const { id } = req.params;
-  let institutions = null;
+  let animals = null;
   try {
     const { data, err } = await institutionHelper.findInstituionAnimals(id);
-    institutions = data;
+    animals = data;
 
     if (err != null) {
       return res.status(400).json({ error: err });
     }
 
-    if (!institutions) {
+    if (!animals) {
       return res.status(404).json({
-        error: "Animals of institution not find",
+        error: "Animals of institution not found",
       });
     }
-    return res.status(200).json({ institutions: institutions });
+    return res.status(200).json({ animals: animals });
   } catch (error) {
     return res.status(500).send(error);
   }
-  // return res.status(200).json("Get animals of institution correctly");
-};
-
-const getAnimal = async (req, res) => {
-  return res.status(200).json("Get concrete animal of institution correctly");
 };
 
 const getUser = async (req, res) => {
-  return res
-    .status(200)
-    .json("Get user who adopted concrete animal of institution correctly");
+  const idInsitution = req.params.idInst;
+  const idAnimal = req.params.idAnim;
+  let user = null;
+  try {
+    const { data, err } = await institutionHelper.findUser(
+      idInsitution,
+      idAnimal
+    );
+    user = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        error: "User who adopted this animal not found.",
+      });
+    }
+    console.log(user);
+    return res.status(200).json({ user: user.user });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 
 module.exports = {
@@ -201,6 +216,5 @@ module.exports = {
   getInstitutionInfo,
   banInstitution,
   getAnimals,
-  getAnimal,
   getUser,
 };
