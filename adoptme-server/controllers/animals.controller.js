@@ -4,11 +4,45 @@ const animalHelper = require("../helpers/animals.helper");
 // Public
 
 const getList = async (req, res) => {
-  return res.status(200).json("Get animals list correctly");
+  let animals = null;
+  try {
+    const { data, err } = await animalHelper.getListHelper();
+    animals = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!animals) {
+      return res.status(404).json({
+        error: "Users not find",
+      });
+    }
+    return res.status(200).json({ animals: animals });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 
 const getListAdopted = async (req, res) => {
-  return res.status(200).json("Get adopted animals list correctly");
+  let animals = null;
+  try {
+    const { data, err } = await animalHelper.getListAdoptedHelper();
+    animals = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    if (!animals) {
+      return res.status(404).json({
+        error: "Users not find",
+      });
+    }
+    return res.status(200).json({ animals: animals });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 
 const getPublicAnimal = async (req, res) => {

@@ -61,9 +61,45 @@ const deleteAnimalById = async (id) => {
   }
 };
 
+const getListHelper = async () => {
+  try {
+    const res = await Animal.find(
+      { enabled: true, adopted: false },
+      "animal_name photo description"
+    ).exec();
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
+const getListAdoptedHelper = async () => {
+  try {
+    const res = await Animal.find(
+      { enabled: true, adopted: true },
+      "animal_name photo description"
+    ).exec();
+    return {
+      data: res,
+      err: null,
+    };
+  } catch (error) {
+    return {
+      err: error,
+    };
+  }
+};
+
 module.exports = {
   findAnimalById,
   registerAnimalHelper,
   updateAnimalById,
   deleteAnimalById,
+  getListHelper,
+  getListAdoptedHelper,
 };

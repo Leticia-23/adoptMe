@@ -62,3 +62,14 @@ Si voy a necesitar toda la info según lo que quiera recibir en esa página del 
 // };
 
 - El endpoint "Get user who adopted concrete animal of institution" lo he implementado, pero creo que tampoco tiene sentido ya que esa información la puedes obtener con el id del animal y ya y teniendo en el front la lista de los animales, o si estás en la página de un animal concreto ya te viene con la información de dicho animal el user.
+
+######
+
+Para getList y getListAdopted cojo los datos para la pantalla de List Animals:
+
+- id
+- photo
+- animal_name
+- description
+
+Solo cojo esta información pública y si se quiere entrar en el animal, entonces dependiendo de si es user registrado (tiene token) o no, se coge la info del animal con el endpoint correspondiente public o private.
