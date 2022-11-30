@@ -1,11 +1,11 @@
 class User {
   id = "";
-  username = "";
-  bio = "";
-  createdAt = Date();
-  messagesNum = 0;
+  name = "";
+  email = "";
+  biography = "";
   avatar = "";
   role = "user";
+  createdAt = Date();
 
   get isAdmin() {
     return this.role === "admin";
@@ -19,12 +19,13 @@ class User {
   static preview() {
     return User.from({
       id: "12319283719283712937",
-      username: "Test user",
-      bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      createdAt: new Date(),
-      messagesNum: 500,
+      name: "Test user",
+      email: "email@gmail.com",
+      biography:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       avatar: "https://i.imgur.com/qJ4UV1i.png",
       role: "user",
+      createdAt: new Date(),
     });
   }
 }
