@@ -11,7 +11,7 @@ function getStorageValue(key, defaultValue, objectType) {
   return defaultValue;
 }
 
-function useLocalStorageObject(key, defaultValue, objectType) {
+export const useLocalStorageObject = (key, defaultValue, objectType) => {
   const [value, setValue] = useState(() => {
     return getStorageValue(key, defaultValue, objectType);
   });
@@ -23,6 +23,4 @@ function useLocalStorageObject(key, defaultValue, objectType) {
   }, [key, value]);
 
   return [value, setValue];
-}
-
-export default useLocalStorageObject;
+};

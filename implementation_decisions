@@ -73,3 +73,23 @@ Para getList y getListAdopted cojo los datos para la pantalla de List Animals:
 - description
 
 Solo cojo esta información pública y si se quiere entrar en el animal, entonces dependiendo de si es user registrado (tiene token) o no, se coge la info del animal con el endpoint correspondiente public o private.
+
+###########################################
+###########################################
+FRONTEND REACT
+
+1. Crear app
+   npx create-react-app my-app
+   cd my-app
+   npm start
+
+2. Para usar bootstrap
+   npm install react-bootstrap bootstrap
+
+3. Para que funcione el diseño de bootstrap, hay que importar el css de bootstrap (columnas, espacios, etc)
+
+   - Lo importo en index.js
+     import "bootstrap/dist/css/bootstrap.min.css";
+   - Igual es buena idea hacer lo de await a que se cargue el import para mostrar el resto de cosas. -> buscar info de por qué se hace eso.
+
+4. npm i react-router-dom

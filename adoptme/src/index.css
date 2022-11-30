@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.navbar-light .navbar-nav .nav-link.active,
+a {
+  color: #ff7043;
+}
+
+.navbar-light .navbar-nav .nav-link.active:hover,
+a:hover {
+  color: #ff7043;
+}
+
+
+.nav-item {
+  margin: auto;
+}
+
+.navbar-nav {
+  white-space: nowrap;
+}
+
+.btn-primary {
+  color: white !important;
+  background-color: #ff7043 !important;
+  border-color: #ff7043 !important;
+}
+
+.btn-secondary {
+  color: #ff7043 !important;
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}

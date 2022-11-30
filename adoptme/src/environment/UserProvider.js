@@ -1,5 +1,6 @@
 import React from "react";
-import useLocalStorageObject from "../extensions/localStorageObject";
+
+import { useLocalStorageObject } from "../extensions/localStorageObject";
 
 import { User } from "../models";
 

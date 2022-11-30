@@ -9,10 +9,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import Navigation from "./Navigation";
 
-import Home from "./Home";
+import { UserProvider, TokenProvider } from "./environment";
 
-import UserProvider from "./environment/UserProvider";
-import TokenProvider from "./environment/TokenProvider";
+import { Home } from "./views";
 
 (async function () {
   await import("bootstrap/dist/css/bootstrap.min.css");
@@ -26,13 +25,7 @@ root.render(
       <TokenProvider>
         <Router>
           <Navigation />
-
           <Routes>
-            {/* <Route path="/lab2" element={<Lab2 />} />
-            <Route path="/lab3-signup" element={<Lab3Signup />} />
-            <Route path="/lab3-login" element={<Lab3Login />} />
-            <Route path="/lab3message" element={<Lab3message />} /> */}
-
             <Route path="/" exact element={<Home />} />
           </Routes>
         </Router>
