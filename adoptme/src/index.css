@@ -43,3 +43,8 @@ a:hover {
   background-color: var(--primary) !important;
   border-color: var(--primary) !important;
 }
+
+.footer {
+  background-color: #ff7043;
+  min-height: 5%;
+}

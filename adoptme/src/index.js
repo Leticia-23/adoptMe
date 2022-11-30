@@ -16,6 +16,7 @@ import {
   Signup,
   Login,
   AboutUs,
+  Footer,
   Animal,
   EditAnimal,
   ListAnimals,
@@ -56,6 +57,7 @@ root.render(
             <Route path="/editProfile" element={<EditProfile />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
+          <Footer />
         </Router>
       </TokenProvider>
     </UserProvider>
