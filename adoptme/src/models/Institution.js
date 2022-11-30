@@ -22,7 +22,7 @@ class Institution {
       id: "12328283728283728642",
       name: "Test institution",
       email: "email@gmail.com",
-      web_URL: "https://www.adoptuskids.org/",
+      web_URL: "https://www.adoptapet.com/",
       phoneNumber: "658945782",
       information:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
