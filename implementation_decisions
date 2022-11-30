@@ -93,3 +93,7 @@ FRONTEND REACT
    - Igual es buena idea hacer lo de await a que se cargue el import para mostrar el resto de cosas. -> buscar info de por qué se hace eso.
 
 4. npm i react-router-dom
+
+5. Imágenes svg en /public/assets
+
+6. He copiado de adoptadicos la forma de poner la URL de la imagen con lo que había en Api.js

@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "./environment";
+
+import { toImageUrl } from "./api/Api";
 
 function Navigation() {
+  let { user: currentUser } = useContext(UserContext);
+
   return (
     <div className="navigation">
       <nav className="navbar navbar-expand-sm navbar-light p-3">
@@ -24,19 +29,50 @@ function Navigation() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/lab2">
-                Lab 2
+              <NavLink className="nav-link" to="/institutions">
+                Institutions
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/lab3-signup">
-                Lab3-Signup
+              <NavLink className="nav-link" to="/animals">
+                Animals
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/lab3-login">
-                Lab3-Login
+              <NavLink className="nav-link" to="/aboutUs">
+                About Us
               </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/adminPanel">
+                Admin panel
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/institutionPanel">
+                Institution panel
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              {/* If logged, show profile photo. If not, show Log in botton. */}
+              {currentUser ? (
+                <NavLink className="nav-link" to="/profile">
+                  <img
+                    src={
+                      currentUser.avatar
+                        ? toImageUrl(currentUser.avatar)
+                        : "/assets/person-circle.svg"
+                    }
+                    className="rounded-circle"
+                    style={{ width: 40, height: 40 }}
+                    alt="Profile"
+                  />
+                </NavLink>
+              ) : (
+                <NavLink className="nav-link" to="/login">
+                  Log In
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>
