@@ -49,3 +49,7 @@ a:hover {
   min-height: 5%;
   bottom: 0;
 }
+
+.card-home {
+  border-color: #ff7043;
+}
