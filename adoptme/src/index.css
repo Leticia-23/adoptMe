@@ -47,4 +47,5 @@ a:hover {
 .footer {
   background-color: #ff7043;
   min-height: 5%;
+  bottom: 0;
 }

@@ -1,13 +1,15 @@
 import React, { useState, useContext } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Col } from "react-bootstrap";
 
 import { UserContext, TokenContext } from "../environment";
 import { User } from "../models";
 import { useNavigate } from "react-router-dom";
 
+import { login_api } from "../api/Api";
+
 function Login() {
   const [state, setState] = useState({
-    email_id: "",
+    email: "",
     password: "",
   });
 
@@ -26,37 +28,37 @@ function Login() {
 
   const login = async (e) => {
     e.preventDefault();
-    console.log("Email: " + state.email_id + " password:" + state.password);
+    console.log("Email: " + state.email + " password:" + state.password);
 
-    // loginStudentApi({
-    //   email: state.email_id,
-    //   password: state.password,
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     // Save el token
-    //     setToken(response.accessToken);
-    //     // Remove the token for not to add it to the user
-    //     delete response.accessToken;
-    //     // Parse the user
-    //     let user_ = User.from(response);
-    //     setUser(user_);
-    //     navigate("/lab3message");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     return;
-    //   });
+    login_api({
+      email: state.email,
+      password: state.password,
+    })
+      .then((response) => {
+        console.log(response);
+        // Save el token
+        setToken(response.accessToken);
+        // Remove the token for not to add it to the user
+        delete response.accessToken;
+        // Parse the user
+        let user_ = User.from(response);
+        setUser(user_);
+        navigate("/lab3message");
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
   };
 
   return (
     <div className="login">
-      <Container className="mb-5 col-lg-4 col-sm-7 col-md-6">
+      <Container className=" justify-content-center mb-5 col-lg-4 col-sm-7 col-md-6">
         <h1 className="text-center">Login</h1>
-        <Form>
+        <Form className="justify-content-center">
           <Form.Group
             className="mb-3 text-start "
-            controlId="email_id"
+            controlId="email"
             onChange={handleChange}
           >
             <Form.Label>Email</Form.Label>
@@ -72,23 +74,26 @@ function Login() {
             <Form.Control type="password" placeholder="Enter password" />
           </Form.Group>
 
-          <Button
-            className="text-center col-6"
-            variant="primary"
-            type="submit"
-            onClick={login}
-          >
-            Login
-          </Button>
-
-          <Button
-            className="text-center col-6"
-            variant="primary"
-            type="submit"
-            onClick={() => navigate("/signup")}
-          >
-            Sign up
-          </Button>
+          <Col className="text-center mt-5">
+            <Button
+              className="col-6"
+              variant="primary"
+              type="submit"
+              onClick={login}
+            >
+              Login
+            </Button>
+          </Col>
+          <Col className="text-center mt-5 mb-5 pb-5">
+            <Button
+              className="col-6"
+              variant="primary"
+              type="submit"
+              onClick={() => navigate("/signup")}
+            >
+              Sign up
+            </Button>
+          </Col>
         </Form>
       </Container>
     </div>
