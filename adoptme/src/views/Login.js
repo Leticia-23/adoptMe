@@ -54,7 +54,7 @@ function Login() {
   return (
     <div className="login">
       <Container className=" justify-content-center mb-5 col-lg-4 col-sm-7 col-md-6">
-        <h1 className="text-center">Login</h1>
+        <h1 className="text-center">Log in</h1>
         <Form className="justify-content-center">
           <Form.Group
             className="mb-3 text-start "
