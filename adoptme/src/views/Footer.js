@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer fixed-bottom">
       <div className="container">
         <div className="row mt-1">
-          <div className="col col-sm-3 mx-auto mb-2  text-center">
+          <div className="col col-lg-4 col-sm-7 col-md-6 mx-auto mb-2  text-center">
             <h6 className="text-white text-uppercase fw-bold mt-2 mb-2">
               Contact
             </h6>
