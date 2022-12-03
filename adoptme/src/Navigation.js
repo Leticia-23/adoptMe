@@ -7,10 +7,13 @@ import { toImageUrl } from "./api/Api";
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
 
+  // TODO: fix navbar expand toggler
+
   return (
     <div className="navigation">
       <nav className="navbar navbar-expand-sm navbar-light p-3">
-        {/* <button
+        {/* <nav className="navbar navbar-expand-lg navbar-light bg-light"> */}
+        <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -20,9 +23,22 @@ function Navigation() {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-        </button> */}
+        </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
+            {/*  <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0"> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/">
                 Home
