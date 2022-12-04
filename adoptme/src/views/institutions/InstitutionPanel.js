@@ -63,7 +63,18 @@ function InstitutionPanel() {
 
   // const [animals, setAnimals] = useState([]);
   const animal1 = ["6497", "animal name"];
-  const animals = [animal1, animal1, animal1, animal1, animal1];
+  const animals = [
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+    animal1,
+  ];
   let table = splitInGroups(animals, 3);
 
   let [img, setImg] = useState("/assets/person-circle.svg");
