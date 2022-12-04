@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 
-import InstitutionMiniCard from "./components/InstitutionMiniCard";
+import InstitutionMiniCard from "../institutions/components/InstitutionMiniCard";
 import UserMiniCard from "./components/UserMiniCard";
 
 // Source: https://stackoverflow.com/a/58519810
