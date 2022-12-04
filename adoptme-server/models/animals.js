@@ -19,6 +19,7 @@ const Animal = new Schema(
     sex: {
       type: String,
       enum: ["Male", "Female"],
+      required: true,
     },
     bornDate: {
       type: Date,

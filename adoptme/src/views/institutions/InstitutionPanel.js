@@ -1,5 +1,5 @@
 // institution panel
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import AnimalMiniCard from "../animals/components/AnimalMiniCard";
 
@@ -13,10 +13,11 @@ function splitInGroups(arr, n) {
 
 function InstitutionPanel() {
   const [state, setState] = useState({
-    name: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
+    animal_name: "",
+    specie: "",
+    breed: "",
+    sex: "",
+    description: "",
   });
 
   const handleChange = (e) => {
@@ -31,13 +32,17 @@ function InstitutionPanel() {
     e.preventDefault();
     console.log(
       "Name: " +
-        state.name +
-        " Email:" +
-        state.email +
-        " Password:" +
-        state.password +
-        " Repeat password: " +
-        state.repeatPassword
+        state.animal_name +
+        " Specie:" +
+        state.specie +
+        " Breed:" +
+        state.breed +
+        " Sex: " +
+        state.sex +
+        " Description" +
+        state.description +
+        " Image: " +
+        imgFile
     );
 
     /* createUser({
@@ -60,6 +65,23 @@ function InstitutionPanel() {
   const animal1 = ["6497", "animal name"];
   const animals = [animal1, animal1, animal1, animal1, animal1];
   let table = splitInGroups(animals, 3);
+
+  let [img, setImg] = useState("/assets/person-circle.svg");
+  let [imgFile, setImgFile] = useState(null);
+
+  const inputRef = useRef(null);
+  const handleUpload = () => {
+    inputRef.current?.click();
+  };
+
+  const handleImgChange = (event) => {
+    if (event.target.files.length !== 1) {
+      return;
+    }
+    setImgFile(event.target.files[0]);
+    setImg(URL.createObjectURL(event.target.files[0]));
+  };
+
   return (
     <div className="institutionPanel">
       <Container className="mb-5 pb-5">
@@ -67,61 +89,89 @@ function InstitutionPanel() {
         {/* TODO: change form to register animal */}
         <Form>
           <Row className="col-12">
-            <Col className="col-lg-9 col-md-9 col-sm-11 ">
+            <Col className="col-lg-6 col-md-9 col-sm-10 ">
               <Row>
                 <Col>
                   <Form.Group
                     className="mb-3 text-start "
-                    controlId="name"
+                    controlId="animal_name"
                     onChange={handleChange}
                   >
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="name" placeholder="Enter name" />
+                    <Form.Control type="name" placeholder="Enter animal name" />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group
                     className="mb-3 text-start "
-                    controlId="password"
+                    controlId="specie"
                     onChange={handleChange}
                   >
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter temporal password"
-                    />
+                    <Form.Label>Specie</Form.Label>
+                    <Form.Control type="specie" placeholder="Enter specie" />
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <Form.Group
-                    className="mb-3 text-start "
-                    controlId="email"
-                    onChange={handleChange}
-                  >
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                  <Form.Group controlId="sex" onChange={handleChange}>
+                    <Form.Label>Sex</Form.Label>
+                    <Form.Select aria-label="Select sex">
+                      <option value="Female">Female</option>
+                      <option value="Male">Male</option>
+                    </Form.Select>
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group
                     className="mb-3 text-start "
-                    controlId="repeatPassword"
+                    controlId="breed"
                     onChange={handleChange}
                   >
-                    <Form.Label>Repeat password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter password"
-                    />
+                    <Form.Label>Breed</Form.Label>
+                    <Form.Control type="breed" placeholder="Enter breed" />
                   </Form.Group>
                 </Col>
               </Row>
+              <Row>
+                <Form.Group
+                  className="mb-3 text-start "
+                  controlId="description"
+                  onChange={handleChange}
+                >
+                  <Form.Label>Description</Form.Label>
+                  {/* <Form.Control
+                    type="description"
+                    placeholder="Enter description"
+                  /> */}
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    id="description"
+                  ></textarea>
+                </Form.Group>
+              </Row>
             </Col>
-            <Col className="col-lg-3 col-md-3 col-sm-1 align-self-center">
+            <Col className="col-lg-3 col-md-2 col-sm-1 align-self-center text-center ">
+              <p className="mt-3 text-center">Animal photo</p>
+              <input
+                ref={inputRef}
+                className="d-none"
+                type="file"
+                accept="image/*"
+                capture="camera"
+                onChange={handleImgChange}
+              />
+              <img
+                className="img img-responsive clickable w-100 border border-primary profile-pic "
+                onClick={handleUpload}
+                src={img}
+                alt=""
+              />
+            </Col>
+            <Col className="col-lg-3 col-md-1 col-sm-1 align-self-center ps-5">
               <Button variant="primary" type="submit" onClick={register_animal}>
-                Register institution
+                Register animal
               </Button>
             </Col>
           </Row>
