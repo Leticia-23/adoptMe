@@ -90,6 +90,16 @@ function Navigation() {
                 </NavLink>
               )}
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/profile">
+                User profile
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/institution">
+                Institution profile
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>
