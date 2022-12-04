@@ -53,3 +53,8 @@ a:hover {
 .card-home {
   border-color: #ff7043;
 }
+
+.list-cards-box {
+  height: 300px;
+  overflow-y: scroll;
+}
