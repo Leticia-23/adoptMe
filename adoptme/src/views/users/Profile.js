@@ -1,7 +1,7 @@
 // profile and own user profile
 // control if is admin or not
 import React, { useState } from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 function Profile() {
   let [isSelf, setIsSelf] = useState(true);
@@ -28,9 +28,9 @@ function Profile() {
 
   return (
     <div className="profile">
-      <Container className="mb-5">
+      <Container className="mb-5 pb-5">
         <Row>
-          <Col className="col-lg-3 col-md-3 col-sm-11 text-center">
+          <div className="col-sm-3 text-center">
             <img
               className="mb-3 img img-responsive profile-pic"
               // src={
@@ -49,8 +49,8 @@ function Profile() {
                 Log out
               </button>
             )}
-          </Col>
-          <Col className="col-lg-9 col-md-9 col-sm-1">
+          </div>
+          <div className="ps-5 col-sm-9">
             <h1>Username</h1>
 
             <h4 className="mt-4">Biography:</h4>
@@ -81,7 +81,7 @@ function Profile() {
                 )}
               </Col>
             </Row>
-          </Col>
+          </div>
         </Row>
       </Container>
     </div>

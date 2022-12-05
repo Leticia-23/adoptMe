@@ -31,6 +31,7 @@ import {
 
 (async function () {
   await import("bootstrap/dist/css/bootstrap.min.css");
+  await import("bootstrap");
   await import("./index.css");
 })();
 
