@@ -41,6 +41,8 @@ function Login() {
         // Remove the token for not to add it to the user
         delete response.accessToken;
         // Parse the user
+
+        // TODO: check if is user or institution, maybe add Institution context?
         let user_ = User.from(response);
         setUser(user_);
         navigate("/lab3message");

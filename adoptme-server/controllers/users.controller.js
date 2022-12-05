@@ -34,6 +34,7 @@ const getUser = async (req, res) => {
 
 // Private
 
+// TODO: add actual password and check it if password is a field to change
 const updateProfile = async (req, res) => {
   let updates = req.body;
   const id = updates.id;

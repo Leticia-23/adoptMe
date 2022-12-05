@@ -151,10 +151,6 @@ function InstitutionPanel() {
                   onChange={handleChange}
                 >
                   <Form.Label>Description</Form.Label>
-                  {/* <Form.Control
-                    type="description"
-                    placeholder="Enter description"
-                  /> */}
                   <textarea
                     class="form-control"
                     rows="4"
