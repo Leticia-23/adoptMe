@@ -97,7 +97,6 @@ function InstitutionPanel() {
     <div className="institutionPanel">
       <Container className="mb-5 pb-5">
         <h1 className="text-start">Register animal</h1>
-        {/* TODO: change form to register animal */}
         <Form>
           <Row className="col-12">
             <Col className="col-lg-6 col-md-9 col-sm-10 ">

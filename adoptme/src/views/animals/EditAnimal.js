@@ -40,7 +40,7 @@ function EditAnimal() {
     console.log(
       "Name: " +
         name +
-        "description" +
+        " description: " +
         description +
         " born date: " +
         bornDate +
@@ -48,13 +48,13 @@ function EditAnimal() {
         size +
         " color: " +
         color +
-        " danger:" +
+        " danger: " +
         danger +
         " sterile: " +
         sterile +
         " adopted: " +
         adopted +
-        " adoptionDate:" +
+        " adoptionDate: " +
         adoptionDate +
         " userAdopt: " +
         userAdopt
@@ -81,7 +81,7 @@ function EditAnimal() {
       <Container className="mb-5 pb-5">
         <Form onSubmit={handleSubmit}>
           <Row>
-            <div className="col-sm-4 text-center">
+            <div className="col-sm-4 text-center p-5">
               <input
                 ref={inputRef}
                 className="d-none"
@@ -91,7 +91,7 @@ function EditAnimal() {
                 onChange={handleImgChange}
               />
               <img
-                className="img img-responsive clickable w-100 border border-primary profile-pic "
+                className="img img-responsive clickable w-100 "
                 onClick={handleUpload}
                 src={img}
                 alt=""
@@ -100,6 +100,7 @@ function EditAnimal() {
             </div>
             <div className="col-sm-4">
               <h2>Animal name</h2>
+
               <Form.Group className="mb-3 text-start " controlId="name">
                 <Form.Control
                   type="name"
@@ -118,76 +119,90 @@ function EditAnimal() {
                 ></textarea>
               </Form.Group>
 
-              {/* TODO: change to calendar form */}
-              <Form.Group className="mb-3 text-start " controlId="borDate">
-                <Form.Control
-                  type="borDate"
-                  placeholder="Animal borDate"
-                  onInput={(e) => setBornDate(e.target.value)}
-                />
-              </Form.Group>
-
               <Form.Group className="mb-3 text-start " controlId="size">
                 <Form.Control
                   type="size"
                   placeholder="Animal size"
-                  onInput={(e) => setSize(e.target.value)}
+                  onInput={(e) => setSize(e.target.value + " Kg")}
                 />
+                <Form.Text>Enter weight in Kilograms</Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3 text-start " controlId="color">
                 <Form.Control
-                  type="color"
+                  type="color-name"
                   placeholder="Animal color"
                   onInput={(e) => setColor(e.target.value)}
+                />
+                <Form.Text>Enter color name</Form.Text>
+              </Form.Group>
+
+              <Form.Label>Animal born date</Form.Label>
+              <Form.Group className="mb-3 text-start " controlId="borDate">
+                <Form.Control
+                  type="date"
+                  placeholder="Animal born date"
+                  // value="2012-12-12"
+                  onInput={(e) => setBornDate(e.target.value)}
                 />
               </Form.Group>
             </div>
 
-            {/* TODO: change to choose option */}
-            <Form.Group className="mb-3 text-start " controlId="danger">
-              <Form.Control
-                type="danger"
-                placeholder="Animal danger"
-                onInput={(e) => setDanger(e.target.value)}
-              />
-            </Form.Group>
+            <div className="col-sm-4 pt-4">
+              <Form.Group className="mb-3 text-start " controlId="danger">
+                <Form.Label>Dangerous animal</Form.Label>
+                <Form.Select
+                  aria-label="Dangerous animal"
+                  onInput={(e) => setDanger(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </Form.Select>
+              </Form.Group>
 
-            {/* TODO: change to choose option */}
-            <Form.Group className="mb-3 text-start " controlId="sterile">
-              <Form.Control
-                type="sterile"
-                placeholder="Animal sterile"
-                onInput={(e) => setSterile(e.target.value)}
-              />
-            </Form.Group>
+              <Form.Group className="mb-3 text-start " controlId="sterile">
+                <Form.Label>Sterile animal</Form.Label>
+                <Form.Select
+                  aria-label="Sterile animal"
+                  onInput={(e) => setSterile(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </Form.Select>
+              </Form.Group>
 
-            {/* TODO: change to choose option */}
-            <Form.Group className="mb-3 text-start " controlId="adopted">
-              <Form.Control
-                type="adopted"
-                placeholder="Adopted or not"
-                onInput={(e) => setAdopted(e.target.value)}
-              />
-            </Form.Group>
+              <Form.Group className="mb-3 text-start " controlId="adopted">
+                <Form.Label>Adopted animal</Form.Label>
+                <Form.Select
+                  aria-label="Adopted animal"
+                  onInput={(e) => setAdopted(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </Form.Select>
+              </Form.Group>
 
-            {/* TODO: change to calendar form */}
-            <Form.Group className="mb-3 text-start " controlId="adoptionDate">
-              <Form.Control
-                type="adoptionDate"
-                placeholder="New adoption date"
-                onInput={(e) => setAdoptionDate(e.target.value)}
-              />
-            </Form.Group>
+              <Form.Group className="mb-3 text-start " controlId="adoptionDate">
+                <Form.Label>Adoption date</Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="New adoption date"
+                  onInput={(e) => setAdoptionDate(e.target.value)}
+                />
+              </Form.Group>
 
-            {/* TODO: list of users or delete this info */}
-            <Form.Group className="mb-3 text-start " controlId="userAdopt">
-              <Form.Control
-                type="userAdopt"
-                placeholder="User who adopted"
-                onInput={(e) => setUserAdopt(e.target.value)}
-              />
-            </Form.Group>
+              {/* TODO: list of users or delete this info */}
+              <Form.Group className="mb-3 text-start " controlId="userAdopt">
+                <Form.Control
+                  type="userAdopt"
+                  placeholder="User who adopted"
+                  onInput={(e) => setUserAdopt(e.target.value)}
+                />
+              </Form.Group>
+            </div>
 
             <Row className="mt-3">
               <Col className="text-center">

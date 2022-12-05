@@ -15,7 +15,7 @@ function EditInstitution() {
   let [newPassword, setNewPassword] = useState("");
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
-  //TODO: put user profile
+  //TODO: put institution image
   let [img, setImg] = useState("/assets/person-circle.svg");
   let [imgFile, setImgFile] = useState(null);
 

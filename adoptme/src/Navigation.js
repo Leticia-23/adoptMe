@@ -7,8 +7,6 @@ import { toImageUrl } from "./api/Api";
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
 
-  // TODO: fix navbar expand toggler
-
   return (
     <div className="navigation">
       <nav className="navbar navbar-expand-md navbar-light p-3">
