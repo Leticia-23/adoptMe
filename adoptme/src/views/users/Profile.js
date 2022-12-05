@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 function Profile() {
   let [isSelf, setIsSelf] = useState(true);
 
@@ -26,6 +28,25 @@ function Profile() {
       }); */
   };
 
+  const logout = async (e) => {
+    e.preventDefault();
+    console.log("Log out");
+
+    /* createUser({
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      repeatPassword: state.repeatPassword,
+    })
+      .then((response) => {
+        console.log(response);
+        navigate("/lab3-login");
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      }); */
+  };
   return (
     <div className="profile">
       <Container className="mb-5 pb-5">
@@ -42,10 +63,7 @@ function Profile() {
               alt=""
             />
             {isSelf && (
-              <button
-                className="btn btn-secondary mt-5"
-                onClick={delete_account}
-              >
+              <button className="btn btn-secondary mt-5" onClick={logout}>
                 Log out
               </button>
             )}
@@ -53,21 +71,18 @@ function Profile() {
           <div className="ps-5 col-sm-9">
             <h1>Username</h1>
 
-            <h4 className="mt-4">Biography:</h4>
+            <h5 className="mt-4">Biography:</h5>
             <p>This is the Biography</p>
 
-            <h4 className="mt-4">Register date:</h4>
+            <h5 className="mt-4">Register date:</h5>
             <p>23/10/22</p>
 
             <Row>
               <Col className="text-center">
                 {isSelf && (
-                  <button
-                    className="btn btn-primary mt-5"
-                    onClick={delete_account}
-                  >
+                  <Link to="/editProfile" className="btn btn-primary mt-5">
                     Edit profile
-                  </button>
+                  </Link>
                 )}
               </Col>
               <Col className="text-center">
