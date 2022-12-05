@@ -87,7 +87,7 @@ function EditInstitution() {
                 src={img}
                 alt=""
               />
-              <p className="mt-3 text-center">User avatar</p>
+              <p className="mt-3 text-center">Institution avatar</p>
             </div>
             <div className="col-sm-4">
               <h2>Username</h2>
