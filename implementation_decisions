@@ -97,3 +97,7 @@ FRONTEND REACT
 5. Imágenes svg en /public/assets
 
 6. He copiado de adoptadicos la forma de poner la URL de la imagen con lo que había en Api.js
+
+######
+
+Con la info del usuario puedo devolver si es admin, user o institution para según el tipo poner dar opción a ciertas funcionalidades.

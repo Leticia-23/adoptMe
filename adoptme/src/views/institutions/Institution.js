@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
-function Profile() {
+function Institution() {
   let [isSelf, setIsSelf] = useState(true);
 
   const logout = async (e) => {
@@ -95,4 +95,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Institution;
