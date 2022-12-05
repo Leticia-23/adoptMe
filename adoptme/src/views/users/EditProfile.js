@@ -83,7 +83,7 @@ function EditProfile() {
               <p className="mt-3 text-center">User avatar</p>
             </div>
             <div className="col-sm-4">
-              <h1>Username</h1>
+              <h2>Username</h2>
               <Form.Group className="mb-3 text-start " controlId="name">
                 <Form.Control
                   type="name"
@@ -133,7 +133,7 @@ function EditProfile() {
 
             <Row className="mt-3">
               <Col className="text-center">
-                <button type="submit" className="btn btn-outline-warning">
+                <button type="submit" className="btn btn-primary">
                   Update profile
                 </button>
               </Col>
