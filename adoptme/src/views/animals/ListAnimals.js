@@ -23,6 +23,8 @@ const animal3 = [
 
 const animals = [animal1, animal2, animal3];
 
+// TODO: buttons and frontend for adopted or not adopted animals
+
 function ListAnimals() {
   return (
     <div className="listAnimals">

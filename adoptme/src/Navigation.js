@@ -87,6 +87,11 @@ function Navigation() {
                 Institution profile
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/animal">
+                Concrete animal
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>

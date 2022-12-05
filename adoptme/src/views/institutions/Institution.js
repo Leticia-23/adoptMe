@@ -29,7 +29,7 @@ function Institution() {
   };
 
   return (
-    <div className="profile">
+    <div className="institution">
       <Container className="mb-5 pb-5">
         <Row>
           <div className="col-sm-3 text-center">
