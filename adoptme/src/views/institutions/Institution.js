@@ -71,24 +71,23 @@ function Institution() {
 
             <h5 className="mt-4">Register date:</h5>
             <p>23/10/22</p>
-
-            <Row>
-              <Col className="text-center">
-                {isSelf && (
-                  <Link to="/editInstitution" className="btn btn-primary mt-5">
-                    Edit profile
-                  </Link>
-                )}
-              </Col>
-              <Col className="text-center">
-                {isSelf && (
-                  <button className="btn btn-secondary mt-5" onClick={logout}>
-                    Log out
-                  </button>
-                )}
-              </Col>
-            </Row>
           </div>
+        </Row>
+        <Row>
+          <Col className="text-center">
+            {isSelf && (
+              <Link to="/editInstitution" className="btn btn-primary mt-5">
+                Edit profile
+              </Link>
+            )}
+          </Col>
+          <Col className="text-center">
+            {isSelf && (
+              <button className="btn btn-secondary mt-5" onClick={logout}>
+                Log out
+              </button>
+            )}
+          </Col>
         </Row>
       </Container>
     </div>
