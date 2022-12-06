@@ -58,31 +58,35 @@ function Navigation() {
             <li className="nav-item">
               {/* If logged, show profile photo. If not, show Log in botton. */}
               {currentUser || currentInstitution ? (
-                <NavLink className="nav-link" to="/profile">
+                <div>
                   {currentUser ? (
-                    <img
-                      src={
-                        currentUser.avatar
-                          ? toImageUrl(currentUser.avatar)
-                          : "/assets/person-circle.svg"
-                      }
-                      className="rounded-circle"
-                      style={{ width: 40, height: 40 }}
-                      alt="Profile"
-                    />
+                    <NavLink className="nav-link" to="/profile">
+                      <img
+                        src={
+                          currentUser.avatar
+                            ? toImageUrl(currentUser.avatar)
+                            : "/assets/person-circle.svg"
+                        }
+                        className="rounded-circle"
+                        style={{ width: 40, height: 40 }}
+                        alt="Profile"
+                      />
+                    </NavLink>
                   ) : (
-                    <img
-                      src={
-                        currentInstitution.avatar
-                          ? toImageUrl(currentInstitution.avatar)
-                          : "/assets/person-circle.svg"
-                      }
-                      className="rounded-circle"
-                      style={{ width: 40, height: 40 }}
-                      alt="Profile"
-                    />
+                    <NavLink className="nav-link" to="/institution">
+                      <img
+                        src={
+                          currentInstitution.avatar
+                            ? toImageUrl(currentInstitution.avatar)
+                            : "/assets/person-circle.svg"
+                        }
+                        className="rounded-circle"
+                        style={{ width: 40, height: 40 }}
+                        alt="Profile"
+                      />
+                    </NavLink>
                   )}
-                </NavLink>
+                </div>
               ) : (
                 <NavLink className="nav-link" to="/login">
                   Log In

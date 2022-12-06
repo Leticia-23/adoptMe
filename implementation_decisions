@@ -98,6 +98,8 @@ FRONTEND REACT
 
 6. He copiado de adoptadicos la forma de poner la URL de la imagen con lo que había en Api.js
 
+7. npm i react-popupbox
+
 ######
 
 Con la info del usuario puedo devolver si es admin, user o institution para según el tipo poner dar opción a ciertas funcionalidades.

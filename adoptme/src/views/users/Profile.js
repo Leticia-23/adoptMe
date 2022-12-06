@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { Link, useNavigate } from "react-router-dom";
-import { logout_api } from "../../api/Api";
+import { logout_api, deleteOwnAccount_api } from "../../api/Api";
 
 import {
   UserContext,
@@ -24,23 +24,19 @@ function Profile() {
   const navigate = useNavigate();
 
   const delete_account = async (e) => {
-    e.preventDefault();
-    console.log("Delete acount");
-
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
-    })
+    console.log("Delete self account");
+    deleteOwnAccount_api()
       .then((response) => {
+        console.log("User deleted");
         console.log(response);
-        navigate("/lab3-login");
+        setToken(null);
+        setContextUser(null);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
   const logout = async (e) => {

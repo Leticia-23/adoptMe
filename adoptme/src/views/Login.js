@@ -47,7 +47,6 @@ function Login() {
 
         // Check if is user or institution
         if (response.role === "institution") {
-          console.log("if dentro institution");
           delete response.role;
           let institution_ = Institution.from(response);
           setInstitution(institution_);

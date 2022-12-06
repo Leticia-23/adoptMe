@@ -21,8 +21,13 @@ function serverRequest(path, requestOptions, tokenOverride = null) {
   }
 
   return fetch(baseUrl + path, requestOptions).then(async (response) => {
+    console.log("Response fetch: ", response);
     if (response.ok) {
-      return await response.json();
+      if (response.status === 204) {
+        return "No content succes";
+      } else {
+        return await response.json();
+      }
     }
     throw await response.json();
   });
@@ -59,14 +64,14 @@ function getRequest(path, body = {}, tokenOverride = null) {
   return serverRequest(path + "?" + params, requestOptions, tokenOverride);
 }
 
-/* function deleteRequest(path, body) {
+function deleteRequest(path, body) {
   let requestOptions = {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
   return serverRequest(path, requestOptions);
-} */
+}
 
 // Functions
 export async function login_api({ email, password }) {
@@ -80,4 +85,8 @@ export async function createUser({ name, email, password, repeatPassword }) {
 
 export async function logout_api() {
   return postRequest("/auth/logout");
+}
+
+export async function deleteOwnAccount_api() {
+  return deleteRequest("/users", {});
 }
