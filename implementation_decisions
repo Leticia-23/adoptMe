@@ -100,11 +100,11 @@ FRONTEND REACT
 
 node modules installed
 
-<!-- 7. npm i react-popupbox -->
-
 7. npm i usehooks-ts
 
 8. npm i moment
+
+9. npm i react-popupbox
 
 ######
 

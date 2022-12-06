@@ -91,6 +91,10 @@ export async function deleteOwnAccount_api() {
   return deleteRequest("/users", {});
 }
 
+export async function deleteUserAccount_api() {
+  return deleteRequest("/users", {});
+}
+
 export async function getSelfInformation() {
   return getRequest("/users/info/me");
 }

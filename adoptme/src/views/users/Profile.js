@@ -1,6 +1,5 @@
 // TODO: profile and own user profile
 // TODO: control if is admin or not
-// TODO: delete user as admin -> put button and handlerAPI
 import React, { useState, useContext } from "react";
 import { useEffectOnce } from "usehooks-ts";
 import { Container, Row, Col } from "react-bootstrap";
@@ -10,13 +9,13 @@ import { useParams } from "react-router";
 
 import moment from "moment";
 
-import { toImageUrl } from "../../api/Api";
-
 import {
   logout_api,
   deleteOwnAccount_api,
+  deleteUserAccount_api,
   getSelfInformation,
   getUserInformation,
+  toImageUrl,
 } from "../../api/Api";
 import User from "../../models/User";
 
@@ -103,6 +102,21 @@ function Profile() {
       });
   };
 
+  // TODO: check if works from /profile/47128934782
+  const delete_user_account = async (e) => {
+    console.log("Delete user account");
+    deleteUserAccount_api(userId)
+      .then((response) => {
+        console.log("User deleted");
+        console.log(response);
+        navigate("/adminPanel");
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+  };
+
   const logout = async (e) => {
     logout_api({})
       .then((response) => {
@@ -118,9 +132,9 @@ function Profile() {
       });
   };
 
-  /*  if (!user) {
+  if (!user) {
     return <></>;
-  } */
+  }
 
   return (
     <div className="profile">
@@ -161,7 +175,15 @@ function Profile() {
                 )}
               </Col>
               <Col className="text-center">
-                {isSelf && (
+                {!isSelf && currentUser && currentUser.isAdmin && (
+                  <button
+                    className="btn btn-danger mt-5 text-center"
+                    onClick={delete_user_account}
+                  >
+                    Delete user account
+                  </button>
+                )}
+                {isSelf && !currentUser.isAdmin && (
                   <button
                     className="btn btn-danger mt-5 text-center"
                     onClick={delete_account}
