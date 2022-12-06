@@ -57,19 +57,31 @@ function Navigation() {
             </li>
             <li className="nav-item">
               {/* If logged, show profile photo. If not, show Log in botton. */}
-              {/* TODO: fix currentInstitution button */}
-              {currentUser ? (
+              {currentUser || currentInstitution ? (
                 <NavLink className="nav-link" to="/profile">
-                  <img
-                    src={
-                      currentUser.avatar
-                        ? toImageUrl(currentUser.avatar)
-                        : "/assets/person-circle.svg"
-                    }
-                    className="rounded-circle"
-                    style={{ width: 40, height: 40 }}
-                    alt="Profile"
-                  />
+                  {currentUser ? (
+                    <img
+                      src={
+                        currentUser.avatar
+                          ? toImageUrl(currentUser.avatar)
+                          : "/assets/person-circle.svg"
+                      }
+                      className="rounded-circle"
+                      style={{ width: 40, height: 40 }}
+                      alt="Profile"
+                    />
+                  ) : (
+                    <img
+                      src={
+                        currentInstitution.avatar
+                          ? toImageUrl(currentInstitution.avatar)
+                          : "/assets/person-circle.svg"
+                      }
+                      className="rounded-circle"
+                      style={{ width: 40, height: 40 }}
+                      alt="Profile"
+                    />
+                  )}
                 </NavLink>
               ) : (
                 <NavLink className="nav-link" to="/login">

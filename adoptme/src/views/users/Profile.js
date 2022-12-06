@@ -17,10 +17,8 @@ function Profile() {
 
   // with the rename (user: currentUser) we have to use it with the new name (currentUser)
   let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
-  let {
-    institution: currentInstitution,
-    setInstitution: setContextInstitution,
-  } = useContext(InstitutionContext);
+  let { setInstitution: setContextInstitution } =
+    useContext(InstitutionContext);
   let { setToken } = useContext(TokenContext);
 
   const navigate = useNavigate();

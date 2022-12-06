@@ -21,7 +21,7 @@ function Institution() {
     setInstitution: setContextInstitution,
   } = useContext(InstitutionContext);
   let { setToken } = useContext(TokenContext);
-  let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
+  let { setUser: setContextUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 

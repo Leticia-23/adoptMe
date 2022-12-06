@@ -12,6 +12,7 @@ const router = express.Router();
 router.get("/:id", UserController.getUser);
 
 // Private
+
 // Update profile
 // URL: http://localhost:8080/api/users/profile
 router.patch("/profile", verifyToken, UserController.updateProfile);
