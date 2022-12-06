@@ -131,7 +131,6 @@ const login = async (req, res) => {
       avatar: user.avatar,
       role: user.role,
       createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
       accessToken: accesToken,
     });
   } else {
@@ -163,7 +162,7 @@ const login = async (req, res) => {
       information: institution.information,
       avatar: institution.avatar,
       createdAt: institution.createdAt,
-      updatedAt: institution.updatedAt,
+      role: "institution",
       accessToken: accesToken,
     });
   }

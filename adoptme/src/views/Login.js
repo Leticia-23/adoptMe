@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Container, Form, Button, Col } from "react-bootstrap";
 
-import { UserContext, TokenContext } from "../environment";
-import { User } from "../models";
+import { UserContext, TokenContext, InstitutionContext } from "../environment";
+import { User, Institution } from "../models";
 import { useNavigate } from "react-router-dom";
 
 import { login_api } from "../api/Api";
@@ -15,6 +15,7 @@ function Login() {
 
   const { setToken } = useContext(TokenContext);
   const { setUser } = useContext(UserContext);
+  const { setInstitution } = useContext(InstitutionContext);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -42,10 +43,21 @@ function Login() {
         delete response.accessToken;
         // Parse the user
 
-        // TODO: check if is user or institution, maybe add Institution context?
-        let user_ = User.from(response);
-        setUser(user_);
-        navigate("/lab3message");
+        console.log(response.role);
+
+        // Check if is user or institution
+        if (response.role === "institution") {
+          console.log("if dentro institution");
+          delete response.role;
+          let institution_ = Institution.from(response);
+          setInstitution(institution_);
+          navigate("/");
+        } else {
+          console.log("if dentro user");
+          let user_ = User.from(response);
+          setUser(user_);
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error);

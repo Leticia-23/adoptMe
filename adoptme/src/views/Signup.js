@@ -23,16 +23,6 @@ function Signup() {
 
   const signup = async (e) => {
     e.preventDefault();
-    console.log(
-      "Name: " +
-        state.name +
-        " Email:" +
-        state.email +
-        " Password:" +
-        state.password +
-        " Repeat password: " +
-        state.repeatPassword
-    );
 
     createUser({
       name: state.name,
@@ -42,7 +32,7 @@ function Signup() {
     })
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);

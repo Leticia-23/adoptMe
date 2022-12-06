@@ -14,7 +14,7 @@ function serverRequest(path, requestOptions, tokenOverride = null) {
     token = localStorage.getItem("token");
   }
 
-  // Añadimos el token de sesión a la petición si estamos loggeados
+  // Add sesion token to the request if logged
   if (token) {
     if (!tokenOverride) token = JSON.parse(token);
     if (token) requestOptions.headers["Authorization"] = "Bearer " + token;
@@ -76,4 +76,8 @@ export async function login_api({ email, password }) {
 export async function createUser({ name, email, password, repeatPassword }) {
   console.log(name, email, password, repeatPassword);
   return postRequest("/auth/signup", arguments[0]);
+}
+
+export async function logout_api() {
+  return postRequest("/auth/logout");
 }

@@ -1,12 +1,29 @@
-// profile and own user profile
-// control if is admin or not
-import React, { useState } from "react";
+// TODO: profile and own user profile
+// TODO: control if is admin or not
+import React, { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout_api } from "../../api/Api";
+
+import {
+  UserContext,
+  TokenContext,
+  InstitutionContext,
+} from "../../environment";
 
 function Profile() {
   let [isSelf, setIsSelf] = useState(true);
+
+  // with the rename (user: currentUser) we have to use it with the new name (currentUser)
+  let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
+  let {
+    institution: currentInstitution,
+    setInstitution: setContextInstitution,
+  } = useContext(InstitutionContext);
+  let { setToken } = useContext(TokenContext);
+
+  const navigate = useNavigate();
 
   const delete_account = async (e) => {
     e.preventDefault();
@@ -29,24 +46,20 @@ function Profile() {
   };
 
   const logout = async (e) => {
-    e.preventDefault();
-    console.log("Log out");
-
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
-    })
+    logout_api({})
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
+        setToken(null);
+        setContextUser(null);
+        setContextInstitution(null);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
+
   return (
     <div className="profile">
       <Container className="mb-5 pb-5">

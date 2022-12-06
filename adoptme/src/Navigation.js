@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { UserContext } from "./environment";
+import { UserContext, InstitutionContext } from "./environment";
 
 import { toImageUrl } from "./api/Api";
 
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
+  let { institution: currentInstitution } = useContext(InstitutionContext);
 
   return (
     <div className="navigation">
@@ -56,6 +57,7 @@ function Navigation() {
             </li>
             <li className="nav-item">
               {/* If logged, show profile photo. If not, show Log in botton. */}
+              {/* TODO: fix currentInstitution button */}
               {currentUser ? (
                 <NavLink className="nav-link" to="/profile">
                   <img

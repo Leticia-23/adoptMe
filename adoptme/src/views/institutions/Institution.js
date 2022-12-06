@@ -1,31 +1,43 @@
 // profile and own profile institutions
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import {
+  InstitutionContext,
+  TokenContext,
+  UserContext,
+} from "../../environment";
+import { logout_api } from "../../api/Api";
 
 function Institution() {
   let [isSelf, setIsSelf] = useState(true);
 
-  const logout = async (e) => {
-    e.preventDefault();
-    console.log("Log out");
+  // with the rename (user: currentUser) we have to use it with the new name (currentUser)
+  let {
+    institution: currentInstitution,
+    setInstitution: setContextInstitution,
+  } = useContext(InstitutionContext);
+  let { setToken } = useContext(TokenContext);
+  let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
 
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
-    })
+  const navigate = useNavigate();
+
+  const logout = async (e) => {
+    logout_api({})
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
+        setToken(null);
+        setContextInstitution(null);
+        setContextUser(null);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
   return (
