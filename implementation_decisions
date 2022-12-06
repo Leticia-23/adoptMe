@@ -98,7 +98,13 @@ FRONTEND REACT
 
 6. He copiado de adoptadicos la forma de poner la URL de la imagen con lo que había en Api.js
 
-7. npm i react-popupbox
+node modules installed
+
+<!-- 7. npm i react-popupbox -->
+
+7. npm i usehooks-ts
+
+8. npm i moment
 
 ######
 

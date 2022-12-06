@@ -90,3 +90,11 @@ export async function logout_api() {
 export async function deleteOwnAccount_api() {
   return deleteRequest("/users", {});
 }
+
+export async function getSelfInformation() {
+  return getRequest("/users/info/me");
+}
+
+export async function getUserInformation(id = null) {
+  return getRequest("/users/" + id);
+}

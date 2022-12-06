@@ -9,8 +9,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import Navigation from "./Navigation";
 
-import { PopupboxContainer } from "react-popupbox";
-
 import {
   UserProvider,
   TokenProvider,
@@ -39,7 +37,6 @@ import {
   await import("bootstrap/dist/css/bootstrap.min.css");
   await import("bootstrap");
   await import("./index.css");
-  await import("react-popupbox/dist/react-popupbox.css");
 })();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -49,7 +46,6 @@ root.render(
       <InstitutionProvider>
         <TokenProvider>
           <Router>
-            <PopupboxContainer />
             <Navigation />
             <Routes>
               <Route path="/" exact element={<Home />} />
