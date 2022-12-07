@@ -65,7 +65,7 @@ const getListHelper = async () => {
   try {
     const res = await Animal.find(
       { enabled: true, adopted: false },
-      "animal_name photo description"
+      "animal_name photo description createdAt"
     ).exec();
     return {
       data: res,
@@ -82,7 +82,7 @@ const getListAdoptedHelper = async () => {
   try {
     const res = await Animal.find(
       { enabled: true, adopted: true },
-      "animal_name photo description"
+      "animal_name photo description createdAt"
     ).exec();
     return {
       data: res,

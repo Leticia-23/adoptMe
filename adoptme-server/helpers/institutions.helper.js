@@ -50,7 +50,7 @@ const getInstitutionsHelper = async () => {
   try {
     const res = await Institution.find(
       { enabled: true },
-      "name information avatar"
+      "name information avatar createdAt"
     ).exec();
     return {
       data: res,
