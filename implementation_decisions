@@ -109,3 +109,9 @@ node modules installed
 ######
 
 Con la info del usuario puedo devolver si es admin, user o institution para según el tipo poner dar opción a ciertas funcionalidades.
+
+######
+
+Si da tiempo poner los mensajes flotantes de error y succes para las acciones de registro, update.
+
+Si da tiempo mirar lo de los popups

@@ -24,7 +24,7 @@ function ListAnimals() {
             <option value="Adopted">Adopted animals</option>
           </Form.Select>
         </Row>
-        <Container>{option ? <Adopt></Adopt> : <Adopted></Adopted>}</Container>
+        <Container>{option ? <Adopt /> : <Adopted />}</Container>
       </Container>
     </div>
   );

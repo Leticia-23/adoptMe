@@ -13,14 +13,12 @@ const truncate = (str, n) => {
 
 function AnimalCard({ animal }) {
   return (
-    // TODO: change all real data
-    // TODO: linkear title and image
     <div>
       <Container className="mb-4">
         <Card>
           <Row className="mx-2 align-items-center ">
             <Col className="col-sm-2 col-lg-1 col-md-2">
-              <Link to={"/animal"}>
+              <Link to={"/animal/" + animal._id}>
                 <img
                   src={
                     animal.photo
@@ -35,13 +33,12 @@ function AnimalCard({ animal }) {
               </Link>
             </Col>
             <Col className="col-sm-10 col-lg-11 col-md-10">
-              <Link to={"/animal"}>
+              <Link to={"/animal/" + animal._id}>
                 <Card.Title className="mt-2">{animal.animal_name}</Card.Title>
               </Link>
 
               <p>{truncate(animal.description, 250)}</p>
-              {/* TODO: link to animal */}
-              <Link to={"/animal"}>Read more</Link>
+              <Link to={"/animal/" + animal._id}>Read more</Link>
               <p className="text-end">
                 {moment(animal.createdAt).format("DD-MM-YYYY")}
               </p>

@@ -52,7 +52,7 @@ root.render(
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path="/animal" element={<Animal />} />
+              <Route path="/animal/:animalId" element={<Animal />} />
               <Route path="/editAnimal" element={<EditAnimal />} />
               <Route path="/animals" element={<ListAnimals />} />
               <Route path="/editInstitution" element={<EditInstitution />} />
