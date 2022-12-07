@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+import { toImageUrl } from "../../../api/Api";
+import moment from "moment";
+
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
 const truncate = (str, n) => {
@@ -16,29 +20,31 @@ function AnimalCard({ animal }) {
         <Card>
           <Row className="mx-2 align-items-center ">
             <Col className="col-sm-2 col-lg-1 col-md-2">
-              <Link to={"/"}>
+              <Link to={"/animal"}>
                 <img
                   src={
-                    "/assets/person-circle.svg"
-                    // animal.photo ? toImageUrl(animal.photo) : "/assets/person-circle.svg"
+                    animal.photo
+                      ? toImageUrl(animal.photo)
+                      : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
                   width={60}
                   height={60}
-                  //   alt={user.username}
-                  alt={animal[2]}
+                  alt={animal.animal_name}
                 />
               </Link>
             </Col>
             <Col className="col-sm-10 col-lg-11 col-md-10">
-              <Link to={"/"}>
-                <Card.Title className="mt-2">{animal[0]}</Card.Title>
+              <Link to={"/animal"}>
+                <Card.Title className="mt-2">{animal.animal_name}</Card.Title>
               </Link>
 
-              <p>{truncate(animal[1], 250)}</p>
+              <p>{truncate(animal.description, 250)}</p>
               {/* TODO: link to animal */}
-              <Link to={"/"}>Read more</Link>
-              <p className="text-end">{animal[3]}</p>
+              <Link to={"/animal"}>Read more</Link>
+              <p className="text-end">
+                {moment(animal.createdAt).format("DD-MM-YYYY")}
+              </p>
             </Col>
           </Row>
         </Card>

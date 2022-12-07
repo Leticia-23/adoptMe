@@ -118,3 +118,11 @@ export async function banInstitutionAccount(institutionId = null) {
 export async function getInstitutions_api() {
   return getRequest("/institutions");
 }
+
+export async function getAdoptAnimals_api() {
+  return getRequest("/animals");
+}
+
+export async function getAdoptedAnimals_api() {
+  return getRequest("/animals/adopted");
+}
