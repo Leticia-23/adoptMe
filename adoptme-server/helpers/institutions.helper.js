@@ -50,7 +50,7 @@ const getInstitutionsHelper = async () => {
   try {
     const res = await Institution.find(
       { enabled: true },
-      "name email web_URL phoneNumber information avatar createdAt"
+      "name information avatar"
     ).exec();
     return {
       data: res,

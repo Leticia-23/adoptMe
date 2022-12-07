@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import InstitutionCard from "./components/InstitutionCard";
+
+import { useEffectOnce } from "usehooks-ts";
 
 function ListInstitutions() {
   const institution1 = [
@@ -22,7 +24,29 @@ function ListInstitutions() {
     "24-05-2022",
   ];
 
-  const institutions = [institution1, institution2, institution3];
+  const institutions_ = [institution1, institution2, institution3];
+
+  const [institutions, setInstitutions] = useState([]);
+
+  useEffectOnce(() => {
+    /* getAnimals({
+      starts: (pag - 1) * animalsPerPage,
+      rows: animalsPerPage,
+      specie: filterSpecie || null,
+      breed: filterBreed ? filterBreed.toUpperCase() : null,
+    })
+      .then((result) => {
+        console.log("res", result);
+        setTotalAnimals(result.data.total);
+        let animal_list = result.data.pets.map((animal) =>
+          ListAnimal.from(animal)
+        );
+        setAnimals(animal_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      }); */
+  });
 
   return (
     <div className="listInstitutions">
@@ -30,7 +54,7 @@ function ListInstitutions() {
         <h1 className="text-center">Institutions</h1>
         <Container>
           <div className="mb-2">
-            {institutions.map((inst, i) => (
+            {institutions_.map((inst, i) => (
               <InstitutionCard key={i} institution={inst} />
             ))}
           </div>

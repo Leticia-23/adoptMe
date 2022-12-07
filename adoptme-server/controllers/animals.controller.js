@@ -15,7 +15,7 @@ const getList = async (req, res) => {
 
     if (!animals) {
       return res.status(404).json({
-        error: "Users not find",
+        error: "Animals to adopt not found",
       });
     }
     return res.status(200).json({ animals: animals });
@@ -36,7 +36,7 @@ const getListAdopted = async (req, res) => {
 
     if (!animals) {
       return res.status(404).json({
-        error: "Users not find",
+        error: "Animals adopted not found",
       });
     }
     return res.status(200).json({ animals: animals });

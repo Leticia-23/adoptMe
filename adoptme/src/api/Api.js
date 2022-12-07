@@ -114,3 +114,7 @@ export async function getInstitutionInfo(id = null) {
 export async function banInstitutionAccount(institutionId = null) {
   return deleteRequest("/institutions/" + institutionId, {});
 }
+
+export async function getInstitutions_api() {
+  return getRequest("/institutions");
+}
