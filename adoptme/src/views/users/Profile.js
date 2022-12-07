@@ -10,7 +10,7 @@ import moment from "moment";
 import {
   logout_api,
   deleteOwnAccount_api,
-  deleteUserAccount_api,
+  banUserAccount,
   getSelfInformation,
   getUserInformation,
   toImageUrl,
@@ -22,9 +22,6 @@ import {
   TokenContext,
   InstitutionContext,
 } from "../../environment";
-
-// Add this in your component file
-require("react-dom");
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -39,6 +36,8 @@ function Profile() {
   let { userId } = useParams();
 
   useEffectOnce(() => {
+    console.log(userId);
+
     let id = userId;
     let is_self = false;
 
@@ -93,7 +92,7 @@ function Profile() {
   };
 
   const delete_user_account = async (e) => {
-    deleteUserAccount_api(userId)
+    banUserAccount(userId)
       .then((response) => {
         console.log(response);
         navigate("/adminPanel");

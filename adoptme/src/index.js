@@ -25,7 +25,7 @@ import {
   EditAnimal,
   ListAnimals,
   EditInstitution,
-  Institution,
+  InstitutionProfile,
   InstitutionPanel,
   ListInstitutions,
   AdminPanel,
@@ -56,7 +56,11 @@ root.render(
               <Route path="/editAnimal" element={<EditAnimal />} />
               <Route path="/animals" element={<ListAnimals />} />
               <Route path="/editInstitution" element={<EditInstitution />} />
-              <Route path="/institution" element={<Institution />} />
+              <Route path="/institution" element={<InstitutionProfile />} />
+              <Route
+                path="/institution/:institutionId"
+                element={<InstitutionProfile />}
+              />
               <Route path="/institutionPanel" element={<InstitutionPanel />} />
               <Route path="/institutions" element={<ListInstitutions />} />
               <Route path="/adminPanel" element={<AdminPanel />} />

@@ -91,7 +91,7 @@ export async function deleteOwnAccount_api() {
   return deleteRequest("/users", {});
 }
 
-export async function deleteUserAccount_api(userId = null) {
+export async function banUserAccount(userId = null) {
   return deleteRequest("/users/" + userId, {});
 }
 
@@ -101,4 +101,16 @@ export async function getSelfInformation() {
 
 export async function getUserInformation(id = null) {
   return getRequest("/users/" + id);
+}
+
+export async function getSelfInstitutionInfo() {
+  return getRequest("/institutions/info/me");
+}
+
+export async function getInstitutionInfo(id = null) {
+  return getRequest("/institutions/" + id);
+}
+
+export async function banInstitutionAccount(institutionId = null) {
+  return deleteRequest("/institutions/" + institutionId, {});
 }
