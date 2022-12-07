@@ -1,42 +1,30 @@
-import React from "react";
-import { Container } from "react-bootstrap";
-import AnimalCard from "./components/AnimalCard";
-
-const animal1 = [
-  "animal_name",
-  "animal information animal information animal information animal information animal information animal informationvvv v animal informationanimal informationanimal information animal information animal information animal informationanimal information animal information animal informationanimal informationanimal informationvanimal informationanimal information animal informationanimal informationanimal informationanimal information",
-  "alt for the picture",
-  "23-05-2022",
-];
-const animal2 = [
-  "animal_name",
-  "animal information animal information animal information animal information animal information animal informationvvv v animal informationanimal informationanimal information animal information animal information animal informationanimal information animal information animal informationanimal informationanimal informationvanimal informationanimal information animal informationanimal informationanimal informationanimal information",
-  "alt for the picture",
-  "23-05-2022",
-];
-const animal3 = [
-  "animal_name",
-  "animal information animal information animal information animal information animal information animal informationvvv v animal informationanimal informationanimal information animal information animal information animal informationanimal information animal information animal informationanimal informationanimal informationvanimal informationanimal information animal informationanimal informationanimal informationanimal information",
-  "alt for the picture",
-  "23-05-2022",
-];
-
-const animals = [animal1, animal2, animal3];
-
-// TODO: buttons and frontend for adopted or not adopted animals
+import React, { useState } from "react";
+import { Container, Row, Form } from "react-bootstrap";
+import Adopt from "./components/Adopt";
+import Adopted from "./components/Adopted";
 
 function ListAnimals() {
+  const [option, setOption] = useState(true);
+
+  const handleChange = (e) => {
+    if (option) {
+      setOption(false);
+    } else {
+      setOption(true);
+    }
+  };
+
   return (
     <div className="listAnimals">
       <Container className="mb-5 pb-5">
-        <h1 className="text-center">Animals</h1>
-        <Container>
-          <div className="mb-2">
-            {animals.map((animal, i) => (
-              <AnimalCard key={i} animal={animal} />
-            ))}
-          </div>
-        </Container>
+        <h1 className="text-center ">Animals</h1>
+        <Row className="mb-3">
+          <Form.Select aria-label="Select option" onChange={handleChange}>
+            <option value="Adopt">Animals to adopt</option>
+            <option value="Adopted">Adopted animals</option>
+          </Form.Select>
+        </Row>
+        <Container>{option ? <Adopt></Adopt> : <Adopted></Adopted>}</Container>
       </Container>
     </div>
   );
