@@ -1,5 +1,3 @@
-// TODO: profile and own user profile
-// TODO: control if is admin or not
 import React, { useState, useContext } from "react";
 import { useEffectOnce } from "usehooks-ts";
 import { Container, Row, Col } from "react-bootstrap";
@@ -49,7 +47,6 @@ function Profile() {
       return;
     }
 
-    console.log("useEffectOncee");
     // If no id or id is the same as the current user one
     if (!userId || (currentUser && currentUser.id === userId)) {
       setIsSelf(true);
@@ -58,25 +55,20 @@ function Profile() {
     }
 
     if (is_self) {
-      console.log("here");
       getSelfInformation()
         .then((result) => {
           let user = User.from(result);
           setUser(user);
           setContextUser(user);
-          console.log("is self: ", user);
         })
         .catch((error) => {
           console.error(error);
         });
     } else {
-      // TODO: check this works too from /profile/47128934782
-      console.log("there");
       getUserInformation(id)
         .then((result) => {
           let user = User.from(result);
           setUser(user);
-          setContextUser(user);
         })
         .catch((error) => {
           console.error(error);
@@ -87,10 +79,8 @@ function Profile() {
   const navigate = useNavigate();
 
   const delete_account = async (e) => {
-    console.log("Delete self account");
     deleteOwnAccount_api()
       .then((response) => {
-        console.log("User deleted");
         console.log(response);
         setToken(null);
         setContextUser(null);
@@ -102,12 +92,9 @@ function Profile() {
       });
   };
 
-  // TODO: check if works from /profile/47128934782
   const delete_user_account = async (e) => {
-    console.log("Delete user account");
     deleteUserAccount_api(userId)
       .then((response) => {
-        console.log("User deleted");
         console.log(response);
         navigate("/adminPanel");
       })

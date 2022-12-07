@@ -149,7 +149,7 @@ function AdminPanel() {
 
         <h1 className="text-start mt-4">Institutions</h1>
         <Container>
-          <div class="border list-cards-box">
+          <div className="border list-cards-box">
             {table.map((row, i) => (
               <div className="row mt-2" key={i}>
                 {row.map((institution, j) => (
@@ -164,7 +164,7 @@ function AdminPanel() {
 
         <h1 className="text-start mt-4">Users</h1>
         <Container>
-          <div class="border list-cards-box">
+          <div className="border list-cards-box">
             {table_user.map((row, i) => (
               <div className="row mt-2" key={i}>
                 {row.map((user, j) => (

@@ -62,6 +62,7 @@ root.render(
               <Route path="/adminPanel" element={<AdminPanel />} />
               <Route path="/editProfile" element={<EditProfile />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:userId" element={<Profile />} />
             </Routes>
             <Footer />
           </Router>
