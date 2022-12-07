@@ -126,3 +126,11 @@ export async function getAdoptAnimals_api() {
 export async function getAdoptedAnimals_api() {
   return getRequest("/animals/adopted");
 }
+
+export async function getPublicAnimal_api(animalId = null) {
+  return getRequest("/animals/public/" + animalId);
+}
+
+export async function getPrivateAnimal_api(animalId = null) {
+  return getRequest("/api/animals/" + animalId);
+}

@@ -1,0 +1,170 @@
+import React, { useState, useContext } from "react";
+import { useEffectOnce } from "usehooks-ts";
+import { Container, Row, Col } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+
+import moment from "moment";
+
+import { InstitutionContext, UserContext } from "../../environment";
+import { Animal /* Institution */ } from "../../models";
+import {
+  /* getInstitutionInfo */
+  getPrivateAnimal_api,
+  getPublicAnimal_api,
+  toImageUrl,
+} from "../../api/Api";
+
+function AnimalConcrete() {
+  let [isInstOwner, setisInstOwner] = useState(false);
+  let [isRegistered, setisRegistered] = useState(false);
+  let [isAdopted, setisAdopted] = useState(true);
+  let [animal, setAnimal] = useState(null);
+  /*   let [institution, setInstitution] = useState(null);
+   */
+  let { institution: currentInstitution } = useContext(InstitutionContext);
+  let { user: currentUser } = useContext(UserContext);
+
+  let { animalId } = useParams();
+
+  useEffectOnce(() => {
+    // Check if there is a registered user or institution viewing this page
+    if (currentUser || currentInstitution) {
+      setisRegistered(true);
+    }
+
+    if (isRegistered) {
+      getPrivateAnimal_api(animalId)
+        .then((result) => {
+          let animal = Animal.from(result);
+          setAnimal(animal);
+          if (
+            currentInstitution &&
+            currentInstitution.id === animal.institution
+          ) {
+            setisInstOwner(true);
+          }
+          if (animal.adopted) {
+            setisAdopted(true);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      getPublicAnimal_api(animalId)
+        .then((result) => {
+          let animal = Animal.from(result);
+          setAnimal(animal);
+          if (
+            currentInstitution &&
+            currentInstitution.id === animal.institution
+          ) {
+            setisInstOwner(true);
+          }
+          if (animal.adopted) {
+            setisAdopted(true);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+    /* getInstitutionInfo(animal.institution)
+      .then((result) => {
+        let institution = Institution.from(result);
+        setInstitution(institution);
+      })
+      .catch((error) => {
+        console.error(error);
+      }); */
+  });
+
+  return (
+    <div className="animal">
+      <Container className="mb-5 pb-5">
+        <Row>
+          <div className="col-sm-8">
+            <h1>{animal.animal_name}</h1>
+
+            <h5 className="mt-4">Description:</h5>
+            <p>{animal.description}</p>
+          </div>
+          <div className="col-sm-4 text-center">
+            <img
+              className="mb-3 img img-responsive profile-pic"
+              src={
+                animal.photo
+                  ? toImageUrl(animal.photo)
+                  : "/assets/person-circle.svg"
+              }
+              alt={animal.animal_name}
+            />
+          </div>
+        </Row>
+        <Row>
+          <div className="col-sm-4">
+            <h5 className="mt-4">Specie:</h5>
+            <p>{animal.specie}</p>
+
+            <h5 className="mt-4">Breed:</h5>
+            <p>{animal.breed}</p>
+
+            {isRegistered && <h5 className="mt-4">Born date:</h5>}
+            {isRegistered && <p>25/03/22</p>}
+
+            {isRegistered && <h5 className="mt-4">Color:</h5>}
+            {isRegistered && <p>Gray</p>}
+
+            {isRegistered && <h5 className="mt-4">Sterile:</h5>}
+            {isRegistered && <p>No</p>}
+          </div>
+          <div className="col-sm-4">
+            <h5 className="mt-4">Sex:</h5>
+            <p>{animal.sex}</p>
+
+            <h5 className="mt-4">Institution:</h5>
+            <p>Name institution with link to the profile</p>
+
+            {isRegistered && <h5 className="mt-4">Size:</h5>}
+            {isRegistered && <p>7 Kg</p>}
+
+            {isRegistered && <h5 className="mt-4">Danger:</h5>}
+            {isRegistered && <p>No</p>}
+          </div>
+          <div className="col-sm-4">
+            <h5 className="mt-4">Adopted:</h5>
+            <p>No</p>
+
+            {isInstOwner && isAdopted && (
+              <h5 className="mt-4">Adoption date:</h5>
+            )}
+            {isInstOwner && isAdopted && <p>25/05/22</p>}
+            {isInstOwner && isAdopted && (
+              <h5 className="mt-4">Person who adopted:</h5>
+            )}
+            {isInstOwner && isAdopted && (
+              <p>
+                Name user adopted link to the profile or this person is not
+                registered in this community
+              </p>
+            )}
+          </div>
+        </Row>
+        <Row>
+          <Col className="text-center">
+            {isInstOwner && (
+              <Link to="/editAnimal" className="btn btn-primary mt-5">
+                Edit animal information
+              </Link>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+}
+
+export default AnimalConcrete;

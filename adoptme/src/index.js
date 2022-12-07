@@ -21,7 +21,7 @@ import {
   Login,
   AboutUs,
   Footer,
-  Animal,
+  AnimalConcrete,
   EditAnimal,
   ListAnimals,
   EditInstitution,
@@ -52,7 +52,7 @@ root.render(
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path="/animal/:animalId" element={<Animal />} />
+              <Route path="/animal/:animalId" element={<AnimalConcrete />} />
               <Route path="/editAnimal" element={<EditAnimal />} />
               <Route path="/animals" element={<ListAnimals />} />
               <Route path="/editInstitution" element={<EditInstitution />} />
