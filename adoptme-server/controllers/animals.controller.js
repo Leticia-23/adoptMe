@@ -82,6 +82,7 @@ const getPublicAnimal = async (req, res) => {
 // Private
 
 const registerAnimal = async (req, res) => {
+  // TODO: upload photo
   let animal = req.body;
   // delete name of institution from body
   delete animal.name;
@@ -153,6 +154,7 @@ const getPrivateAnimal = async (req, res) => {
 };
 
 const updateAnimal = async (req, res) => {
+  // TODO: upload photo
   // return res.status(200).json("Update animal info correctly");
   let updates = req.body;
   const animalId = req.params.id;

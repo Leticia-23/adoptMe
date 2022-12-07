@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+import moment from "moment";
+import { toImageUrl } from "../../../api/Api";
+
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
 const truncate = (str, n) => {
@@ -9,36 +13,35 @@ const truncate = (str, n) => {
 
 function InstitutionCard({ institution }) {
   return (
-    // TODO: change all real data
-    // TODO: linkear title and image
     <div>
       <Container className="mb-4">
         <Card>
           <Row className="mx-2 align-items-center ">
             <Col className="col-sm-2 col-lg-1 col-md-2">
-              <Link to={"/"}>
+              <Link to={"/institution/" + institution._id}>
                 <img
                   src={
-                    "/assets/person-circle.svg"
-                    // institution.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+                    institution.avatar
+                      ? toImageUrl(institution.avatar)
+                      : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
                   width={60}
                   height={60}
-                  //   alt={user.username}
-                  alt={institution[2]}
+                  alt={institution.name}
                 />
               </Link>
             </Col>
             <Col className="col-sm-10 col-lg-11 col-md-10">
-              <Link to={"/"}>
-                <Card.Title className="mt-2">{institution[0]}</Card.Title>
+              <Link to={"/institution/" + institution._id}>
+                <Card.Title className="mt-2">{institution.name}</Card.Title>
               </Link>
 
-              <p>{truncate(institution[1], 250)}</p>
-              {/* TODO: link to institution */}
-              <Link to={"/"}>Read more</Link>
-              <p className="text-end">{institution[3]}</p>
+              <p>{truncate(institution.information, 250)}</p>
+              <Link to={"/institution/" + institution._id}>Read more</Link>
+              <p className="text-end">
+                {moment(institution.createdAt).format("DD-MM-YYYY")}
+              </p>
             </Col>
           </Row>
         </Card>
