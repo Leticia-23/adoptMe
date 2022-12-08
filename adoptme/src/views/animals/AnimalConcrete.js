@@ -8,9 +8,9 @@ import { useParams } from "react-router";
 import moment from "moment";
 
 import { InstitutionContext, UserContext } from "../../environment";
-import { Animal /* Institution */ } from "../../models";
+import { Animal, Institution } from "../../models";
 import {
-  /* getInstitutionInfo */
+  getInstitutionInfo,
   getPrivateAnimal_api,
   getPublicAnimal_api,
   toImageUrl,
@@ -19,10 +19,10 @@ import {
 function AnimalConcrete() {
   let [isInstOwner, setisInstOwner] = useState(false);
   let [isRegistered, setisRegistered] = useState(false);
-  let [isAdopted, setisAdopted] = useState(true);
+  let [isAdopted, setisAdopted] = useState(false);
   let [animal, setAnimal] = useState(null);
-  /*   let [institution, setInstitution] = useState(null);
-   */
+  let [institution, setInstitution] = useState(null);
+
   let { institution: currentInstitution } = useContext(InstitutionContext);
   let { user: currentUser } = useContext(UserContext);
 
@@ -33,6 +33,8 @@ function AnimalConcrete() {
     if (currentUser || currentInstitution) {
       setisRegistered(true);
     }
+
+    console.log("useEffectOnce");
 
     if (isRegistered) {
       getPrivateAnimal_api(animalId)
@@ -48,6 +50,15 @@ function AnimalConcrete() {
           if (animal.adopted) {
             setisAdopted(true);
           }
+
+          getInstitutionInfo(animal.institution)
+            .then((result) => {
+              let institution = Institution.from(result);
+              setInstitution(institution);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         })
         .catch((error) => {
           console.error(error);
@@ -66,21 +77,25 @@ function AnimalConcrete() {
           if (animal.adopted) {
             setisAdopted(true);
           }
+
+          getInstitutionInfo(animal.institution)
+            .then((result) => {
+              let institution = Institution.from(result);
+              setInstitution(institution);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         })
         .catch((error) => {
           console.error(error);
         });
     }
-
-    /* getInstitutionInfo(animal.institution)
-      .then((result) => {
-        let institution = Institution.from(result);
-        setInstitution(institution);
-      })
-      .catch((error) => {
-        console.error(error);
-      }); */
   });
+
+  if (!animal || !institution) {
+    return <></>;
+  }
 
   return (
     <div className="animal">
@@ -113,39 +128,45 @@ function AnimalConcrete() {
             <p>{animal.breed}</p>
 
             {isRegistered && <h5 className="mt-4">Born date:</h5>}
-            {isRegistered && <p>25/03/22</p>}
+            {isRegistered && (
+              <p>{moment(animal.createdAt).format("DD-MM-YYYY")}</p>
+            )}
 
             {isRegistered && <h5 className="mt-4">Color:</h5>}
-            {isRegistered && <p>Gray</p>}
+            {isRegistered && <p>{animal.color}</p>}
 
             {isRegistered && <h5 className="mt-4">Sterile:</h5>}
-            {isRegistered && <p>No</p>}
+            {isRegistered && <p>{animal.sterile ? "Yes" : "No"}</p>}
           </div>
           <div className="col-sm-4">
             <h5 className="mt-4">Sex:</h5>
             <p>{animal.sex}</p>
 
             <h5 className="mt-4">Institution:</h5>
-            <p>Name institution with link to the profile</p>
+            <Link to={"/institution/" + institution.id}>
+              <p>{institution.name}</p>
+            </Link>
 
             {isRegistered && <h5 className="mt-4">Size:</h5>}
-            {isRegistered && <p>7 Kg</p>}
+            {isRegistered && <p>{animal.size}</p>}
 
             {isRegistered && <h5 className="mt-4">Danger:</h5>}
-            {isRegistered && <p>No</p>}
+            {isRegistered && <p>{animal.danger ? "Yes" : "No"}</p>}
           </div>
           <div className="col-sm-4">
             <h5 className="mt-4">Adopted:</h5>
-            <p>No</p>
+            <p>{animal.adopted ? "Yes" : "No"}</p>
 
-            {isInstOwner && isAdopted && (
+            {isRegistered && isAdopted && (
               <h5 className="mt-4">Adoption date:</h5>
             )}
-            {isInstOwner && isAdopted && <p>25/05/22</p>}
-            {isInstOwner && isAdopted && (
+            {isRegistered && isAdopted && animal.adoptionDate && (
+              <p>{moment(animal.adoptionDate).format("DD-MM-YYYY")}</p>
+            )}
+            {isRegistered && isAdopted && (
               <h5 className="mt-4">Person who adopted:</h5>
             )}
-            {isInstOwner && isAdopted && (
+            {isRegistered && isAdopted && (
               <p>
                 Name user adopted link to the profile or this person is not
                 registered in this community
@@ -155,8 +176,8 @@ function AnimalConcrete() {
         </Row>
         <Row>
           <Col className="text-center">
-            {isInstOwner && (
-              <Link to="/editAnimal" className="btn btn-primary mt-5">
+            {isRegistered && isInstOwner && (
+              <Link to="/editAnimal" className="btn btn-primary mt-2">
                 Edit animal information
               </Link>
             )}

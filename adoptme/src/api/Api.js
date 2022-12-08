@@ -132,5 +132,5 @@ export async function getPublicAnimal_api(animalId = null) {
 }
 
 export async function getPrivateAnimal_api(animalId = null) {
-  return getRequest("/api/animals/" + animalId);
+  return getRequest("/animals/" + animalId);
 }

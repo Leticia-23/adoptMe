@@ -104,7 +104,7 @@ function Navigation() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/animal">
+              <NavLink className="nav-link" to="/animal/:animalId">
                 Concrete animal
               </NavLink>
             </li>
