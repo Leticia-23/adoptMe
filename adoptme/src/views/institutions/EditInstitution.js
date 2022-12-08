@@ -7,7 +7,7 @@ function EditInstitution() {
   // TODO: useContext institution?
   let { institution, setInstition } = useContext(UserContext);
 
-  let [name, setName] = useState("");
+  let [new_name, setNew_name] = useState("");
   let [information, setInformation] = useState("");
   let [webURL, setWebURL] = useState("");
   let [phone, setPhone] = useState("");
@@ -36,7 +36,7 @@ function EditInstitution() {
     e.preventDefault();
     console.log(
       "Name: " +
-        name +
+        new_name +
         "information" +
         information +
         " web: " +
@@ -95,7 +95,7 @@ function EditInstitution() {
                 <Form.Control
                   type="name"
                   placeholder="New name"
-                  onInput={(e) => setName(e.target.value)}
+                  onInput={(e) => setNew_name(e.target.value)}
                 />
               </Form.Group>
 

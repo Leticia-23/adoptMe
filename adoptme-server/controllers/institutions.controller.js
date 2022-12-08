@@ -65,16 +65,66 @@ const updateInstitution = async (req, res) => {
   delete updates.id;
   let institution = null;
 
-  // Check if name is a field to update
+  /* // Check if name is a field to update
   if (updates.new_name) {
     updates.name = updates.new_name;
     delete updates.new_name;
   } else {
     delete updates.name;
+  } */
+
+  // Check if each field is empty ("") to delete for the patch request
+  if (updates.new_name === "") {
+    //There isn't new name
+    delete updates.name;
+    delete updates.new_name;
+  } else {
+    // There is a new name
+    updates.name = updates.new_name;
+    delete updates.new_name;
+  }
+
+  if (updates.information === "") {
+    delete updates.information;
+  }
+
+  if (updates.web_URL === "") {
+    delete updates.web_URL;
+  }
+
+  if (updates.phoneNumber === "") {
+    delete updates.phoneNumber;
+  }
+
+  if (updates.avatar === "") {
+    delete updates.avatar;
   }
 
   // Check if password is a field to update
-  if (updates.password) {
+  if (updates.actual_password && updates.password && updates.repeatPassword) {
+    // Search the institution to check actual password
+    const { data, err } = await institutionHelper.findInstitutionById(id);
+    institution = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    // Check password
+    const validPassword = await bcrypt.compare(
+      updates.actual_password,
+      institution.password
+    );
+
+    if (!validPassword) {
+      return res.status(400).json({ error: "Actual password not valid" });
+    }
+
+    // Check passwords
+    if (updates.password !== updates.repeatPassword) {
+      return res.status(400).json({ error: "New passwords don't match" });
+    }
+
     // Generate a Salt
     const salt = await bcrypt.genSalt(10);
     // Hash password
