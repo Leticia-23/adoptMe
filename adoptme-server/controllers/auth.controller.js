@@ -23,6 +23,11 @@ const signup = async (req, res) => {
     return res.status(400).json({ error: "Email is not valid" });
   }
 
+  // Check passwords
+  if (password !== repeatPassword) {
+    return res.status(400).json({ error: "Passwords don't match" });
+  }
+
   // Generate a Salt
   const salt = await bcrypt.genSalt(10);
   // Hash password
@@ -48,6 +53,11 @@ const signup_institution = async (req, res) => {
   // Check if the email is valid
   if (!validator.isEmail(email)) {
     return res.status(400).json({ error: "Email is not valid" });
+  }
+
+  // Check passwords
+  if (password !== repeatPassword) {
+    return res.status(400).json({ error: "Passwords don't match" });
   }
 
   // Generate a Salt

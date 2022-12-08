@@ -79,7 +79,6 @@ export async function login_api({ email, password }) {
 }
 
 export async function createUser({ name, email, password, repeatPassword }) {
-  console.log(name, email, password, repeatPassword);
   return postRequest("/auth/signup", arguments[0]);
 }
 
@@ -133,4 +132,17 @@ export async function getPublicAnimal_api(animalId = null) {
 
 export async function getPrivateAnimal_api(animalId = null) {
   return getRequest("/animals/" + animalId);
+}
+
+export async function getUsers_api() {
+  return getRequest("/users");
+}
+
+export async function registerInstitution_api({
+  name,
+  email,
+  password,
+  repeatPassword,
+}) {
+  return postRequest("/auth/signup/institution", arguments[0]);
 }

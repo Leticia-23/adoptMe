@@ -1,32 +1,31 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { toImageUrl } from "../../../api/Api";
 
 function InstitutionMiniCard({ institution }) {
   return (
-    // TODO: change all real data
-    // TODO: linkear image or all card?
     <div>
       <Container className="mb-4">
         <Card>
           <Row className="mx-2 my-1 align-items-center ">
             <Col className="col-sm-2 col-lg-3 col-md-5">
-              <Link to={"/"}>
+              <Link to={"/institution/" + institution._id} s>
                 <img
                   src={
-                    "/assets/person-circle.svg"
-                    // institution.avatar ? toImageUrl(instituion.avatar) : "/assets/person-circle.svg"
+                    institution.avatar
+                      ? toImageUrl(institution.avatar)
+                      : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
                   width={60}
                   height={60}
-                  //   alt={institution.name}
-                  alt={institution[1]}
+                  alt={institution.name}
                 />
               </Link>
             </Col>
             <Col className="col-sm-10 col-lg-9 col-md-7">
-              <Card.Title className="mt-2">{institution[1]}</Card.Title>
+              <Card.Title className="mt-2 mx-2">{institution.name}</Card.Title>
             </Col>
           </Row>
         </Card>

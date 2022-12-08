@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 
 import InstitutionMiniCard from "../institutions/components/InstitutionMiniCard";
 import UserMiniCard from "./components/UserMiniCard";
+
+import {
+  getInstitutions_api,
+  getUsers_api,
+  registerInstitution_api,
+} from "../../api/Api";
+
+import { ListInstitution } from "../../models";
 
 // Source: https://stackoverflow.com/a/58519810
 function splitInGroups(arr, n) {
@@ -28,20 +37,35 @@ function AdminPanel() {
     }));
   };
 
+  const [institutions, setInstitutions] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffectOnce(() => {
+    getInstitutions_api()
+      .then((result) => {
+        let institution_list = result.institutions.map((institution) =>
+          ListInstitution.from(institution)
+        );
+        setInstitutions(institution_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    getUsers_api()
+      .then((result) => {
+        let user_list = result.users.map((user) => ListInstitution.from(user));
+        setUsers(user_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
   const register_institution = async (e) => {
     e.preventDefault();
-    console.log(
-      "Name: " +
-        state.name +
-        " Email:" +
-        state.email +
-        " Password:" +
-        state.password +
-        " Repeat password: " +
-        state.repeatPassword
-    );
 
-    /* createUser({
+    registerInstitution_api({
       name: state.name,
       email: state.email,
       password: state.password,
@@ -49,32 +73,14 @@ function AdminPanel() {
     })
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
-  // const [institutions, setInstitution] = useState([]);
-  const institution1 = ["5487", "name institution"];
-  const institution2 = ["5487", "name institution"];
-  const institution3 = ["5487", "name institution"];
-  const institution4 = ["5487", "name institution"];
-  const institution5 = ["5487", "name institution"];
-  const institutions = [
-    institution1,
-    institution2,
-    institution3,
-    institution4,
-    institution5,
-  ];
   let table = splitInGroups(institutions, 3);
-
-  // const [users, setUsers] = useState([]);
-  const user1 = ["1693", "name user"];
-  const users = [user1, user1, user1, user1, user1];
   let table_user = splitInGroups(users, 3);
 
   return (
