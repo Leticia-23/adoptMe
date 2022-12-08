@@ -42,6 +42,18 @@ function postRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
+/* function postRequestFile(path, body, file) {
+  let data = JSON.stringify(body);
+  data.append("");
+
+  let requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return serverRequest(path, requestOptions);
+}
+ */
 /* function putRequest(path, body) {
   let requestOptions = {
     method: "PUT",
@@ -149,4 +161,16 @@ export async function registerInstitution_api({
 
 export async function getInstitutionAnimals(institutionId = null) {
   return getRequest("/institutions/" + institutionId + "/animals");
+}
+
+// TODO: add imgFile
+export async function registerAnimal_api(
+  animal_name,
+  specie,
+  breed,
+  sex,
+  description
+) {
+  console.log("arguments" + arguments[1]);
+  return postRequest("/animals", arguments[0]);
 }

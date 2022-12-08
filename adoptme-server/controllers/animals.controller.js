@@ -84,6 +84,8 @@ const getPublicAnimal = async (req, res) => {
 const registerAnimal = async (req, res) => {
   // TODO: upload photo
   let animal = req.body;
+  console.log("animal", animal);
+
   // delete name of institution from body
   delete animal.name;
   // put institution's id like institution instead id
@@ -96,7 +98,8 @@ const registerAnimal = async (req, res) => {
     !animal.specie ||
     !animal.breed ||
     !animal.sex ||
-    !animal.photo ||
+    /* TODO: add photo */
+    /* !animal.photo || */
     !animal.description ||
     !animal.institution
   ) {

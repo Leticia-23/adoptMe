@@ -4,7 +4,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import AnimalMiniCard from "../animals/components/AnimalMiniCard";
 
-import { getInstitutionAnimals } from "../../api/Api";
+import { getInstitutionAnimals, registerAnimal_api } from "../../api/Api";
 import { ListAnimal } from "../../models";
 
 import { InstitutionContext } from "../../environment";
@@ -53,35 +53,23 @@ function InstitutionPanel() {
 
   const register_animal = async (e) => {
     e.preventDefault();
-    console.log(
-      "Name: " +
-        state.animal_name +
-        " Specie:" +
-        state.specie +
-        " Breed:" +
-        state.breed +
-        " Sex: " +
-        state.sex +
-        " Description" +
-        state.description +
-        " Image: " +
-        imgFile
-    );
 
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
+    registerAnimal_api({
+      animal_name: state.animal_name,
+      specie: state.specie,
+      breed: state.breed,
+      sex: state.sex,
+      description: state.description,
+      /* TODO: add imgFile */
+      /* imgFile: imgFile, */
     })
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
   let table = splitInGroups(animals, 3);
@@ -160,7 +148,7 @@ function InstitutionPanel() {
                 >
                   <Form.Label>Description</Form.Label>
                   <textarea
-                    class="form-control"
+                    className="form-control"
                     rows="4"
                     id="description"
                   ></textarea>
@@ -194,7 +182,7 @@ function InstitutionPanel() {
 
         <h1 className="text-start mt-4">Animals</h1>
         <Container>
-          <div class="border list-cards-box">
+          <div className="border list-cards-box">
             {table.map((row, i) => (
               <div className="row mt-2" key={i}>
                 {row.map((animal, j) => (
