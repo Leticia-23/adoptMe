@@ -79,7 +79,11 @@ const updateInstitutionById = async (id, updates) => {
 
 const findInstituionAnimals = async (id) => {
   try {
-    const res = await Animal.find({ institution: id }).exec();
+    // Response only public info for the list
+    const res = await Animal.find(
+      { institution: id },
+      "animal_name photo description createdAt"
+    ).exec();
     return {
       data: res,
       err: null,

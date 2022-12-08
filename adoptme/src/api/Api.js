@@ -146,3 +146,7 @@ export async function registerInstitution_api({
 }) {
   return postRequest("/auth/signup/institution", arguments[0]);
 }
+
+export async function getInstitutionAnimals(institutionId = null) {
+  return getRequest("/institutions/" + institutionId + "/animals");
+}

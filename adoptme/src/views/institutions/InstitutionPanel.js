@@ -1,7 +1,13 @@
 // institution panel
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import AnimalMiniCard from "../animals/components/AnimalMiniCard";
+
+import { getInstitutionAnimals } from "../../api/Api";
+import { ListAnimal } from "../../models";
+
+import { InstitutionContext } from "../../environment";
 
 // Source: https://stackoverflow.com/a/58519810
 function splitInGroups(arr, n) {
@@ -27,6 +33,23 @@ function InstitutionPanel() {
       [id]: value,
     }));
   };
+
+  const [animals, setAnimals] = useState([]);
+  // with the rename (institution: currentInstitution) we have to use it with the new name (currentInstitution)
+  let { institution: currentInstitution } = useContext(InstitutionContext);
+
+  useEffectOnce(() => {
+    getInstitutionAnimals(currentInstitution.id)
+      .then((result) => {
+        let animal_list = result.animals.map((animal) =>
+          ListAnimal.from(animal)
+        );
+        setAnimals(animal_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
   const register_animal = async (e) => {
     e.preventDefault();
@@ -61,20 +84,6 @@ function InstitutionPanel() {
       }); */
   };
 
-  // const [animals, setAnimals] = useState([]);
-  const animal1 = ["6497", "animal name"];
-  const animals = [
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-    animal1,
-  ];
   let table = splitInGroups(animals, 3);
 
   let [img, setImg] = useState("/assets/person-circle.svg");
