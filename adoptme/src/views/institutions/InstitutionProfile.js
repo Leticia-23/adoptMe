@@ -151,13 +151,6 @@ function InstitutionProfile() {
         <Row>
           <Col className="text-center">
             {isSelf && (
-              <Link to="/editInstitution" className="btn btn-primary mt-5">
-                Edit institution profile
-              </Link>
-            )}
-          </Col>
-          <Col className="text-center">
-            {isSelf && (
               <button className="btn btn-secondary mt-5" onClick={logout}>
                 Log out
               </button>
@@ -169,6 +162,13 @@ function InstitutionProfile() {
               >
                 Delete institution account
               </button>
+            )}
+          </Col>
+          <Col className="text-center">
+            {isSelf && (
+              <Link to="/editInstitution" className="btn btn-primary mt-5">
+                Edit institution profile
+              </Link>
             )}
           </Col>
         </Row>

@@ -65,14 +65,6 @@ const updateInstitution = async (req, res) => {
   delete updates.id;
   let institution = null;
 
-  /* // Check if name is a field to update
-  if (updates.new_name) {
-    updates.name = updates.new_name;
-    delete updates.new_name;
-  } else {
-    delete updates.name;
-  } */
-
   // Check if each field is empty ("") to delete for the patch request
   if (updates.new_name === "") {
     //There isn't new name
@@ -131,6 +123,10 @@ const updateInstitution = async (req, res) => {
     const hashed_password = await bcrypt.hash(updates.password, salt);
 
     updates.password = hashed_password;
+  } else {
+    delete updates.actual_password;
+    delete updates.password;
+    delete updates.repeatPassword;
   }
 
   try {

@@ -34,7 +34,6 @@ const getUser = async (req, res) => {
 
 // Private
 
-// TODO: add actual password and check it if password is a field to change
 // TODO: upload photo
 const updateProfile = async (req, res) => {
   let updates = req.body;
@@ -42,22 +41,60 @@ const updateProfile = async (req, res) => {
   delete updates.id;
   let user = null;
 
-  // Check if name is a field to update
-  if (updates.new_name) {
-    updates.name = updates.new_name;
+  // Check if each field is empty ("") to delete for the patch request
+  if (updates.new_name === "") {
+    //There isn't new name
+    delete updates.name;
     delete updates.new_name;
   } else {
-    delete updates.name;
+    // There is a new name
+    updates.name = updates.new_name;
+    delete updates.new_name;
+  }
+
+  if (updates.biography === "") {
+    delete updates.biography;
+  }
+
+  if (updates.avatar === "") {
+    delete updates.avatar;
   }
 
   // Check if password is a field to update
-  if (updates.password) {
+  if (updates.actual_password && updates.password && updates.repeatPassword) {
+    // Search the user to check actual password
+    const { data, err } = await userHelper.findUserById(id);
+    user = data;
+
+    if (err != null) {
+      return res.status(400).json({ error: err });
+    }
+
+    // Check password
+    const validPassword = await bcrypt.compare(
+      updates.actual_password,
+      user.password
+    );
+
+    if (!validPassword) {
+      return res.status(400).json({ error: "Actual password not valid" });
+    }
+
+    // Check passwords
+    if (updates.password !== updates.repeatPassword) {
+      return res.status(400).json({ error: "New passwords don't match" });
+    }
+
     // Generate a Salt
     const salt = await bcrypt.genSalt(10);
     // Hash password
     const hashed_password = await bcrypt.hash(updates.password, salt);
 
     updates.password = hashed_password;
+  } else {
+    delete updates.actual_password;
+    delete updates.password;
+    delete updates.repeatPassword;
   }
 
   try {
