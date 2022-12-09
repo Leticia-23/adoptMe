@@ -4,7 +4,6 @@ import { Container, Row, Form, Col } from "react-bootstrap";
 import { UserContext } from "../../environment/UserProvider";
 
 function EditInstitution() {
-  // TODO: useContext institution?
   let { institution, setInstition } = useContext(UserContext);
 
   let [new_name, setNew_name] = useState("");
@@ -18,6 +17,18 @@ function EditInstitution() {
   //TODO: put institution image
   let [img, setImg] = useState("/assets/person-circle.svg");
   let [imgFile, setImgFile] = useState(null);
+
+  /*   useEffectOnce(() => {
+    getSelfInstitutionInfo()
+      .then((result) => {
+        let institution = Institution.from(result);
+        setInstitution(institution);
+        setContextInstitution(institution);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }); */
 
   const inputRef = useRef(null);
   const handleUpload = () => {

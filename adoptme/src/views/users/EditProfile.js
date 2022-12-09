@@ -20,7 +20,9 @@ function EditProfile() {
   let provImg = user.avatar
     ? toImageUrl(user.avatar)
     : "/assets/person-circle.svg";
-  let [img, setImg] = useState(provImg);
+  let [img, setImg] = useState(
+    user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+  );
   let [imgFile, setImgFile] = useState(null);
 
   useEffectOnce(() => {
@@ -28,11 +30,6 @@ function EditProfile() {
       .then((result) => {
         let user = User.from(result);
         setUser(user);
-        setUsername(user.username);
-        setBiography(user.biography);
-        setImg(
-          user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
-        );
       })
       .catch((error) => {
         console.error(error);
