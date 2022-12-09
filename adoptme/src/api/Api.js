@@ -54,14 +54,14 @@ function postRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
  */
-/* function putRequest(path, body) {
+function patchRequest(path, body) {
   let requestOptions = {
-    method: "PUT",
+    method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
   return serverRequest(path, requestOptions);
-} */
+}
 
 function getRequest(path, body = {}, tokenOverride = null) {
   let params = new URLSearchParams();
@@ -171,6 +171,29 @@ export async function registerAnimal_api(
   sex,
   description
 ) {
-  console.log("arguments" + arguments[1]);
   return postRequest("/animals", arguments[0]);
+}
+
+export async function updateUser_api(
+  new_name,
+  biography,
+  actual_password,
+  password,
+  repeatedNewPassword,
+  avatar
+) {
+  return patchRequest("/users/profile", arguments[0]);
+}
+
+export async function updateInstitution_api(
+  new_name,
+  web_URL,
+  avatar,
+  actual_password,
+  password,
+  repeatedNewPassword,
+  phoneNumber,
+  information
+) {
+  return patchRequest("/institutions/profile", arguments[0]);
 }

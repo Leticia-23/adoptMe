@@ -1,8 +1,13 @@
 import React, { useState, useRef, useContext } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import { Container, Row, Form, Col } from "react-bootstrap";
 
 import { UserContext } from "../../environment/UserProvider";
 
+import { toImageUrl, updateUser_api, getSelfInformation } from "../../api/Api";
+import User from "../../models/User";
+
+// TODO: upload avatar photo
 function EditProfile() {
   let { user, setUser } = useContext(UserContext);
 
@@ -12,9 +17,27 @@ function EditProfile() {
   let [newPassword, setNewPassword] = useState("");
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
-  //TODO: put user profile
-  let [img, setImg] = useState("/assets/person-circle.svg");
+  let provImg = user.avatar
+    ? toImageUrl(user.avatar)
+    : "/assets/person-circle.svg";
+  let [img, setImg] = useState(provImg);
   let [imgFile, setImgFile] = useState(null);
+
+  useEffectOnce(() => {
+    getSelfInformation({ id: user.id })
+      .then((result) => {
+        let user = User.from(result);
+        setUser(user);
+        setUsername(user.username);
+        setBiography(user.biography);
+        setImg(
+          user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
   const inputRef = useRef(null);
   const handleUpload = () => {
@@ -31,33 +54,22 @@ function EditProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      "Name: " +
-        username +
-        "biography" +
-        biography +
-        " Password:" +
-        password +
-        " New password: " +
-        newPassword +
-        " Repeat new password: " +
-        repeatedNewPassword
-    );
 
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
+    updateUser_api({
+      new_name: username,
+      biography: biography,
+      actual_password: password,
+      password: newPassword,
+      repeatPassword: repeatedNewPassword,
+      avatar: img,
     })
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
   return (
@@ -83,7 +95,7 @@ function EditProfile() {
               <p className="mt-3 text-center">User avatar</p>
             </div>
             <div className="col-sm-4">
-              <h2>Username</h2>
+              <h2>{user.name}</h2>
               <Form.Group className="mb-3 text-start " controlId="name">
                 <Form.Control
                   type="name"
@@ -94,7 +106,7 @@ function EditProfile() {
 
               <Form.Group className="mb-3 text-start " controlId="biography">
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   rows="4"
                   id="biography"
                   placeholder="New biography"
