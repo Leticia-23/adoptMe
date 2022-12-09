@@ -14,7 +14,7 @@ function EditProfile() {
   let [username, setUsername] = useState("");
   let [biography, setBiography] = useState("");
   let [password, setPassword] = useState("");
-  let [newPassword, setNewPassword] = useStatyyye("");
+  let [newPassword, setNewPassword] = useState("");
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
   let [img, setImg] = useState(
