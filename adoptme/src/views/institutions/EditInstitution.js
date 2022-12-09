@@ -1,10 +1,14 @@
 import React, { useState, useRef, useContext } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import { Container, Row, Form, Col } from "react-bootstrap";
 
 import { UserContext } from "../../environment/UserProvider";
 
+import { getSelfInstitutionInfo, toImageUrl } from "../../api/Api";
+import Institution from "../../models/Institution";
+
 function EditInstitution() {
-  let { institution, setInstition } = useContext(UserContext);
+  let { institution, setInstitution } = useContext(UserContext);
 
   let [new_name, setNew_name] = useState("");
   let [information, setInformation] = useState("");
@@ -15,20 +19,23 @@ function EditInstitution() {
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
   //TODO: put institution image
-  let [img, setImg] = useState("/assets/person-circle.svg");
+  let [img, setImg] = useState(
+    institution.avatar
+      ? toImageUrl(institution.avatar)
+      : "/assets/person-circle.svg"
+  );
   let [imgFile, setImgFile] = useState(null);
 
-  /*   useEffectOnce(() => {
+  useEffectOnce(() => {
     getSelfInstitutionInfo()
       .then((result) => {
         let institution = Institution.from(result);
         setInstitution(institution);
-        setContextInstitution(institution);
       })
       .catch((error) => {
         console.error(error);
       });
-  }); */
+  });
 
   const inputRef = useRef(null);
   const handleUpload = () => {
