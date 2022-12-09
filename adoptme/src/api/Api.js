@@ -179,7 +179,7 @@ export async function updateUser_api(
   biography,
   actual_password,
   password,
-  repeatedNewPassword,
+  repeatPassword,
   avatar
 ) {
   return patchRequest("/users/profile", arguments[0]);
@@ -191,7 +191,7 @@ export async function updateInstitution_api(
   avatar,
   actual_password,
   password,
-  repeatedNewPassword,
+  repeatPassword,
   phoneNumber,
   information
 ) {

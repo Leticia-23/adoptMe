@@ -138,11 +138,11 @@ function InstitutionProfile() {
             <p>{institution.email}</p>
 
             <h5 className="mt-4">Website:</h5>
-            <p>{institution.website}</p>
+            <p>{institution.web_URL}</p>
           </div>
           <div className="col-sm-6">
             <h5 className="mt-4">Phone number:</h5>
-            <p>{institution.phone}</p>
+            <p>{institution.phoneNumber}</p>
 
             <h5 className="mt-4">Register date:</h5>
             <p>{moment(institution.createdAt).format("DD-MM-YYYY")}</p>

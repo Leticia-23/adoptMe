@@ -2,13 +2,18 @@ import React, { useState, useRef, useContext } from "react";
 import { useEffectOnce } from "usehooks-ts";
 import { Container, Row, Form, Col } from "react-bootstrap";
 
-import { UserContext } from "../../environment/UserProvider";
+import { InstitutionContext } from "../../environment/InstitutionProvider";
 
-import { getSelfInstitutionInfo, toImageUrl } from "../../api/Api";
+import {
+  getSelfInstitutionInfo,
+  toImageUrl,
+  updateInstitution_api,
+} from "../../api/Api";
 import Institution from "../../models/Institution";
 
+// TODO: upload avatar photo
 function EditInstitution() {
-  let { institution, setInstitution } = useContext(UserContext);
+  let { institution, setInstitution } = useContext(InstitutionContext);
 
   let [new_name, setNew_name] = useState("");
   let [information, setInformation] = useState("");
@@ -18,7 +23,6 @@ function EditInstitution() {
   let [newPassword, setNewPassword] = useState("");
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
-  //TODO: put institution image
   let [img, setImg] = useState(
     institution.avatar
       ? toImageUrl(institution.avatar)
@@ -69,20 +73,23 @@ function EditInstitution() {
         repeatedNewPassword
     );
 
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
+    updateInstitution_api({
+      new_name: new_name,
+      web_URL: webURL,
+      avatar: img,
+      actual_password: password,
+      password: newPassword,
+      repeatPassword: repeatedNewPassword,
+      phoneNumber: phone,
+      information: information,
     })
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
   return (
@@ -108,7 +115,7 @@ function EditInstitution() {
               <p className="mt-3 text-center">Institution avatar</p>
             </div>
             <div className="col-sm-4">
-              <h2>Username</h2>
+              <h2>{institution.name}</h2>
               <Form.Group className="mb-3 text-start " controlId="name">
                 <Form.Control
                   type="name"
@@ -119,7 +126,7 @@ function EditInstitution() {
 
               <Form.Group className="mb-3 text-start " controlId="information">
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   rows="4"
                   id="information"
                   placeholder="New information"
