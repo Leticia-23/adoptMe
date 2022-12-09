@@ -14,12 +14,9 @@ function EditProfile() {
   let [username, setUsername] = useState("");
   let [biography, setBiography] = useState("");
   let [password, setPassword] = useState("");
-  let [newPassword, setNewPassword] = useState("");
+  let [newPassword, setNewPassword] = useStatyyye("");
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
-  let provImg = user.avatar
-    ? toImageUrl(user.avatar)
-    : "/assets/person-circle.svg";
   let [img, setImg] = useState(
     user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
   );
