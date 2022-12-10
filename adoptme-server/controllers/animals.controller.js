@@ -84,7 +84,6 @@ const getPublicAnimal = async (req, res) => {
 const registerAnimal = async (req, res) => {
   // TODO: upload photo
   let animal = req.body;
-  console.log("animal", animal);
 
   // delete name of institution from body
   delete animal.name;
@@ -148,7 +147,7 @@ const getPrivateAnimal = async (req, res) => {
       adopted: animal.adopted,
       adoptionDate: animal.adoptionDate,
       institution: animal.institution,
-      user: animal.user,
+      /*  user: animal.user, */
       createdAt: animal.createdAt,
     });
   } catch (error) {
@@ -156,22 +155,79 @@ const getPrivateAnimal = async (req, res) => {
   }
 };
 
+// TODO: upload photo
 const updateAnimal = async (req, res) => {
-  // TODO: upload photo
-  // return res.status(200).json("Update animal info correctly");
   let updates = req.body;
+
   const animalId = req.params.id;
   delete updates.animalId;
+
   // delete institution's info from body
   delete updates.id;
   delete updates.name;
 
   let animal = null;
 
-  // Check if animal_name is a field to update
-  if (updates.new_animal_name) {
+  // Check if each field is empty ("") to delete for the patch request
+  if (updates.new_animal_name === "") {
+    //There isn't new name
+    delete updates.new_animal_name;
+  } else {
+    // There is a new name
     updates.animal_name = updates.new_animal_name;
     delete updates.new_animal_name;
+  }
+
+  if (updates.description === "") {
+    delete updates.description;
+  }
+
+  if (updates.size === "") {
+    delete updates.size;
+  }
+
+  if (updates.color === "") {
+    delete updates.color;
+  }
+
+  if (updates.bornDate === "") {
+    delete updates.bornDate;
+  }
+
+  if (updates.danger === "") {
+    delete updates.danger;
+  } else {
+    if (updates.danger === "Yes") {
+      updates.danger = true;
+    } else {
+      updates.danger = false;
+    }
+  }
+
+  if (updates.sterile === "") {
+    delete updates.sterile;
+  }
+  if (updates.sterile === "Yes") {
+    updates.sterile = true;
+  } else {
+    updates.sterile = false;
+  }
+
+  if (updates.adopted === "") {
+    delete updates.adopted;
+  }
+  if (updates.adopted === "Yes") {
+    updates.adopted = true;
+  } else {
+    updates.adopted = false;
+  }
+
+  if (updates.adoptionDate === "") {
+    delete updates.adoptionDate;
+  }
+
+  if (updates.photo === "") {
+    delete updates.photo;
   }
 
   try {

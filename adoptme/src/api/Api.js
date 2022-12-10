@@ -197,3 +197,25 @@ export async function updateInstitution_api(
 ) {
   return patchRequest("/institutions/profile", arguments[0]);
 }
+
+export async function banAnimal(animalId = null) {
+  return deleteRequest("/animals/" + animalId, {});
+}
+
+export async function updateAnimal_api(
+  new_animal_name,
+  description,
+  bornDate,
+  size,
+  color,
+  danger,
+  sterile,
+  adopted,
+  adoptionDate,
+  photo,
+  animalId
+) {
+  console.log(arguments[0]);
+  console.log(arguments[0].animalId);
+  return patchRequest("/animals/" + arguments[0].animalId, arguments[0]);
+}

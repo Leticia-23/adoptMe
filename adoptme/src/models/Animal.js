@@ -14,7 +14,7 @@ class Animal {
   adopted = false;
   adoptionDate = "";
   institution = "";
-  user = "";
+  /* user = ""; */
   createdAt = Date();
 
   static from(json) {
@@ -39,7 +39,7 @@ class Animal {
       adopted: false,
       adoptionDate: "2014-09-06T22:00:00.000Z",
       institution: "12328283728283728642",
-      user: "12319283719283712937",
+      /*  user: "12319283719283712937", */
       createdAt: new Date(),
     });
   }

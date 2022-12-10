@@ -28,13 +28,13 @@ function AnimalConcrete() {
 
   let { animalId } = useParams();
 
+  let navigateTo = "/editAnimal/" + animalId;
+
   useEffectOnce(() => {
     // Check if there is a registered user or institution viewing this page
     if (currentUser || currentInstitution) {
       setisRegistered(true);
     }
-
-    console.log("useEffectOnce");
 
     if (isRegistered) {
       getPrivateAnimal_api(animalId)
@@ -129,7 +129,7 @@ function AnimalConcrete() {
 
             {isRegistered && <h5 className="mt-4">Born date:</h5>}
             {isRegistered && (
-              <p>{moment(animal.createdAt).format("DD-MM-YYYY")}</p>
+              <p>{moment(animal.bornDate).format("DD-MM-YYYY")}</p>
             )}
 
             {isRegistered && <h5 className="mt-4">Color:</h5>}
@@ -160,7 +160,7 @@ function AnimalConcrete() {
             {isRegistered && isAdopted && (
               <h5 className="mt-4">Adoption date:</h5>
             )}
-            {isRegistered && isAdopted && animal.adoptionDate && (
+            {isRegistered && isAdopted && (
               <p>{moment(animal.adoptionDate).format("DD-MM-YYYY")}</p>
             )}
             {isRegistered && isAdopted && (
@@ -177,7 +177,7 @@ function AnimalConcrete() {
         <Row>
           <Col className="text-center">
             {isRegistered && isInstOwner && (
-              <Link to="/editAnimal" className="btn btn-primary mt-2">
+              <Link to={navigateTo} className="btn btn-primary mt-2">
                 Edit animal information
               </Link>
             )}

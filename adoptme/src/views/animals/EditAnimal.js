@@ -1,11 +1,22 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef } from "react";
+import { useEffectOnce } from "usehooks-ts";
+import { useParams } from "react-router";
 import { Container, Row, Form, Col } from "react-bootstrap";
 
-import { UserContext } from "../../environment/UserProvider";
+import { useNavigate } from "react-router-dom";
+
+import { Animal } from "../../models";
+
+import {
+  getPrivateAnimal_api,
+  banAnimal,
+  updateAnimal_api,
+  toImageUrl,
+} from "../../api/Api";
 
 function EditAnimal() {
   // TODO: get animal information
-  let { animal, setAnimal } = "";
+  let [animal, setAnimal] = useState(null);
 
   let [name, setName] = useState("");
   let [description, setDescription] = useState("");
@@ -16,11 +27,29 @@ function EditAnimal() {
   let [sterile, setSterile] = useState("");
   let [adopted, setAdopted] = useState("");
   let [adoptionDate, setAdoptionDate] = useState("");
-  let [userAdopt, setUserAdopt] = useState("");
+  /* let [userAdopt, setUserAdopt] = useState(""); */
+
+  let { animalId } = useParams();
 
   //TODO: put animal photo
   let [img, setImg] = useState("/assets/person-circle.svg");
   let [imgFile, setImgFile] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffectOnce(() => {
+    getPrivateAnimal_api(animalId)
+      .then((result) => {
+        let anim = Animal.from(result);
+        setAnimal(anim);
+        setImg(
+          anim.photo ? toImageUrl(anim.photo) : "/assets/person-circle.svg"
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
   const inputRef = useRef(null);
   const handleUpload = () => {
@@ -37,47 +66,47 @@ function EditAnimal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      "Name: " +
-        name +
-        " description: " +
-        description +
-        " born date: " +
-        bornDate +
-        " Size: " +
-        size +
-        " color: " +
-        color +
-        " danger: " +
-        danger +
-        " sterile: " +
-        sterile +
-        " adopted: " +
-        adopted +
-        " adoptionDate: " +
-        adoptionDate +
-        " userAdopt: " +
-        userAdopt
-    );
 
-    /* createUser({
-      name: state.name,
-      email: state.email,
-      password: state.password,
-      repeatPassword: state.repeatPassword,
+    updateAnimal_api({
+      new_animal_name: name,
+      description: description,
+      bornDate: bornDate,
+      size: size,
+      color: color,
+      danger: danger,
+      sterile: sterile,
+      adopted: adopted,
+      adoptionDate: adoptionDate,
+      photo: img,
+      animalId: animalId,
     })
       .then((response) => {
         console.log(response);
-        navigate("/lab3-login");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
+  const delete_animal = async (e) => {
+    banAnimal(animalId)
+      .then((response) => {
+        console.log(response);
+        navigate("/institution");
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+  };
+
+  if (!animal) {
+    return <></>;
+  }
+
   return (
-    <div className="editProfile">
+    <div className="editAnimal">
       <Container className="mb-5 pb-5">
         <Form onSubmit={handleSubmit}>
           <Row>
@@ -97,9 +126,13 @@ function EditAnimal() {
                 alt=""
               />
               <p className="mt-3 text-center">Animal photo</p>
+              <button className="btn btn-danger mt-5" onClick={delete_animal}>
+                Delete animal
+              </button>
             </div>
+
             <div className="col-sm-4">
-              <h2>Animal name</h2>
+              <h2>{animal.animal_name}</h2>
 
               <Form.Group className="mb-3 text-start " controlId="name">
                 <Form.Control
@@ -111,10 +144,10 @@ function EditAnimal() {
 
               <Form.Group className="mb-3 text-start " controlId="description">
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   rows="4"
                   id="description"
-                  placeholder="New information"
+                  placeholder="New description"
                   onInput={(e) => setDescription(e.target.value)}
                 ></textarea>
               </Form.Group>
@@ -143,7 +176,7 @@ function EditAnimal() {
                   type="date"
                   placeholder="Animal born date"
                   // value="2012-12-12"
-                  onInput={(e) => setBornDate(e.target.value)}
+                  onInput={(e) => setBornDate(new Date(e.target.value))}
                 />
               </Form.Group>
             </div>
@@ -190,27 +223,24 @@ function EditAnimal() {
                 <Form.Control
                   type="date"
                   placeholder="New adoption date"
-                  onInput={(e) => setAdoptionDate(e.target.value)}
+                  onInput={(e) => setAdoptionDate(new Date(e.target.value))}
                 />
               </Form.Group>
 
               {/* TODO: list of users or delete this info */}
-              <Form.Group className="mb-3 text-start " controlId="userAdopt">
+              {/* <Form.Group className="mb-3 text-start " controlId="userAdopt">
                 <Form.Control
                   type="userAdopt"
                   placeholder="User who adopted"
                   onInput={(e) => setUserAdopt(e.target.value)}
                 />
-              </Form.Group>
+              </Form.Group> */}
             </div>
-
-            <Row className="mt-3">
-              <Col className="text-center">
-                <button type="submit" className="btn btn-primary">
-                  Update instituion
-                </button>
-              </Col>
-            </Row>
+            <Col className="text-center mt-2">
+              <button type="submit" className="btn btn-primary">
+                Update animal
+              </button>
+            </Col>
           </Row>
         </Form>
       </Container>
