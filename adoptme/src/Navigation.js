@@ -45,16 +45,20 @@ function Navigation() {
                 About Us
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/adminPanel">
-                Admin panel
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/institutionPanel">
-                Institution panel
-              </NavLink>
-            </li>
+            {currentUser && currentUser.isAdmin && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/adminPanel">
+                  Admin panel
+                </NavLink>
+              </li>
+            )}
+            {currentInstitution && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/institutionPanel">
+                  Institution panel
+                </NavLink>
+              </li>
+            )}
             <li className="nav-item">
               {/* If logged, show profile photo. If not, show Log in botton. */}
               {currentUser || currentInstitution ? (
@@ -92,21 +96,6 @@ function Navigation() {
                   Log In
                 </NavLink>
               )}
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/profile">
-                User profile
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/institution">
-                Institution profile
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/animal/:animalId">
-                Concrete animal
-              </NavLink>
             </li>
           </ul>
         </div>
