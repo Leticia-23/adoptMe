@@ -1,9 +1,5 @@
 export const baseUrl = "http://localhost:8080/api";
 
-export function toImageUrl(avatarId) {
-  return baseUrl + "/users/avatar/" + avatarId;
-}
-
 // Helpers
 
 function serverRequest(path, requestOptions, tokenOverride = null) {
@@ -42,18 +38,6 @@ function postRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
-/* function postRequestFile(path, body, file) {
-  let data = JSON.stringify(body);
-  data.append("");
-
-  let requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  };
-  return serverRequest(path, requestOptions);
-}
- */
 function patchRequest(path, body) {
   let requestOptions = {
     method: "PATCH",

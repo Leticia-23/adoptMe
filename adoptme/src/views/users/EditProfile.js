@@ -5,7 +5,6 @@ import { Container, Row, Form, Col } from "react-bootstrap";
 import { UserContext } from "../../environment/UserProvider";
 
 import {
-  toImageUrl,
   updateUser_api,
   getSelfInformation,
   updateAvatar,
@@ -23,7 +22,7 @@ function EditProfile() {
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
   let [img, setImg] = useState(
-    user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+    user.avatar ? user.avatar : "/assets/person-circle.svg"
   );
   let [imgFile, setImgFile] = useState(null);
 
@@ -61,6 +60,7 @@ function EditProfile() {
     })
       .then((response) => {
         console.log(response);
+        console.log(response.url);
       })
       .catch((error) => {
         console.log(error);
@@ -99,7 +99,7 @@ function EditProfile() {
                 onChange={handleImgChange}
               />
               <img
-                className="img img-responsive clickable w-100 border border-primary profile-pic "
+                className="img img-responsive clickable w-100 border border-primary "
                 onClick={handleUpload}
                 src={img}
                 alt=""

@@ -13,7 +13,6 @@ import {
   getInstitutionInfo,
   getPrivateAnimal_api,
   getPublicAnimal_api,
-  toImageUrl,
 } from "../../api/Api";
 
 function AnimalConcrete() {
@@ -110,11 +109,7 @@ function AnimalConcrete() {
           <div className="col-sm-4 text-center">
             <img
               className="mb-3 img img-responsive profile-pic"
-              src={
-                animal.photo
-                  ? toImageUrl(animal.photo)
-                  : "/assets/person-circle.svg"
-              }
+              src={animal.photo ? animal.photo : "/assets/person-circle.svg"}
               alt={animal.animal_name}
             />
           </div>

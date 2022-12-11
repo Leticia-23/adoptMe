@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext, InstitutionContext } from "./environment";
 
-import { toImageUrl } from "./api/Api";
-
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
   let { institution: currentInstitution } = useContext(InstitutionContext);
@@ -68,7 +66,7 @@ function Navigation() {
                       <img
                         src={
                           currentUser.avatar
-                            ? toImageUrl(currentUser.avatar)
+                            ? currentUser.avatar
                             : "/assets/person-circle.svg"
                         }
                         className="rounded-circle"
@@ -81,7 +79,7 @@ function Navigation() {
                       <img
                         src={
                           currentInstitution.avatar
-                            ? toImageUrl(currentInstitution.avatar)
+                            ? currentInstitution.avatar
                             : "/assets/person-circle.svg"
                         }
                         className="rounded-circle"

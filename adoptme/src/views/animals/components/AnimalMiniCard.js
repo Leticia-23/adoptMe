@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { toImageUrl } from "../../../api/Api";
 
 function AnimalMiniCard({ animal }) {
   return (
@@ -13,9 +12,7 @@ function AnimalMiniCard({ animal }) {
               <Link to={"/animal/" + animal._id}>
                 <img
                   src={
-                    animal.photo
-                      ? toImageUrl(animal.avatar)
-                      : "/assets/person-circle.svg"
+                    animal.photo ? animal.avatar : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
                   width={60}

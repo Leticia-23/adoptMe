@@ -2,8 +2,6 @@ import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { toImageUrl } from "../../../api/Api";
-
 function UserMiniCard({ user }) {
   return (
     <div>
@@ -13,11 +11,7 @@ function UserMiniCard({ user }) {
             <Col className="col-sm-2 col-lg-3 col-md-5">
               <Link to={"/profile/" + user._id}>
                 <img
-                  src={
-                    user.avatar
-                      ? toImageUrl(user.avatar)
-                      : "/assets/person-circle.svg"
-                  }
+                  src={user.avatar ? user.avatar : "/assets/person-circle.svg"}
                   className="rounded-circle"
                   width={60}
                   height={60}

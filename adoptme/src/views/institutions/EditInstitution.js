@@ -4,11 +4,7 @@ import { Container, Row, Form, Col } from "react-bootstrap";
 
 import { InstitutionContext } from "../../environment/InstitutionProvider";
 
-import {
-  getSelfInstitutionInfo,
-  toImageUrl,
-  updateInstitution_api,
-} from "../../api/Api";
+import { getSelfInstitutionInfo, updateInstitution_api } from "../../api/Api";
 import Institution from "../../models/Institution";
 
 // TODO: upload avatar photo
@@ -24,9 +20,7 @@ function EditInstitution() {
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
   let [img, setImg] = useState(
-    institution.avatar
-      ? toImageUrl(institution.avatar)
-      : "/assets/person-circle.svg"
+    institution.avatar ? institution.avatar : "/assets/person-circle.svg"
   );
   let [imgFile, setImgFile] = useState(null);
 

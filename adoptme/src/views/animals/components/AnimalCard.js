@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { toImageUrl } from "../../../api/Api";
 import moment from "moment";
 
 // truncate returns the string truncated to a given length. If string would
@@ -21,9 +20,7 @@ function AnimalCard({ animal }) {
               <Link to={"/animal/" + animal._id}>
                 <img
                   src={
-                    animal.photo
-                      ? toImageUrl(animal.photo)
-                      : "/assets/person-circle.svg"
+                    animal.photo ? animal.photo : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
                   width={60}

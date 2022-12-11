@@ -3,7 +3,6 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import moment from "moment";
-import { toImageUrl } from "../../../api/Api";
 
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
@@ -22,7 +21,7 @@ function InstitutionCard({ institution }) {
                 <img
                   src={
                     institution.avatar
-                      ? toImageUrl(institution.avatar)
+                      ? institution.avatar
                       : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"

@@ -18,7 +18,6 @@ import {
   banInstitutionAccount,
   getSelfInstitutionInfo,
   getInstitutionInfo,
-  toImageUrl,
 } from "../../api/Api";
 import Institution from "../../models/Institution";
 
@@ -119,7 +118,7 @@ function InstitutionProfile() {
               className="mb-3 img img-responsive profile-pic"
               src={
                 institution.avatar
-                  ? toImageUrl(institution.avatar)
+                  ? institution.avatar
                   : "/assets/person-circle.svg"
               }
               alt=""

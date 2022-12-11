@@ -13,7 +13,6 @@ import {
   banUserAccount,
   getSelfInformation,
   getUserInformation,
-  toImageUrl,
 } from "../../api/Api";
 import User from "../../models/User";
 
@@ -129,11 +128,7 @@ function Profile() {
           <div className="col-sm-3 text-center">
             <img
               className="mb-3 img img-responsive profile-pic"
-              src={
-                user.avatar
-                  ? toImageUrl(user.avatar)
-                  : "/assets/person-circle.svg"
-              }
+              src={user.avatar ? user.avatar : "/assets/person-circle.svg"}
               // src={"/assets/person-circle.svg"}
               alt=""
             />

@@ -11,7 +11,6 @@ import {
   getPrivateAnimal_api,
   banAnimal,
   updateAnimal_api,
-  toImageUrl,
 } from "../../api/Api";
 
 function EditAnimal() {
@@ -42,9 +41,7 @@ function EditAnimal() {
       .then((result) => {
         let anim = Animal.from(result);
         setAnimal(anim);
-        setImg(
-          anim.photo ? toImageUrl(anim.photo) : "/assets/person-circle.svg"
-        );
+        setImg(anim.photo ? anim.photo : "/assets/person-circle.svg");
       })
       .catch((error) => {
         console.error(error);

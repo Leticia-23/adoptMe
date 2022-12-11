@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { toImageUrl } from "../../../api/Api";
 
 function InstitutionMiniCard({ institution }) {
   return (
@@ -14,7 +13,7 @@ function InstitutionMiniCard({ institution }) {
                 <img
                   src={
                     institution.avatar
-                      ? toImageUrl(institution.avatar)
+                      ? institution.avatar
                       : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
