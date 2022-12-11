@@ -3,7 +3,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import { Container, Row, Form, Col } from "react-bootstrap";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { Animal } from "../../models";
 
@@ -15,6 +15,9 @@ import {
 } from "../../api/Api";
 
 function EditAnimal() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   let [animal, setAnimal] = useState(null);
 
   let [name, setName] = useState("");
@@ -86,6 +89,7 @@ function EditAnimal() {
           })
             .then((response) => {
               console.log(response);
+              setSuccessMsg(response);
               navigate("/animal/" + animalId);
             })
             .catch((error) => {
@@ -95,6 +99,7 @@ function EditAnimal() {
         })
         .catch((error) => {
           console.log(error);
+          setAlertMsg(error.error);
           return;
         });
     } else {
@@ -113,9 +118,11 @@ function EditAnimal() {
       })
         .then((response) => {
           console.log(response);
+          setSuccessMsg(response);
           navigate("/animal/" + animalId);
         })
         .catch((error) => {
+          setAlertMsg(error.error);
           console.log(error);
           return;
         });
@@ -126,9 +133,11 @@ function EditAnimal() {
     banAnimal(animalId)
       .then((response) => {
         console.log(response);
+        setSuccessMsg(response);
         navigate("/animals");
       })
       .catch((error) => {
+        setAlertMsg(error.error);
         console.log(error);
         return;
       });
@@ -141,7 +150,14 @@ function EditAnimal() {
   return (
     <div className="editAnimal">
       <Container className="mb-5 pb-5">
-        <Form onSubmit={handleSubmit}>
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
+
+        <Form>
           <Row>
             <div className="col-sm-4 text-center p-5">
               <input
@@ -261,7 +277,7 @@ function EditAnimal() {
               </Form.Group>
             </div>
             <Col className="text-center mt-2">
-              <button type="submit" className="btn btn-primary">
+              <button className="btn btn-primary" onClick={handleSubmit}>
                 Update animal
               </button>
             </Col>

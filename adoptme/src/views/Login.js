@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { login_api } from "../api/Api";
 
 function Login() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -37,6 +40,7 @@ function Login() {
     })
       .then((response) => {
         console.log(response);
+        setSuccessMsg(response);
         // Save el token
         setToken(response.accessToken);
         // Remove the token for not to add it to the user
@@ -60,6 +64,7 @@ function Login() {
       })
       .catch((error) => {
         console.log(error);
+        setAlertMsg(error.error);
         return;
       });
   };
@@ -68,6 +73,14 @@ function Login() {
     <div className="login">
       <Container className=" justify-content-center mb-5 col-lg-4 col-sm-7 col-md-6">
         <h1 className="text-center">Log in</h1>
+
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
+
         <Form className="justify-content-center">
           <Form.Group
             className="mb-3 text-start "

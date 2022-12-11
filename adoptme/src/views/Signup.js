@@ -4,6 +4,9 @@ import { createUser } from "../api/Api";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const navigate = useNavigate();
 
   const [state, setState] = useState({
@@ -32,10 +35,11 @@ function Signup() {
     })
       .then((response) => {
         console.log(response);
-        navigate("/login");
+        setSuccessMsg(response);
       })
       .catch((error) => {
         console.log(error);
+        setAlertMsg(error.error);
         return;
       });
   };
@@ -44,7 +48,14 @@ function Signup() {
       <Container className="mb-5 col-lg-4 col-sm-7 col-md-6">
         <h1 className="text-center">Sign up</h1>
 
-        <Form>
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
+
+        <Form className="justify-content-center">
           <Form.Group
             className="mb-3 text-start "
             controlId="name"

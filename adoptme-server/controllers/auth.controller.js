@@ -84,6 +84,11 @@ const login = async (req, res) => {
     return res.status(400).json({ error: "Fill all the fields" });
   }
 
+  // Check if the email is valid
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ error: "Email is not valid" });
+  }
+
   // Check if user or institution exists
   try {
     const { data, err } = await userHelper.findUserByEmail(email);

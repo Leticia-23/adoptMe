@@ -135,7 +135,7 @@ const deleteOwnUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "It's not possible find the user" });
     }
-    return res.status(204).json("Delete own user correctly");
+    return res.status(204).json();
   } catch (error) {
     return res.status(500).send(error);
   }
