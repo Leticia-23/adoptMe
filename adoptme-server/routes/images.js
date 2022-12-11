@@ -6,11 +6,7 @@ const ImageController = require("../controllers/images.controller");
 
 const router = express.Router();
 
-// http://localhost:8080/api/images/user/avatar
-router.post(
-  "/user/avatar",
-  upload.single("avatar"),
-  ImageController.uploadImage
-);
+// http://localhost:8080/api/images/avatar
+router.post("/avatar", upload.single("avatar"), ImageController.uploadImage);
 
 module.exports = router;

@@ -7,7 +7,7 @@ import { InstitutionContext } from "../../environment/InstitutionProvider";
 import {
   getSelfInstitutionInfo,
   updateInstitution_api,
-  updateAvatar,
+  uploadAvatar,
 } from "../../api/Api";
 import Institution from "../../models/Institution";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ function EditInstitution() {
     let display_url;
 
     if (imgFile) {
-      updateAvatar({
+      uploadAvatar({
         imgFile: imgFile,
       })
         .then((response) => {

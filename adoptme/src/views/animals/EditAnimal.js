@@ -11,7 +11,7 @@ import {
   getPrivateAnimal_api,
   banAnimal,
   updateAnimal_api,
-  updateAvatar,
+  uploadAvatar,
 } from "../../api/Api";
 
 function EditAnimal() {
@@ -68,7 +68,7 @@ function EditAnimal() {
     let display_url;
 
     if (imgFile) {
-      updateAvatar({
+      uploadAvatar({
         imgFile: imgFile,
       })
         .then((response) => {

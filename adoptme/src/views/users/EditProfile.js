@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {
   updateUser_api,
   getSelfInformation,
-  updateAvatar,
+  uploadAvatar,
 } from "../../api/Api";
 import User from "../../models/User";
 
@@ -59,7 +59,7 @@ function EditProfile() {
     let display_url;
 
     if (imgFile) {
-      updateAvatar({
+      uploadAvatar({
         imgFile: imgFile,
       })
         .then((response) => {

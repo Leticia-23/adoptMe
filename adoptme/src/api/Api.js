@@ -204,8 +204,8 @@ export async function updateAnimal_api(
   return patchRequest("/animals/" + arguments[0].animalId, arguments[0]);
 }
 
-export async function updateAvatar({ imgFile = null }) {
-  let path = "/images/user/avatar";
+export async function uploadAvatar({ imgFile = null }) {
+  let path = "/images/avatar";
 
   let data = new FormData();
   data.append("avatar", imgFile);

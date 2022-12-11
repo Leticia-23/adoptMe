@@ -6,7 +6,7 @@ import AnimalMiniCard from "../animals/components/AnimalMiniCard";
 import {
   getInstitutionAnimals,
   registerAnimal_api,
-  updateAvatar,
+  uploadAvatar,
 } from "../../api/Api";
 import { ListAnimal } from "../../models";
 
@@ -81,7 +81,7 @@ function InstitutionPanel() {
     let display_url;
 
     if (imgFile) {
-      updateAvatar({
+      uploadAvatar({
         imgFile: imgFile,
       })
         .then((response) => {
