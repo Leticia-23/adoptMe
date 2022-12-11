@@ -66,7 +66,6 @@ const updateProfile = async (req, res) => {
     user = data;
 
     if (err != null) {
-      console.log("yyyyy");
       return res.status(400).json({ error: err });
     }
 
@@ -77,13 +76,11 @@ const updateProfile = async (req, res) => {
     );
 
     if (!validPassword) {
-      console.log("there");
       return res.status(400).json({ error: "Actual password not valid" });
     }
 
     // Check passwords
     if (updates.password !== updates.repeatPassword) {
-      console.log("here");
       return res.status(400).json({ error: "New passwords don't match" });
     }
 
@@ -104,10 +101,9 @@ const updateProfile = async (req, res) => {
     user = data;
 
     if (err != null) {
-      console.log("hhhh");
       console.log(err);
-      // TODO: decidir si poner que el error es que el nombre ya existe y está duplicado
-      return res.status(400).json({ error: err });
+      // This error is from de DB and is that the name is not unique
+      return res.status(400).json({ error: "The name is already used" });
     }
 
     if (!user) {
