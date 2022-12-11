@@ -34,7 +34,6 @@ const getUser = async (req, res) => {
 
 // Private
 
-// TODO: upload photo
 const updateProfile = async (req, res) => {
   let updates = req.body;
   const id = updates.id;

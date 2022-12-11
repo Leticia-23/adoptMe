@@ -115,7 +115,7 @@ function InstitutionProfile() {
         <Row>
           <div className="col-sm-3 text-center">
             <img
-              className="mb-3 img img-responsive profile-pic"
+              className="mb-3 img img-responsive w-100"
               src={
                 institution.avatar
                   ? institution.avatar

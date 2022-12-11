@@ -4,11 +4,17 @@ import { Container, Row, Form, Col } from "react-bootstrap";
 
 import { InstitutionContext } from "../../environment/InstitutionProvider";
 
-import { getSelfInstitutionInfo, updateInstitution_api } from "../../api/Api";
+import {
+  getSelfInstitutionInfo,
+  updateInstitution_api,
+  updateAvatar,
+} from "../../api/Api";
 import Institution from "../../models/Institution";
+import { useNavigate } from "react-router-dom";
 
-// TODO: upload avatar photo
 function EditInstitution() {
+  const navigate = useNavigate();
+
   let { institution, setInstitution } = useContext(InstitutionContext);
 
   let [new_name, setNew_name] = useState("");
@@ -50,22 +56,19 @@ function EditInstitution() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      "Name: " +
-        new_name +
-        "information" +
-        information +
-        " web: " +
-        webURL +
-        " phone: " +
-        phone +
-        " Password:" +
-        password +
-        " New password: " +
-        newPassword +
-        " Repeat new password: " +
-        repeatedNewPassword
-    );
+
+    if (imgFile) {
+      updateAvatar({
+        imgFile: imgFile,
+      })
+        .then((response) => {
+          setImg(response.url);
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    }
 
     updateInstitution_api({
       new_name: new_name,
@@ -78,7 +81,7 @@ function EditInstitution() {
       information: information,
     })
       .then((response) => {
-        console.log(response);
+        navigate("/institution");
       })
       .catch((error) => {
         console.log(error);
@@ -101,7 +104,7 @@ function EditInstitution() {
                 onChange={handleImgChange}
               />
               <img
-                className="img img-responsive clickable w-100 border border-primary profile-pic "
+                className="img img-responsive clickable w-100 border border-primary "
                 onClick={handleUpload}
                 src={img}
                 alt=""
