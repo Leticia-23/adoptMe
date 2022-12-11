@@ -136,7 +136,7 @@ function Profile() {
             )}
           </div>
           <div className="ps-5 col-sm-9">
-            <h1>{user.name}</h1>
+            <h1 style={{ color: "#ff7043" }}>{user.name}</h1>
 
             <h5 className="mt-4">Biography:</h5>
             <p>{user.biography}</p>

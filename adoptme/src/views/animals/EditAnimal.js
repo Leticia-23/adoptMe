@@ -156,133 +156,141 @@ function EditAnimal() {
         {successMsg !== "" && (
           <div className="alert alert-success">{successMsg}</div>
         )}
+        <Row>
+          <div className="col-sm-4 text-center p-5">
+            <input
+              ref={inputRef}
+              className="d-none"
+              type="file"
+              accept="image/*"
+              capture="camera"
+              onChange={handleImgChange}
+            />
+            <img
+              className="img img-responsive clickable w-100 "
+              onClick={handleUpload}
+              src={img}
+              alt=""
+            />
+            <p className="mt-3 text-center">Animal photo</p>
+            <button className="btn btn-danger mt-5" onClick={delete_animal}>
+              Delete animal
+            </button>
+          </div>
+          <Col>
+            <Form>
+              <Row>
+                <div className="col-sm-4">
+                  <h2>{animal.animal_name}</h2>
 
-        <Form>
-          <Row>
-            <div className="col-sm-4 text-center p-5">
-              <input
-                ref={inputRef}
-                className="d-none"
-                type="file"
-                accept="image/*"
-                capture="camera"
-                onChange={handleImgChange}
-              />
-              <img
-                className="img img-responsive clickable w-100 "
-                onClick={handleUpload}
-                src={img}
-                alt=""
-              />
-              <p className="mt-3 text-center">Animal photo</p>
-              <button className="btn btn-danger mt-5" onClick={delete_animal}>
-                Delete animal
-              </button>
-            </div>
+                  <Form.Group className="mb-3 text-start " controlId="name">
+                    <Form.Control
+                      type="name"
+                      placeholder="New animal name"
+                      onInput={(e) => setName(e.target.value)}
+                    />
+                  </Form.Group>
 
-            <div className="col-sm-4">
-              <h2>{animal.animal_name}</h2>
+                  <Form.Group
+                    className="mb-3 text-start "
+                    controlId="description"
+                  >
+                    <textarea
+                      className="form-control"
+                      rows="4"
+                      id="description"
+                      placeholder="New description"
+                      onInput={(e) => setDescription(e.target.value)}
+                    ></textarea>
+                  </Form.Group>
 
-              <Form.Group className="mb-3 text-start " controlId="name">
-                <Form.Control
-                  type="name"
-                  placeholder="New animal name"
-                  onInput={(e) => setName(e.target.value)}
-                />
-              </Form.Group>
+                  <Form.Group className="mb-3 text-start " controlId="size">
+                    <Form.Control
+                      type="size"
+                      placeholder="Animal size"
+                      onInput={(e) => setSize(e.target.value + " Kg")}
+                    />
+                    <Form.Text>Enter weight in Kilograms</Form.Text>
+                  </Form.Group>
 
-              <Form.Group className="mb-3 text-start " controlId="description">
-                <textarea
-                  className="form-control"
-                  rows="4"
-                  id="description"
-                  placeholder="New description"
-                  onInput={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </Form.Group>
+                  <Form.Group className="mb-3 text-start " controlId="color">
+                    <Form.Control
+                      type="color-name"
+                      placeholder="Animal color"
+                      onInput={(e) => setColor(e.target.value)}
+                    />
+                    <Form.Text>Enter color name</Form.Text>
+                  </Form.Group>
 
-              <Form.Group className="mb-3 text-start " controlId="size">
-                <Form.Control
-                  type="size"
-                  placeholder="Animal size"
-                  onInput={(e) => setSize(e.target.value + " Kg")}
-                />
-                <Form.Text>Enter weight in Kilograms</Form.Text>
-              </Form.Group>
+                  <Form.Label>Animal born date</Form.Label>
+                  <Form.Group className="mb-3 text-start " controlId="borDate">
+                    <Form.Control
+                      type="date"
+                      placeholder="Animal born date"
+                      // value="2012-12-12"
+                      onInput={(e) => setBornDate(new Date(e.target.value))}
+                    />
+                  </Form.Group>
+                </div>
 
-              <Form.Group className="mb-3 text-start " controlId="color">
-                <Form.Control
-                  type="color-name"
-                  placeholder="Animal color"
-                  onInput={(e) => setColor(e.target.value)}
-                />
-                <Form.Text>Enter color name</Form.Text>
-              </Form.Group>
+                <div className="col-sm-4 pt-4">
+                  <Form.Group className="mb-3 text-start " controlId="danger">
+                    <Form.Label>Dangerous animal</Form.Label>
+                    <Form.Select
+                      aria-label="Dangerous animal"
+                      onInput={(e) => setDanger(e.target.value)}
+                    >
+                      <option value=""></option>
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option>
+                    </Form.Select>
+                  </Form.Group>
 
-              <Form.Label>Animal born date</Form.Label>
-              <Form.Group className="mb-3 text-start " controlId="borDate">
-                <Form.Control
-                  type="date"
-                  placeholder="Animal born date"
-                  // value="2012-12-12"
-                  onInput={(e) => setBornDate(new Date(e.target.value))}
-                />
-              </Form.Group>
-            </div>
+                  <Form.Group className="mb-3 text-start " controlId="sterile">
+                    <Form.Label>Sterile animal</Form.Label>
+                    <Form.Select
+                      aria-label="Sterile animal"
+                      onInput={(e) => setSterile(e.target.value)}
+                    >
+                      <option value=""></option>
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option>
+                    </Form.Select>
+                  </Form.Group>
 
-            <div className="col-sm-4 pt-4">
-              <Form.Group className="mb-3 text-start " controlId="danger">
-                <Form.Label>Dangerous animal</Form.Label>
-                <Form.Select
-                  aria-label="Dangerous animal"
-                  onInput={(e) => setDanger(e.target.value)}
-                >
-                  <option value=""></option>
-                  <option value="No">No</option>
-                  <option value="Yes">Yes</option>
-                </Form.Select>
-              </Form.Group>
+                  <Form.Group className="mb-3 text-start " controlId="adopted">
+                    <Form.Label>Adopted animal</Form.Label>
+                    <Form.Select
+                      aria-label="Adopted animal"
+                      onInput={(e) => setAdopted(e.target.value)}
+                    >
+                      <option value=""></option>
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option>
+                    </Form.Select>
+                  </Form.Group>
 
-              <Form.Group className="mb-3 text-start " controlId="sterile">
-                <Form.Label>Sterile animal</Form.Label>
-                <Form.Select
-                  aria-label="Sterile animal"
-                  onInput={(e) => setSterile(e.target.value)}
-                >
-                  <option value=""></option>
-                  <option value="No">No</option>
-                  <option value="Yes">Yes</option>
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3 text-start " controlId="adopted">
-                <Form.Label>Adopted animal</Form.Label>
-                <Form.Select
-                  aria-label="Adopted animal"
-                  onInput={(e) => setAdopted(e.target.value)}
-                >
-                  <option value=""></option>
-                  <option value="No">No</option>
-                  <option value="Yes">Yes</option>
-                </Form.Select>
-              </Form.Group>
-
-              <Form.Group className="mb-3 text-start " controlId="adoptionDate">
-                <Form.Label>Adoption date</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="New adoption date"
-                  onInput={(e) => setAdoptionDate(new Date(e.target.value))}
-                />
-              </Form.Group>
-            </div>
-            <Col className="text-center mt-2">
-              <button className="btn btn-primary" onClick={handleSubmit}>
-                Update animal
-              </button>
-            </Col>
-          </Row>
-        </Form>
+                  <Form.Group
+                    className="mb-3 text-start "
+                    controlId="adoptionDate"
+                  >
+                    <Form.Label>Adoption date</Form.Label>
+                    <Form.Control
+                      type="date"
+                      placeholder="New adoption date"
+                      onInput={(e) => setAdoptionDate(new Date(e.target.value))}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="text-center mt-2">
+                  <button className="btn btn-primary" onClick={handleSubmit}>
+                    Update animal
+                  </button>
+                </div>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     </div>
   );

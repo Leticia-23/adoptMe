@@ -11,6 +11,10 @@ function AboutUs() {
           have a place with us. In addition, anyone has the opportunity to meet
           the institutions and animals for adoption.
         </p>
+        <p>
+          This community and this web page have been created by Leticia Sánchez
+          Romero.
+        </p>
         <h1 style={{ color: "#ff7043" }}>What do we do?</h1>
         <p>
           Any institution can contact us to belong to our community and make

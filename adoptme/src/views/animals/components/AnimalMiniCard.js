@@ -12,7 +12,7 @@ function AnimalMiniCard({ animal }) {
               <Link to={"/animal/" + animal._id}>
                 <img
                   src={
-                    animal.photo ? animal.avatar : "/assets/person-circle.svg"
+                    animal.photo ? animal.photo : "/assets/person-circle.svg"
                   }
                   className="rounded-circle"
                   width={60}

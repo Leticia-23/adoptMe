@@ -125,7 +125,7 @@ function InstitutionProfile() {
             />
           </div>
           <div className="ps-5 col-sm-9">
-            <h1>{institution.name}</h1>
+            <h1 style={{ color: "#ff7043" }}>{institution.name}</h1>
 
             <h5 className="mt-4">Information:</h5>
             <p>{institution.information}</p>

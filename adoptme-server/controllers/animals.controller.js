@@ -60,7 +60,9 @@ const getPublicAnimal = async (req, res) => {
     if (!animal) {
       return res
         .status(404)
-        .json({ error: "It's not possible find the animal" });
+        .json({
+          error: "It's not possible find the animal to get public information",
+        });
     }
 
     return res.status(200).json({
@@ -123,9 +125,9 @@ const getPrivateAnimal = async (req, res) => {
     }
 
     if (!animal) {
-      return res
-        .status(404)
-        .json({ error: "It's not possible find the animal" });
+      return res.status(404).json({
+        error: "It's not possible find the animal to get private information",
+      });
     }
 
     return res.status(200).json({
@@ -240,7 +242,7 @@ const updateAnimal = async (req, res) => {
     if (!animal) {
       return res
         .status(404)
-        .json({ error: "It's not possible find the animal" });
+        .json({ error: "It's not possible find the animal to update" });
     }
 
     return res.status(200).json("Animal correclty updated");
@@ -262,7 +264,7 @@ const deleteAnimal = async (req, res) => {
 
     if (!animal) {
       return res.status(404).json({
-        error: "It's not possible find the animal",
+        error: "It's not possible find the animal to delete it",
       });
     }
     return res.status(204).json();

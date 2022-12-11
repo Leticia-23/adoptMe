@@ -101,7 +101,7 @@ function AnimalConcrete() {
       <Container className="mb-5 pb-5">
         <Row>
           <div className="col-sm-8">
-            <h1>{animal.animal_name}</h1>
+            <h1 style={{ color: "#ff7043" }}>{animal.animal_name}</h1>
 
             <h5 className="mt-4">Description:</h5>
             <p>{animal.description}</p>

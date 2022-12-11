@@ -129,7 +129,7 @@ function EditProfile() {
               <p className="mt-3 text-center">User avatar</p>
             </div>
             <div className="col-sm-4">
-              <h2>{user.name}</h2>
+              <h2 style={{ color: "#ff7043" }}>{user.name}</h2>
               <Form.Group className="mb-3 text-start " controlId="name">
                 <Form.Control
                   type="name"

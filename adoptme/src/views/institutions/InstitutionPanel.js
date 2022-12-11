@@ -134,7 +134,9 @@ function InstitutionPanel() {
   return (
     <div className="institutionPanel">
       <Container className="mb-5 pb-5">
-        <h1 className="text-start">Register animal</h1>
+        <h1 className="text-start" style={{ color: "#ff7043" }}>
+          Register animal
+        </h1>
 
         {alertMsg !== "" && (
           <div className="alert alert-danger">{alertMsg}</div>
@@ -230,7 +232,9 @@ function InstitutionPanel() {
           </Row>
         </Form>
 
-        <h1 className="text-start mt-4">Animals</h1>
+        <h1 className="text-start mt-4" style={{ color: "#ff7043" }}>
+          Animals
+        </h1>
         <Container>
           <div className="border list-cards-box">
             {table.map((row, i) => (

@@ -77,10 +77,12 @@ function AdminPanel() {
       .then((response) => {
         console.log(response);
         setSuccessMsg(response);
+        setAlertMsg("");
       })
       .catch((error) => {
         console.log(error);
         setAlertMsg(error.error);
+        setSuccessMsg("");
         return;
       });
   };
@@ -91,7 +93,9 @@ function AdminPanel() {
   return (
     <div className="adminPanel">
       <Container className="mb-5 pb-5">
-        <h1 className="text-start">Register institution</h1>
+        <h1 className="text-start" style={{ color: "#ff7043" }}>
+          Register institution
+        </h1>
 
         {alertMsg !== "" && (
           <div className="alert alert-danger">{alertMsg}</div>
@@ -166,7 +170,9 @@ function AdminPanel() {
           </Row>
         </Form>
 
-        <h1 className="text-start mt-4">Institutions</h1>
+        <h1 className="text-start mt-4" style={{ color: "#ff7043" }}>
+          Institutions
+        </h1>
         <Container>
           <div className="border list-cards-box">
             {table.map((row, i) => (
@@ -181,7 +187,9 @@ function AdminPanel() {
           </div>
         </Container>
 
-        <h1 className="text-start mt-4">Users</h1>
+        <h1 className="text-start mt-4" style={{ color: "#ff7043" }}>
+          Users
+        </h1>
         <Container>
           <div className="border list-cards-box">
             {table_user.map((row, i) => (
