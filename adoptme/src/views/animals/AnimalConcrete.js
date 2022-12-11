@@ -108,7 +108,7 @@ function AnimalConcrete() {
           </div>
           <div className="col-sm-4 text-center">
             <img
-              className="mb-3 img img-responsive profile-pic"
+              className="mb-3 img img-responsive w-100"
               src={animal.photo ? animal.photo : "/assets/person-circle.svg"}
               alt={animal.animal_name}
             />

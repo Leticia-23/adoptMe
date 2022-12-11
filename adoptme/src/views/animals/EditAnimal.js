@@ -11,10 +11,10 @@ import {
   getPrivateAnimal_api,
   banAnimal,
   updateAnimal_api,
+  updateAvatar,
 } from "../../api/Api";
 
 function EditAnimal() {
-  // TODO: get animal information
   let [animal, setAnimal] = useState(null);
 
   let [name, setName] = useState("");
@@ -26,11 +26,9 @@ function EditAnimal() {
   let [sterile, setSterile] = useState("");
   let [adopted, setAdopted] = useState("");
   let [adoptionDate, setAdoptionDate] = useState("");
-  /* let [userAdopt, setUserAdopt] = useState(""); */
 
   let { animalId } = useParams();
 
-  //TODO: put animal photo
   let [img, setImg] = useState("/assets/person-circle.svg");
   let [imgFile, setImgFile] = useState(null);
 
@@ -41,7 +39,7 @@ function EditAnimal() {
       .then((result) => {
         let anim = Animal.from(result);
         setAnimal(anim);
-        setImg(anim.photo ? anim.photo : "/assets/person-circle.svg");
+        setImg(animal.photo ? animal.photo : "/assets/person-circle.svg");
       })
       .catch((error) => {
         console.error(error);
@@ -64,6 +62,19 @@ function EditAnimal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (imgFile) {
+      updateAvatar({
+        imgFile: imgFile,
+      })
+        .then((response) => {
+          setImg(response.url);
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    }
+
     updateAnimal_api({
       new_animal_name: name,
       description: description,
@@ -79,6 +90,7 @@ function EditAnimal() {
     })
       .then((response) => {
         console.log(response);
+        navigate("/animal/" + animalId);
       })
       .catch((error) => {
         console.log(error);
@@ -223,15 +235,6 @@ function EditAnimal() {
                   onInput={(e) => setAdoptionDate(new Date(e.target.value))}
                 />
               </Form.Group>
-
-              {/* List of users or delete this info */}
-              {/* <Form.Group className="mb-3 text-start " controlId="userAdopt">
-                <Form.Control
-                  type="userAdopt"
-                  placeholder="User who adopted"
-                  onInput={(e) => setUserAdopt(e.target.value)}
-                />
-              </Form.Group> */}
             </div>
             <Col className="text-center mt-2">
               <button type="submit" className="btn btn-primary">

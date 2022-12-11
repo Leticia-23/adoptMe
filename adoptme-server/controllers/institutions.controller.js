@@ -59,7 +59,6 @@ const getInstitutions = async (req, res) => {
 // Private
 
 const updateInstitution = async (req, res) => {
-  // TODO: upload photo
   let updates = req.body;
   const id = updates.id;
   delete updates.id;

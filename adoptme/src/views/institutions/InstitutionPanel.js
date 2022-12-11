@@ -1,4 +1,3 @@
-// institution panel
 import React, { useState, useRef, useContext } from "react";
 import { useEffectOnce } from "usehooks-ts";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
@@ -51,6 +50,24 @@ function InstitutionPanel() {
       });
   });
 
+  let table = splitInGroups(animals, 3);
+
+  let [img, setImg] = useState("/assets/person-circle.svg");
+  let [imgFile, setImgFile] = useState(null);
+
+  const inputRef = useRef(null);
+  const handleUpload = () => {
+    inputRef.current?.click();
+  };
+
+  const handleImgChange = (event) => {
+    if (event.target.files.length !== 1) {
+      return;
+    }
+    setImgFile(event.target.files[0]);
+    setImg(URL.createObjectURL(event.target.files[0]));
+  };
+
   const register_animal = async (e) => {
     e.preventDefault();
 
@@ -70,24 +87,6 @@ function InstitutionPanel() {
         console.log(error);
         return;
       });
-  };
-
-  let table = splitInGroups(animals, 3);
-
-  let [img, setImg] = useState("/assets/person-circle.svg");
-  let [imgFile, setImgFile] = useState(null);
-
-  const inputRef = useRef(null);
-  const handleUpload = () => {
-    inputRef.current?.click();
-  };
-
-  const handleImgChange = (event) => {
-    if (event.target.files.length !== 1) {
-      return;
-    }
-    setImgFile(event.target.files[0]);
-    setImg(URL.createObjectURL(event.target.files[0]));
   };
 
   return (
@@ -166,7 +165,7 @@ function InstitutionPanel() {
                 onChange={handleImgChange}
               />
               <img
-                className="img img-responsive clickable w-100 border border-primary profile-pic "
+                className="img img-responsive clickable w-100 border border-primary"
                 onClick={handleUpload}
                 src={img}
                 alt=""

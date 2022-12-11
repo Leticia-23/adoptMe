@@ -155,7 +155,6 @@ const getPrivateAnimal = async (req, res) => {
   }
 };
 
-// TODO: upload photo
 const updateAnimal = async (req, res) => {
   let updates = req.body;
 

@@ -81,6 +81,7 @@ function EditInstitution() {
       information: information,
     })
       .then((response) => {
+        console.log(response);
         navigate("/institution");
       })
       .catch((error) => {

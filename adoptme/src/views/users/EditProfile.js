@@ -78,6 +78,7 @@ function EditProfile() {
       avatar: img,
     })
       .then((response) => {
+        console.log(response);
         navigate("/profile");
       })
       .catch((error) => {
