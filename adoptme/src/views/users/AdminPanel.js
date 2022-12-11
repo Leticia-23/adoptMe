@@ -22,6 +22,9 @@ function splitInGroups(arr, n) {
 }
 
 function AdminPanel() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -73,9 +76,11 @@ function AdminPanel() {
     })
       .then((response) => {
         console.log(response);
+        setSuccessMsg(response);
       })
       .catch((error) => {
         console.log(error);
+        setAlertMsg(error.error);
         return;
       });
   };
@@ -87,6 +92,14 @@ function AdminPanel() {
     <div className="adminPanel">
       <Container className="mb-5 pb-5">
         <h1 className="text-start">Register institution</h1>
+
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
+
         <Form>
           <Row className="col-12">
             <Col className="col-lg-9 col-md-9 col-sm-11 ">

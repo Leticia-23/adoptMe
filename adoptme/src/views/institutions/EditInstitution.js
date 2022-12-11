@@ -13,6 +13,8 @@ import Institution from "../../models/Institution";
 import { useNavigate } from "react-router-dom";
 
 function EditInstitution() {
+  const [alertMsg, setAlertMsg] = useState("");
+
   const navigate = useNavigate();
 
   let { institution, setInstitution } = useContext(InstitutionContext);
@@ -82,11 +84,13 @@ function EditInstitution() {
             })
             .catch((error) => {
               console.log(error);
+              setAlertMsg(error.error);
               return;
             });
         })
         .catch((error) => {
           console.log(error);
+          setAlertMsg(error.error);
           return;
         });
     } else {
@@ -106,6 +110,7 @@ function EditInstitution() {
         })
         .catch((error) => {
           console.log(error);
+          setAlertMsg(error.error);
           return;
         });
     }
@@ -116,6 +121,10 @@ function EditInstitution() {
   return (
     <div className="editProfile">
       <Container className="mb-5 pb-5">
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+
         <Form onSubmit={handleSubmit}>
           <Row>
             <div className="col-sm-4 text-center">

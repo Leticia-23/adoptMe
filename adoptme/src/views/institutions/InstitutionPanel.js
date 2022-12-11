@@ -21,6 +21,9 @@ function splitInGroups(arr, n) {
 }
 
 function InstitutionPanel() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const [state, setState] = useState({
     animal_name: "",
     specie: "",
@@ -94,14 +97,17 @@ function InstitutionPanel() {
           })
             .then((response) => {
               console.log(response);
+              setSuccessMsg(response);
             })
             .catch((error) => {
               console.log(error);
+              setAlertMsg(error.error);
               return;
             });
         })
         .catch((error) => {
           console.log(error);
+          setAlertMsg(error.error);
           return;
         });
     } else {
@@ -115,9 +121,11 @@ function InstitutionPanel() {
       })
         .then((response) => {
           console.log(response);
+          setSuccessMsg(response);
         })
         .catch((error) => {
           console.log(error);
+          setAlertMsg(error.error);
           return;
         });
     }
@@ -127,6 +135,14 @@ function InstitutionPanel() {
     <div className="institutionPanel">
       <Container className="mb-5 pb-5">
         <h1 className="text-start">Register animal</h1>
+
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
+
         <Form>
           <Row className="col-12">
             <Col className="col-lg-6 col-md-9 col-sm-10 ">
