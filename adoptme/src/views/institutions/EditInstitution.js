@@ -57,12 +57,52 @@ function EditInstitution() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let display_url;
+
     if (imgFile) {
       updateAvatar({
         imgFile: imgFile,
       })
         .then((response) => {
-          setImg(response.url);
+          display_url = response.display_url;
+
+          updateInstitution_api({
+            new_name: new_name,
+            web_URL: webURL,
+            avatar: display_url,
+            actual_password: password,
+            password: newPassword,
+            repeatPassword: repeatedNewPassword,
+            phoneNumber: phone,
+            information: information,
+          })
+            .then((response) => {
+              console.log(response);
+              navigate("/institution");
+            })
+            .catch((error) => {
+              console.log(error);
+              return;
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    } else {
+      updateInstitution_api({
+        new_name: new_name,
+        web_URL: webURL,
+        avatar: "",
+        actual_password: password,
+        password: newPassword,
+        repeatPassword: repeatedNewPassword,
+        phoneNumber: phone,
+        information: information,
+      })
+        .then((response) => {
+          console.log(response);
+          navigate("/institution");
         })
         .catch((error) => {
           console.log(error);
@@ -70,24 +110,7 @@ function EditInstitution() {
         });
     }
 
-    updateInstitution_api({
-      new_name: new_name,
-      web_URL: webURL,
-      avatar: img,
-      actual_password: password,
-      password: newPassword,
-      repeatPassword: repeatedNewPassword,
-      phoneNumber: phone,
-      information: information,
-    })
-      .then((response) => {
-        console.log(response);
-        navigate("/institution");
-      })
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
+    console.log("img", img);
   };
 
   return (

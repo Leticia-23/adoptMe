@@ -147,13 +147,13 @@ export async function getInstitutionAnimals(institutionId = null) {
   return getRequest("/institutions/" + institutionId + "/animals");
 }
 
-// TODO: add imgFile
 export async function registerAnimal_api(
   animal_name,
   specie,
   breed,
   sex,
-  description
+  description,
+  photo
 ) {
   return postRequest("/animals", arguments[0]);
 }

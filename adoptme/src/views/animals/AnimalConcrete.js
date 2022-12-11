@@ -35,11 +35,12 @@ function AnimalConcrete() {
       setisRegistered(true);
     }
 
-    if (isRegistered) {
+    if (currentUser || currentInstitution) {
       getPrivateAnimal_api(animalId)
         .then((result) => {
           let animal = Animal.from(result);
           setAnimal(animal);
+          console.log("animal ", animal);
           if (
             currentInstitution &&
             currentInstitution.id === animal.institution
@@ -67,6 +68,7 @@ function AnimalConcrete() {
         .then((result) => {
           let animal = Animal.from(result);
           setAnimal(animal);
+          console.log(animal);
           if (
             currentInstitution &&
             currentInstitution.id === animal.institution

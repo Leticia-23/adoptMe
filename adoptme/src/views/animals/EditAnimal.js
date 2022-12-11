@@ -39,7 +39,7 @@ function EditAnimal() {
       .then((result) => {
         let anim = Animal.from(result);
         setAnimal(anim);
-        setImg(animal.photo ? animal.photo : "/assets/person-circle.svg");
+        setImg(anim.photo ? anim.photo : "/assets/person-circle.svg");
       })
       .catch((error) => {
         console.error(error);
@@ -62,47 +62,71 @@ function EditAnimal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let display_url;
+
     if (imgFile) {
       updateAvatar({
         imgFile: imgFile,
       })
         .then((response) => {
-          setImg(response.url);
+          display_url = response.display_url;
+
+          updateAnimal_api({
+            new_animal_name: name,
+            description: description,
+            bornDate: bornDate,
+            size: size,
+            color: color,
+            danger: danger,
+            sterile: sterile,
+            adopted: adopted,
+            adoptionDate: adoptionDate,
+            photo: display_url,
+            animalId: animalId,
+          })
+            .then((response) => {
+              console.log(response);
+              navigate("/animal/" + animalId);
+            })
+            .catch((error) => {
+              console.log(error);
+              return;
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    } else {
+      updateAnimal_api({
+        new_animal_name: name,
+        description: description,
+        bornDate: bornDate,
+        size: size,
+        color: color,
+        danger: danger,
+        sterile: sterile,
+        adopted: adopted,
+        adoptionDate: adoptionDate,
+        photo: "",
+        animalId: animalId,
+      })
+        .then((response) => {
+          console.log(response);
+          navigate("/animal/" + animalId);
         })
         .catch((error) => {
           console.log(error);
           return;
         });
     }
-
-    updateAnimal_api({
-      new_animal_name: name,
-      description: description,
-      bornDate: bornDate,
-      size: size,
-      color: color,
-      danger: danger,
-      sterile: sterile,
-      adopted: adopted,
-      adoptionDate: adoptionDate,
-      photo: img,
-      animalId: animalId,
-    })
-      .then((response) => {
-        console.log(response);
-        navigate("/animal/" + animalId);
-      })
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
   };
 
   const delete_animal = async (e) => {
     banAnimal(animalId)
       .then((response) => {
         console.log(response);
-        navigate("/institution");
+        navigate("/animals");
       })
       .catch((error) => {
         console.log(error);

@@ -56,35 +56,54 @@ function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let display_url;
+
     if (imgFile) {
       updateAvatar({
         imgFile: imgFile,
       })
         .then((response) => {
-          setImg(response.url);
+          display_url = response.display_url;
+
+          updateUser_api({
+            new_name: username,
+            biography: biography,
+            actual_password: password,
+            password: newPassword,
+            repeatPassword: repeatedNewPassword,
+            avatar: display_url,
+          })
+            .then((response) => {
+              console.log(response);
+              navigate("/profile");
+            })
+            .catch((error) => {
+              console.log(error);
+              return;
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    } else {
+      updateUser_api({
+        new_name: username,
+        biography: biography,
+        actual_password: password,
+        password: newPassword,
+        repeatPassword: repeatedNewPassword,
+        avatar: "",
+      })
+        .then((response) => {
+          console.log(response);
+          navigate("/profile");
         })
         .catch((error) => {
           console.log(error);
           return;
         });
     }
-
-    updateUser_api({
-      new_name: username,
-      biography: biography,
-      actual_password: password,
-      password: newPassword,
-      repeatPassword: repeatedNewPassword,
-      avatar: img,
-    })
-      .then((response) => {
-        console.log(response);
-        navigate("/profile");
-      })
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
   };
 
   return (

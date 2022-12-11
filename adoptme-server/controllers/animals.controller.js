@@ -82,9 +82,7 @@ const getPublicAnimal = async (req, res) => {
 // Private
 
 const registerAnimal = async (req, res) => {
-  // TODO: upload photo
   let animal = req.body;
-
   // delete name of institution from body
   delete animal.name;
   // put institution's id like institution instead id
@@ -97,12 +95,11 @@ const registerAnimal = async (req, res) => {
     !animal.specie ||
     !animal.breed ||
     !animal.sex ||
-    /* TODO: add photo */
-    /* !animal.photo || */
+    !animal.photo ||
     !animal.description ||
     !animal.institution
   ) {
-    return res.status(400).json({ error: "Fill all the fields" });
+    return res.status(400).json({ error: "Fill all the fields and photo" });
   }
 
   try {

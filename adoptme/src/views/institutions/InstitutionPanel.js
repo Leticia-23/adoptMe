@@ -3,7 +3,11 @@ import { useEffectOnce } from "usehooks-ts";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import AnimalMiniCard from "../animals/components/AnimalMiniCard";
 
-import { getInstitutionAnimals, registerAnimal_api } from "../../api/Api";
+import {
+  getInstitutionAnimals,
+  registerAnimal_api,
+  updateAvatar,
+} from "../../api/Api";
 import { ListAnimal } from "../../models";
 
 import { InstitutionContext } from "../../environment";
@@ -54,6 +58,7 @@ function InstitutionPanel() {
 
   let [img, setImg] = useState("/assets/person-circle.svg");
   let [imgFile, setImgFile] = useState(null);
+  let [urlImg, setUrlImg] = useState(null);
 
   const inputRef = useRef(null);
   const handleUpload = () => {
@@ -71,22 +76,34 @@ function InstitutionPanel() {
   const register_animal = async (e) => {
     e.preventDefault();
 
-    registerAnimal_api({
-      animal_name: state.animal_name,
-      specie: state.specie,
-      breed: state.breed,
-      sex: state.sex,
-      description: state.description,
-      /* TODO: add imgFile */
-      /* imgFile: imgFile, */
-    })
-      .then((response) => {
-        console.log(response);
+    if (imgFile) {
+      updateAvatar({
+        imgFile: imgFile,
       })
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
+        .then((response) => {
+          setUrlImg(response.url);
+
+          registerAnimal_api({
+            animal_name: state.animal_name,
+            specie: state.specie,
+            breed: state.breed,
+            sex: state.sex,
+            description: state.description,
+            photo: urlImg,
+          })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+              return;
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    }
   };
 
   return (
@@ -123,6 +140,7 @@ function InstitutionPanel() {
                   <Form.Group controlId="sex" onChange={handleChange}>
                     <Form.Label>Sex</Form.Label>
                     <Form.Select aria-label="Select sex">
+                      <option value=""></option>
                       <option value="Female">Female</option>
                       <option value="Male">Male</option>
                     </Form.Select>

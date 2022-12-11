@@ -20,8 +20,7 @@ const registerAnimalHelper = async (animal) => {
     specie: animal.specie,
     breed: animal.breed,
     sex: animal.sex,
-    /* TODO: add photo */
-    /* photo: animal.photo, */
+    photo: animal.photo,
     description: animal.description,
     institution: animal.institution,
   });
