@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Col } from "react-bootstrap";
 import { createUser } from "../api/Api";
-import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [successMsg, setSuccessMsg] = useState("");
   const [alertMsg, setAlertMsg] = useState("");
-
-  const navigate = useNavigate();
 
   const [state, setState] = useState({
     name: "",

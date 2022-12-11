@@ -3,7 +3,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import { Container, Row, Form, Col } from "react-bootstrap";
 
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Animal } from "../../models";
 
