@@ -23,11 +23,17 @@ function Adopted() {
 
   return (
     <div className="adopted">
-      <div className="mb-2">
-        {animals.map((animal, i) => (
-          <AnimalCard key={i} animal={animal} />
-        ))}
-      </div>
+      {animals.length > 0 ? (
+        <div className="mb-2">
+          {animals.map((animal, i) => (
+            <AnimalCard key={i} animal={animal} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center mt-5">
+          <h4 style={{ color: "#ff7043" }}>No animals registered yet</h4>
+        </div>
+      )}
     </div>
   );
 }

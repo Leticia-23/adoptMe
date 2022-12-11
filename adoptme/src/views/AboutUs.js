@@ -7,7 +7,7 @@ function AboutUs() {
       <Container className="mb-5 text-center">
         <h1 style={{ color: "#ff7043" }}>Who are we?</h1>
         <p>
-          We are a comunity where any institution that have animals to adopt
+          We are a community where any institution that have animals to adopt
           have a place with us. In addition, anyone has the opportunity to meet
           the institutions and animals for adoption.
         </p>

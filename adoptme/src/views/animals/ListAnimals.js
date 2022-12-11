@@ -17,7 +17,9 @@ function ListAnimals() {
   return (
     <div className="listAnimals">
       <Container className="mb-5 pb-5">
-        <h1 className="text-center ">Animals</h1>
+        <h1 className="text-center" style={{ color: "#ff7043" }}>
+          Animals
+        </h1>
         <Row className="mb-3">
           <Form.Select aria-label="Select option" onChange={handleChange}>
             <option value="Adopt">Animals to adopt</option>

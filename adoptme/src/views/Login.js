@@ -72,7 +72,9 @@ function Login() {
   return (
     <div className="login">
       <Container className=" justify-content-center mb-5 col-lg-4 col-sm-7 col-md-6">
-        <h1 className="text-center">Log in</h1>
+        <h1 className="text-center" style={{ color: "#ff7043" }}>
+          Log in
+        </h1>
 
         {alertMsg !== "" && (
           <div className="alert alert-danger">{alertMsg}</div>

@@ -8,7 +8,12 @@ function Home() {
   return (
     <div className="home">
       <Container className="mb-5">
-        <h1 className="font-weight-light text-center fw-bold">AdoptMe</h1>
+        <h1
+          className="font-weight-light text-center fw-bold"
+          style={{ color: "#ff7043" }}
+        >
+          AdoptMe
+        </h1>
         <p className="mt-4 fs-5 text-center">
           The information system about animals adoptions
         </p>

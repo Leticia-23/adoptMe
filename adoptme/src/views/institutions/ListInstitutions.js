@@ -26,13 +26,23 @@ function ListInstitutions() {
   return (
     <div className="listInstitutions">
       <Container className="mb-5 pb-5">
-        <h1 className="text-center">Institutions</h1>
+        <h1 className="text-center" style={{ color: "#ff7043" }}>
+          Institutions
+        </h1>
         <Container>
-          <div className="mb-2">
-            {institutions.map((inst, i) => (
-              <InstitutionCard key={i} institution={inst} />
-            ))}
-          </div>
+          {institutions.length > 0 ? (
+            <div className="mb-2">
+              {institutions.map((inst, i) => (
+                <InstitutionCard key={i} institution={inst} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center mt-5">
+              <h4 style={{ color: "#ff7043" }}>
+                No institutions registered yet
+              </h4>
+            </div>
+          )}
         </Container>
       </Container>
     </div>
