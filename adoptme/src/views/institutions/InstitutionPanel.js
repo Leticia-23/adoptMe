@@ -58,7 +58,6 @@ function InstitutionPanel() {
 
   let [img, setImg] = useState("/assets/person-circle.svg");
   let [imgFile, setImgFile] = useState(null);
-  let [urlImg, setUrlImg] = useState(null);
 
   const inputRef = useRef(null);
   const handleUpload = () => {
@@ -76,12 +75,14 @@ function InstitutionPanel() {
   const register_animal = async (e) => {
     e.preventDefault();
 
+    let display_url;
+
     if (imgFile) {
       updateAvatar({
         imgFile: imgFile,
       })
         .then((response) => {
-          setUrlImg(response.url);
+          display_url = response.display_url;
 
           registerAnimal_api({
             animal_name: state.animal_name,
@@ -89,7 +90,7 @@ function InstitutionPanel() {
             breed: state.breed,
             sex: state.sex,
             description: state.description,
-            photo: urlImg,
+            photo: display_url,
           })
             .then((response) => {
               console.log(response);
@@ -98,6 +99,22 @@ function InstitutionPanel() {
               console.log(error);
               return;
             });
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    } else {
+      registerAnimal_api({
+        animal_name: state.animal_name,
+        specie: state.specie,
+        breed: state.breed,
+        sex: state.sex,
+        description: state.description,
+        photo: null,
+      })
+        .then((response) => {
+          console.log(response);
         })
         .catch((error) => {
           console.log(error);
