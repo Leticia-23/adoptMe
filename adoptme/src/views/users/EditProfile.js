@@ -4,7 +4,12 @@ import { Container, Row, Form, Col } from "react-bootstrap";
 
 import { UserContext } from "../../environment/UserProvider";
 
-import { toImageUrl, updateUser_api, getSelfInformation } from "../../api/Api";
+import {
+  toImageUrl,
+  updateUser_api,
+  getSelfInformation,
+  updateAvatar,
+} from "../../api/Api";
 import User from "../../models/User";
 
 // TODO: upload avatar photo
@@ -49,7 +54,20 @@ function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    updateUser_api({
+    console.log("imgFile: ", imgFile);
+
+    updateAvatar({
+      imgFile: imgFile,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+
+    /* updateUser_api({
       new_name: username,
       biography: biography,
       actual_password: password,
@@ -63,7 +81,7 @@ function EditProfile() {
       .catch((error) => {
         console.log(error);
         return;
-      });
+      }); */
   };
 
   return (

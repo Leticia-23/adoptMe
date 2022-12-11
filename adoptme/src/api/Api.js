@@ -219,3 +219,17 @@ export async function updateAnimal_api(
   console.log(arguments[0].animalId);
   return patchRequest("/animals/" + arguments[0].animalId, arguments[0]);
 }
+
+export async function updateAvatar({ imgFile = null }) {
+  let path = "/images/user/avatar";
+
+  let data = new FormData();
+  data.append("avatar", imgFile);
+
+  let requestOptions = {
+    method: "POST",
+    headers: {},
+    body: data,
+  };
+  return serverRequest(path, requestOptions);
+}
