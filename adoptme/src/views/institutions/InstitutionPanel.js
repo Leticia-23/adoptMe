@@ -98,16 +98,19 @@ function InstitutionPanel() {
             .then((response) => {
               console.log(response);
               setSuccessMsg(response);
+              setAlertMsg("");
             })
             .catch((error) => {
               console.log(error);
               setAlertMsg(error.error);
+              setSuccessMsg("");
               return;
             });
         })
         .catch((error) => {
           console.log(error);
           setAlertMsg(error.error);
+          setSuccessMsg("");
           return;
         });
     } else {
@@ -122,10 +125,12 @@ function InstitutionPanel() {
         .then((response) => {
           console.log(response);
           setSuccessMsg(response);
+          setAlertMsg("");
         })
         .catch((error) => {
           console.log(error);
           setAlertMsg(error.error);
+          setSuccessMsg("");
           return;
         });
     }

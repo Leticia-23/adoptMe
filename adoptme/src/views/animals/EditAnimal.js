@@ -181,7 +181,7 @@ function EditAnimal() {
             <Form>
               <Row>
                 <div className="col-sm-4">
-                  <h2>{animal.animal_name}</h2>
+                  <h2 style={{ color: "#ff7043" }}>{animal.animal_name}</h2>
 
                   <Form.Group className="mb-3 text-start " controlId="name">
                     <Form.Control

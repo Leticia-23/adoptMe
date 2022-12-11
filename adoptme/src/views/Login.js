@@ -41,6 +41,7 @@ function Login() {
       .then((response) => {
         console.log(response);
         setSuccessMsg(response);
+        setAlertMsg("");
         // Save el token
         setToken(response.accessToken);
         // Remove the token for not to add it to the user
@@ -65,6 +66,7 @@ function Login() {
       .catch((error) => {
         console.log(error);
         setAlertMsg(error.error);
+        setSuccessMsg("");
         return;
       });
   };

@@ -33,10 +33,12 @@ function Signup() {
       .then((response) => {
         console.log(response);
         setSuccessMsg(response);
+        setAlertMsg("");
       })
       .catch((error) => {
         console.log(error);
         setAlertMsg(error.error);
+        setSuccessMsg("");
         return;
       });
   };
