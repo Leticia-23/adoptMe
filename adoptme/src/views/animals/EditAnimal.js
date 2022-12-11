@@ -224,7 +224,7 @@ function EditAnimal() {
                 />
               </Form.Group>
 
-              {/* TODO: list of users or delete this info */}
+              {/* List of users or delete this info */}
               {/* <Form.Group className="mb-3 text-start " controlId="userAdopt">
                 <Form.Control
                   type="userAdopt"

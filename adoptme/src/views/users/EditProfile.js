@@ -4,6 +4,8 @@ import { Container, Row, Form, Col } from "react-bootstrap";
 
 import { UserContext } from "../../environment/UserProvider";
 
+import { useNavigate } from "react-router-dom";
+
 import {
   updateUser_api,
   getSelfInformation,
@@ -11,8 +13,9 @@ import {
 } from "../../api/Api";
 import User from "../../models/User";
 
-// TODO: upload avatar photo
 function EditProfile() {
+  const navigate = useNavigate();
+
   let { user, setUser } = useContext(UserContext);
 
   let [username, setUsername] = useState("");
@@ -53,21 +56,20 @@ function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("imgFile: ", imgFile);
-
-    updateAvatar({
-      imgFile: imgFile,
-    })
-      .then((response) => {
-        console.log(response);
-        console.log(response.url);
+    if (imgFile) {
+      updateAvatar({
+        imgFile: imgFile,
       })
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
+        .then((response) => {
+          setImg(response.url);
+        })
+        .catch((error) => {
+          console.log(error);
+          return;
+        });
+    }
 
-    /* updateUser_api({
+    updateUser_api({
       new_name: username,
       biography: biography,
       actual_password: password,
@@ -76,12 +78,12 @@ function EditProfile() {
       avatar: img,
     })
       .then((response) => {
-        console.log(response);
+        navigate("/profile");
       })
       .catch((error) => {
         console.log(error);
         return;
-      }); */
+      });
   };
 
   return (
