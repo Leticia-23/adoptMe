@@ -111,7 +111,7 @@ function Login() {
               type="submit"
               onClick={login}
             >
-              Login
+              Log in
             </Button>
           </Col>
           <Col className="text-center mt-5 mb-5 pb-5">
