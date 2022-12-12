@@ -158,15 +158,6 @@ function AnimalConcrete() {
             {isRegistered && isAdopted && (
               <p>{moment(animal.adoptionDate).format("DD-MM-YYYY")}</p>
             )}
-            {isRegistered && isAdopted && (
-              <h5 className="mt-4">Person who adopted:</h5>
-            )}
-            {isRegistered && isAdopted && (
-              <p>
-                Name user adopted link to the profile or this person is not
-                registered in this community
-              </p>
-            )}
           </div>
         </Row>
         <Row>
