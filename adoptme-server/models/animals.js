@@ -64,11 +64,6 @@ const Animal = new Schema(
       ref: Institution,
       required: true,
     },
-    /* user: {
-      type: Schema.Types.ObjectId,
-      ref: User,
-      default: null,
-    }, */
     enabled: {
       type: Boolean,
       required: true,
